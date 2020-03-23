@@ -8,13 +8,7 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <title>Hello, world!</title>
-    <script type="module">
-      import init, { greet } from "./pkg/remnant.js";
-
-      init("./pkg/remnant_bg.wasm").then(module => {
-        greet();
-      }, console.error);
-    </script>
+    <script src="./application.js" type="module"></script>
   </head>
   <body>
     <h1>Hello, world!</h1>
