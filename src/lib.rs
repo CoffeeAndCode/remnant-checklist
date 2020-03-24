@@ -1,5 +1,4 @@
 mod app;
-mod utils;
 
 use wasm_bindgen::prelude::*;
 
@@ -21,7 +20,6 @@ pub fn greet() {
 
 #[wasm_bindgen]
 pub fn start() -> Result<(), JsValue> {
-    utils::set_panic_hook();
     yew::start_app::<app::App>();
 
     Ok(())
