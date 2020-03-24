@@ -21,7 +21,21 @@ pub fn greet() {
 
 #[wasm_bindgen]
 pub fn start() -> Result<(), JsValue> {
+    utils::set_panic_hook();
     yew::start_app::<app::App>();
 
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn test_example() {
+        assert!(true);
+    }
+
+    #[test]
+    fn test_example2() {
+        assert!(true);
+    }
 }

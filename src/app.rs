@@ -38,7 +38,7 @@ impl Component for App {
     };
 
     html! {
-      <button onclick=&self.onclick>{ button_text }</button>
+      <button style="color: blue; background-color: red; padding: 20px;" onclick=&self.onclick>{ button_text }</button>
     }
   }
 }
