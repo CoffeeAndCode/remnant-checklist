@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-wasm-pack build --out-dir public/pkg --target web
+source bin/build.sh
 
 cd public
 echo "Server started at http://localhost:8000 from $PWD"

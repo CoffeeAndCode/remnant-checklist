@@ -1,5 +1,5 @@
-import init, { greet } from "./pkg/remnant.js";
+import init, { start } from "./pkg/remnant.js";
 
 init("./pkg/remnant_bg.wasm").then(_ => {
-  greet();
+  start();
 }, console.error);
