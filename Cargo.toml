@@ -26,7 +26,9 @@ yew = { version = "0.14", features = ["web_sys"] }
 wee_alloc = { version = "0.4.2", optional = true }
 
 [dev-dependencies]
-wasm-bindgen-test = "0.2"
+js-sys = "0.3.37"
+wasm-bindgen-futures = "0.4.10"
+wasm-bindgen-test = "0.3.10"
 
 [profile.release]
 # Tell `rustc` to optimize for small code size.
