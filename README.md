@@ -2,4 +2,4 @@
 
 ## Development
 
-`cargo watch -x check -s 'touch .trigger'`
+`forego start`
