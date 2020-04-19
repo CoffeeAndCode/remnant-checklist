@@ -29,6 +29,13 @@ struct Entry {
   editing: bool,
 }
 
+#[derive(Debug, Deserialize)]
+struct Trait {
+  description: String,
+  id: u32,
+  name: String,
+}
+
 pub enum Msg {
   Add,
   Edit(usize),
@@ -43,6 +50,20 @@ pub enum Msg {
   Nope,
 }
 
+const TRAITS: &'static [u8] = include_bytes!("data/traits.csv");
+fn remnant_traits() -> Vec<Entry> {
+  let mut rdr = csv::Reader::from_reader(TRAITS);
+  rdr
+    .deserialize()
+    .filter_map(|t: Result<Trait, _>| t.ok())
+    .map(|t| Entry {
+      completed: false,
+      editing: false,
+      description: t.name,
+    })
+    .collect()
+}
+
 impl Component for App {
   type Message = Msg;
   type Properties = ();
@@ -53,9 +74,10 @@ impl Component for App {
       if let Json(Ok(restored_entries)) = storage.restore(KEY) {
         restored_entries
       } else {
-        Vec::new()
+        remnant_traits()
       }
     };
+
     let state = State {
       entries,
       filter: Filter::All,

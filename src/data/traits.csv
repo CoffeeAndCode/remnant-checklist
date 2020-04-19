@@ -1,0 +1,33 @@
+id,name,description
+1,Vigor,Increases Max Health.
+2,Endurance,Increases Max Stamina.
+3,Exploiter,Increases Weak Spot Damage.
+4,Spirit,Increases Mod Power Generation.
+5,Quick Hands,Increases Reload Speed.
+6,World Walker,Reduces Stamina cost when sprinting and evading.
+7,Keeper's Blessing,"Increases resistance to elemental damage, buildup, and STATUS effects."
+8,Mother's Blessing,Increases Ranged damage reduction.
+9,Teamwork,"Increases Mod Power buildup rate, earned Experience when killing enemies, and reduces damage taken when standing near teammates."
+10,Warrior,Increases Melee Damage.
+11,Shadow Walker,Reduces enemy Awareness.
+12,Elder Knowledge,Increases earned Experience when killing enemies.
+13,Scavenger,Increases the amount of scrap picked up.
+14,Recovery,Increases Stamina Regen rate and reduces Stamina Regen delay.
+15,Handling,Reduces Gun Spread and Recoil.
+16,Glutton,Increases Consumable Use speed.
+17,Catalyst,Increases chance to proc STATUS effects on enemies.
+18,Executioner,Increases Critical Hit Chance.
+19,Triage,Increases Healing Effectiveness.
+20,Kingslayer,Increases Critical Hit Damage.
+21,Will to Live,Increases Health while wounded.
+22,Arcane Strike,Increases Mod Power gained on Melee hits.
+23,Mind's Eye,Increases Ranged Damage.
+24,Bark Skin,Increases Armor Effectiveness.
+25,Revivalist,Increases Revive Speed.
+26,Guardian's Blessing,Melee Damage Reduction +1%
+27,Cold as Ice,Increases damage dealt to enemies when attacking them from behind.
+28,Trigger Happy,Increases Fire Rate.
+29,Rapid Strike,Increases Melee Attack Speed.
+30,Suspicion,Reduced Friendly Fire Damage Taken.
+31,Swiftness,Increases Movement Speed.
+32,Sleight of Hand,Increases Weapon Swap Speed.
