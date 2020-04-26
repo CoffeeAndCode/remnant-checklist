@@ -1,6 +1,20 @@
 use super::Entry;
 use serde_derive::Deserialize;
 
+enum DataType {
+    Emote,
+    Trait,
+}
+
+impl DataType {
+    fn data(&self) -> &'static [u8] {
+        match self {
+            DataType::Emote => include_bytes!("../data/emotes.csv"),
+            DataType::Trait => include_bytes!("../data/traits.csv"),
+        }
+    }
+}
+
 #[derive(Debug, Deserialize)]
 struct Emote {
     #[serde(rename = "Description")]
@@ -48,18 +62,16 @@ impl From<Trait> for Entry {
     }
 }
 
-const EMOTES: &'static [u8] = include_bytes!("../data/emotes.csv");
 pub fn emotes() -> Vec<Entry> {
-    let mut rdr = csv::Reader::from_reader(EMOTES);
+    let mut rdr = csv::Reader::from_reader(DataType::Emote.data());
     rdr.deserialize()
         .filter_map(|t: Result<Emote, _>| t.ok())
         .map(|t| Entry::from(t))
         .collect()
 }
 
-const TRAITS: &'static [u8] = include_bytes!("../data/traits.csv");
 pub fn remnant_traits() -> Vec<Entry> {
-    let mut rdr = csv::Reader::from_reader(TRAITS);
+    let mut rdr = csv::Reader::from_reader(DataType::Trait.data());
     rdr.deserialize()
         .filter_map(|t: Result<Trait, _>| t.ok())
         .map(|t| Entry::from(t))
@@ -68,13 +80,15 @@ pub fn remnant_traits() -> Vec<Entry> {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
     fn all_emotes_found() {
-        assert_eq!(15, super::emotes().len());
+        assert_eq!(15, emotes().len());
     }
 
     #[test]
     fn all_traits_found() {
-        assert_eq!(32, super::remnant_traits().len());
+        assert_eq!(32, remnant_traits().len());
     }
 }
