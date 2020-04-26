@@ -60,7 +60,9 @@ impl Component for App {
             if let Json(Ok(restored_entries)) = storage.restore(KEY) {
                 restored_entries
             } else {
-                data::remnant_traits()
+                let mut entries = data::remnant_traits();
+                entries.append(&mut data::emotes());
+                entries
             }
         };
 
