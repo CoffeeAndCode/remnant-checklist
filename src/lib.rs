@@ -3,6 +3,7 @@
 mod app;
 
 use wasm_bindgen::prelude::*;
+use web_sys::console;
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
 // allocator.
@@ -12,7 +13,13 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
 pub fn start() -> Result<(), JsValue> {
-    yew::start_app::<app::App>();
+    yew::initialize();
+
+    let document = yew::utils::document();
+    let element = document.query_selector("#app").unwrap().unwrap();
+    yew::App::<app::App>::new().mount(element);
+
+    console::log_1(&"hello there".into());
 
     Ok(())
 }

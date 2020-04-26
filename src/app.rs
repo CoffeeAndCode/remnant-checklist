@@ -50,6 +50,10 @@ impl Component for App {
     type Message = Msg;
     type Properties = ();
 
+    fn change(&mut self, _: Self::Properties) -> ShouldRender {
+        false
+    }
+
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
         let storage = StorageService::new(Area::Local).unwrap();
         let entries = {
