@@ -1,7 +1,7 @@
 use super::Entry;
 use serde_derive::Deserialize;
 
-enum DataType {
+pub enum DataType {
     Emote,
     Trait,
 }
@@ -11,6 +11,19 @@ impl DataType {
         match self {
             DataType::Emote => include_bytes!("../data/emotes.csv"),
             DataType::Trait => include_bytes!("../data/traits.csv"),
+        }
+    }
+}
+
+pub trait DataDisplay {
+    fn label(&self) -> &'static str;
+}
+
+impl DataDisplay for DataType {
+    fn label(&self) -> &'static str {
+        match self {
+            DataType::Emote => "Emotes",
+            DataType::Trait => "Traits",
         }
     }
 }

@@ -1,5 +1,6 @@
 mod data;
 
+use data::DataDisplay;
 use log::*;
 use serde_derive::{Deserialize, Serialize};
 use strum::IntoEnumIterator;
@@ -151,6 +152,14 @@ impl Component for App {
                             { format!("Clear completed ({})", self.state.total_completed()) }
                         </button>
                     </footer>
+                    <p>
+                        <button>
+                            { data::DataType::Emote.label() }
+                        </button>
+                        <button>
+                            { data::DataType::Trait.label() }
+                        </button>
+                    </p>
                 </section>
                 <footer class="info">
                     <p>{ "Double-click to edit a todo" }</p>
