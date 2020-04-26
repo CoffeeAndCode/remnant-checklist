@@ -10,6 +10,6 @@ jobs:
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
       - run: cargo clippy --all-targets --all-features -- -D warnings
-      - run: cargo test
-      - run: wasm-pack test --headless --chrome
-      - run: wasm-pack test --headless --firefox
+      - run: cargo test --locked
+      - run: wasm-pack test --headless --chrome -- --locked
+      - run: wasm-pack test --headless --firefox -- --locked
