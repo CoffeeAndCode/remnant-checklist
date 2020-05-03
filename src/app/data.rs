@@ -1,6 +1,7 @@
 use super::Entry;
-use serde_derive::Deserialize;
+use serde_derive::{Deserialize, Serialize};
 
+#[derive(Serialize, Deserialize)]
 pub enum DataType {
     Emote,
     Trait,
@@ -59,6 +60,7 @@ impl From<Emote> for Entry {
     fn from(emote: Emote) -> Self {
         Entry {
             completed: false,
+            data_type: Some(DataType::Emote),
             description: emote.name,
             editing: false,
         }
@@ -69,6 +71,7 @@ impl From<Trait> for Entry {
     fn from(remnant_trait: Trait) -> Self {
         Entry {
             completed: false,
+            data_type: Some(DataType::Trait),
             description: remnant_trait.name,
             editing: false,
         }

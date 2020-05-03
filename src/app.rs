@@ -27,6 +27,7 @@ pub struct State {
 
 #[derive(Serialize, Deserialize)]
 pub struct Entry {
+    data_type: Option<data::DataType>,
     description: String,
     completed: bool,
     editing: bool,
@@ -83,6 +84,7 @@ impl Component for App {
         match msg {
             Msg::Add => {
                 let entry = Entry {
+                    data_type: Some(data::DataType::Emote),
                     description: self.state.value.clone(),
                     completed: false,
                     editing: false,
