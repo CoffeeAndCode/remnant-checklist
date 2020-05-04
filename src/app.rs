@@ -21,8 +21,6 @@ pub struct App {
 pub struct State {
     entries: Vec<Entry>,
     filter: Filter,
-    value: String,
-    edit_value: String,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -62,8 +60,6 @@ impl Component for App {
         let state = State {
             entries,
             filter: Filter::All,
-            value: "".into(),
-            edit_value: "".into(),
         };
         App {
             link,
