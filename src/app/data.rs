@@ -60,7 +60,7 @@ impl From<Emote> for Entry {
     fn from(emote: Emote) -> Self {
         Entry {
             completed: false,
-            data_type: Some(DataType::Emote),
+            data_type: DataType::Emote,
             description: emote.name,
             editing: false,
         }
@@ -71,7 +71,7 @@ impl From<Trait> for Entry {
     fn from(remnant_trait: Trait) -> Self {
         Entry {
             completed: false,
-            data_type: Some(DataType::Trait),
+            data_type: DataType::Trait,
             description: remnant_trait.name,
             editing: false,
         }

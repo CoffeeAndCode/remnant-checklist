@@ -25,7 +25,7 @@ pub struct State {
 
 #[derive(Serialize, Deserialize)]
 pub struct Entry {
-    data_type: Option<data::DataType>,
+    data_type: data::DataType,
     description: String,
     completed: bool,
     editing: bool,
