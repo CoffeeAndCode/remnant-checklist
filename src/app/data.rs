@@ -9,7 +9,7 @@ pub enum DataType {
 
 impl DataType {
     fn data(&self) -> &'static [u8] {
-        match self {
+        match *self {
             DataType::Emote => include_bytes!("../data/emotes.csv"),
             DataType::Trait => include_bytes!("../data/traits.csv"),
         }
@@ -22,7 +22,7 @@ pub trait DataDisplay {
 
 impl DataDisplay for DataType {
     fn label(&self) -> &'static str {
-        match self {
+        match *self {
             DataType::Emote => "Emotes",
             DataType::Trait => "Traits",
         }
@@ -82,7 +82,7 @@ pub fn emotes() -> Vec<Entry> {
     let mut rdr = csv::Reader::from_reader(DataType::Emote.data());
     rdr.deserialize()
         .filter_map(|t: Result<Emote, _>| t.ok())
-        .map(|t| Entry::from(t))
+        .map(Entry::from)
         .collect()
 }
 
@@ -90,7 +90,7 @@ pub fn remnant_traits() -> Vec<Entry> {
     let mut rdr = csv::Reader::from_reader(DataType::Trait.data());
     rdr.deserialize()
         .filter_map(|t: Result<Trait, _>| t.ok())
-        .map(|t| Entry::from(t))
+        .map(Entry::from)
         .collect()
 }
 
