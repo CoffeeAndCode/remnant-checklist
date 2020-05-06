@@ -7,6 +7,7 @@ pub enum DataType {
     HandGun,
     LongGun,
     MeleeWeapon,
+    Ring,
     Trait,
 }
 
@@ -17,6 +18,7 @@ impl DataType {
             DataType::HandGun => include_bytes!("../data/hand_guns.csv"),
             DataType::LongGun => include_bytes!("../data/long_guns.csv"),
             DataType::MeleeWeapon => include_bytes!("../data/melee_weapons.csv"),
+            DataType::Ring => include_bytes!("../data/rings.csv"),
             DataType::Trait => include_bytes!("../data/traits.csv"),
         }
     }
@@ -34,6 +36,7 @@ impl DataDisplay for DataType {
             DataType::HandGun => '⚒',
             DataType::LongGun => '⚒',
             DataType::MeleeWeapon => '⚒',
+            DataType::Ring => '💫',
             DataType::Trait => '☯',
         }
     }
@@ -44,6 +47,7 @@ impl DataDisplay for DataType {
             DataType::HandGun => "Hand Guns",
             DataType::LongGun => "Long Guns",
             DataType::MeleeWeapon => "Melee Weapons",
+            DataType::Ring => "Rings",
             DataType::Trait => "Traits",
         }
     }
@@ -143,6 +147,21 @@ struct MeleeWeapon {
 }
 
 #[derive(Debug, Deserialize)]
+struct Ring {
+    #[serde(rename = "Description")]
+    description: String,
+
+    #[serde(rename = "ID")]
+    id: u32,
+
+    #[serde(rename = "Name")]
+    name: String,
+
+    #[serde(rename = "Location")]
+    location: String,
+}
+
+#[derive(Debug, Deserialize)]
 struct Trait {
     #[serde(rename = "Description")]
     description: String,
@@ -193,6 +212,17 @@ impl From<MeleeWeapon> for Entry {
             completed: false,
             data_type: DataType::MeleeWeapon,
             description: format!("{} {}", melee_weapon.name, DataType::MeleeWeapon.icon()),
+            editing: false,
+        }
+    }
+}
+
+impl From<Ring> for Entry {
+    fn from(ring: Ring) -> Self {
+        Entry {
+            completed: false,
+            data_type: DataType::MeleeWeapon,
+            description: format!("{} {}", ring.name, DataType::Ring.icon()),
             editing: false,
         }
     }
@@ -249,6 +279,14 @@ pub fn remnant_traits() -> Vec<Entry> {
         .collect()
 }
 
+pub fn rings() -> Vec<Entry> {
+    let mut rdr = csv::Reader::from_reader(DataType::Ring.data());
+    rdr.deserialize()
+        .filter_map(|t: Result<Ring, _>| t.ok())
+        .map(Entry::from)
+        .collect()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -271,6 +309,11 @@ mod tests {
     #[test]
     fn all_melee_weapons_found() {
         assert_eq!(17, melee_weapons().len());
+    }
+
+    #[test]
+    fn all_rings_found() {
+        assert_eq!(45, rings().len());
     }
 
     #[test]
