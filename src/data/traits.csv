@@ -31,3 +31,11 @@ ID,Name,Description
 30,Suspicion,Reduced Friendly Fire Damage Taken.
 31,Swiftness,Increases Movement Speed.
 32,Sleight of Hand,Increases Weapon Swap Speed.
+33,Concentration,Increases weapon mod duration.
+34,Blood Bond,Damage absorbtion.
+35,Footwork,Aim movement speed.
+36,Potency,Increases consumable duration.
+37,Fortification,Reduces damage taken while reviving teamates.
+38,Invoker,Increases summons damage.
+39,Luminescent,Extra lumenite chance.
+40,Evocation,Mod damage bonus.

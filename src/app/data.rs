@@ -105,6 +105,6 @@ mod tests {
 
     #[test]
     fn all_traits_found() {
-        assert_eq!(32, remnant_traits().len());
+        assert_eq!(40, remnant_traits().len());
     }
 }
