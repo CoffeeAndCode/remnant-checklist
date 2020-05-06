@@ -5,6 +5,7 @@ use serde_derive::{Deserialize, Serialize};
 pub enum DataType {
     Emote,
     HandGun,
+    LongGun,
     MeleeWeapon,
     Trait,
 }
@@ -14,6 +15,7 @@ impl DataType {
         match *self {
             DataType::Emote => include_bytes!("../data/emotes.csv"),
             DataType::HandGun => include_bytes!("../data/hand_guns.csv"),
+            DataType::LongGun => include_bytes!("../data/long_guns.csv"),
             DataType::MeleeWeapon => include_bytes!("../data/melee_weapons.csv"),
             DataType::Trait => include_bytes!("../data/traits.csv"),
         }
@@ -30,6 +32,7 @@ impl DataDisplay for DataType {
         match *self {
             DataType::Emote => '☺',
             DataType::HandGun => '⚒',
+            DataType::LongGun => '⚒',
             DataType::MeleeWeapon => '⚒',
             DataType::Trait => '☯',
         }
@@ -39,6 +42,7 @@ impl DataDisplay for DataType {
         match *self {
             DataType::Emote => "Emotes",
             DataType::HandGun => "Hand Guns",
+            DataType::LongGun => "Long Guns",
             DataType::MeleeWeapon => "Melee Weapons",
             DataType::Trait => "Traits",
         }
@@ -62,6 +66,36 @@ struct Emote {
 
 #[derive(Debug, Deserialize)]
 struct HandGun {
+    #[serde(rename = "Base Damage")]
+    base_damage: u32,
+
+    #[serde(rename = "Crit Chance")]
+    crit_chance: u32,
+
+    #[serde(rename = "ID")]
+    id: u32,
+
+    #[serde(rename = "Ideal Range")]
+    ideal_range: u32,
+
+    #[serde(rename = "Magazine")]
+    magazine: u32,
+
+    #[serde(rename = "Max Ammo")]
+    max_ammo: u32,
+
+    #[serde(rename = "Max Damage")]
+    max_damage: Option<u32>,
+
+    #[serde(rename = "Name")]
+    name: String,
+
+    #[serde(rename = "RPS")]
+    rps: f32,
+}
+
+#[derive(Debug, Deserialize)]
+struct LongGun {
     #[serde(rename = "Base Damage")]
     base_damage: u32,
 
@@ -142,6 +176,17 @@ impl From<HandGun> for Entry {
     }
 }
 
+impl From<LongGun> for Entry {
+    fn from(long_gun: LongGun) -> Self {
+        Entry {
+            completed: false,
+            data_type: DataType::LongGun,
+            description: format!("{} {}", long_gun.name, DataType::LongGun.icon()),
+            editing: false,
+        }
+    }
+}
+
 impl From<MeleeWeapon> for Entry {
     fn from(melee_weapon: MeleeWeapon) -> Self {
         Entry {
@@ -180,6 +225,14 @@ pub fn hand_guns() -> Vec<Entry> {
         .collect()
 }
 
+pub fn long_guns() -> Vec<Entry> {
+    let mut rdr = csv::Reader::from_reader(DataType::LongGun.data());
+    rdr.deserialize()
+        .filter_map(|t: Result<LongGun, _>| t.ok())
+        .map(Entry::from)
+        .collect()
+}
+
 pub fn melee_weapons() -> Vec<Entry> {
     let mut rdr = csv::Reader::from_reader(DataType::MeleeWeapon.data());
     rdr.deserialize()
@@ -210,10 +263,10 @@ mod tests {
         assert_eq!(15, emotes().len());
     }
 
-    // #[test]
-    // fn all_long_guns_found() {
-    //     assert_eq!(15, long_guns().len());
-    // }
+    #[test]
+    fn all_long_guns_found() {
+        assert_eq!(15, long_guns().len());
+    }
 
     #[test]
     fn all_melee_weapons_found() {
