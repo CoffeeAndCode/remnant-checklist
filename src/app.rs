@@ -52,6 +52,7 @@ impl Component for App {
                 restored_entries
             } else {
                 let mut entries = data::remnant_traits();
+                entries.append(&mut data::amulets());
                 entries.append(&mut data::emotes());
                 entries.append(&mut data::rings());
                 entries.append(&mut data::hand_guns());

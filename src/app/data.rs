@@ -3,6 +3,7 @@ use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
 pub enum DataType {
+    Amulet,
     Emote,
     HandGun,
     LongGun,
@@ -14,6 +15,7 @@ pub enum DataType {
 impl DataType {
     fn data(&self) -> &'static [u8] {
         match *self {
+            DataType::Amulet => include_bytes!("../data/amulets.csv"),
             DataType::Emote => include_bytes!("../data/emotes.csv"),
             DataType::HandGun => include_bytes!("../data/hand_guns.csv"),
             DataType::LongGun => include_bytes!("../data/long_guns.csv"),
@@ -32,6 +34,7 @@ pub trait DataDisplay {
 impl DataDisplay for DataType {
     fn icon(&self) -> char {
         match *self {
+            DataType::Amulet => '💎',
             DataType::Emote => '☺',
             DataType::HandGun => '⚒',
             DataType::LongGun => '⚒',
@@ -43,6 +46,7 @@ impl DataDisplay for DataType {
 
     fn label(&self) -> &'static str {
         match *self {
+            DataType::Amulet => "Amulets",
             DataType::Emote => "Emotes",
             DataType::HandGun => "Hand Guns",
             DataType::LongGun => "Long Guns",
@@ -51,6 +55,21 @@ impl DataDisplay for DataType {
             DataType::Trait => "Traits",
         }
     }
+}
+
+#[derive(Debug, Deserialize)]
+struct Amulet {
+    #[serde(rename = "Description")]
+    description: Option<String>,
+
+    #[serde(rename = "ID")]
+    id: u32,
+
+    #[serde(rename = "Location & Crafting")]
+    location: Option<String>,
+
+    #[serde(rename = "Name")]
+    name: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -173,6 +192,17 @@ struct Trait {
     name: String,
 }
 
+impl From<Amulet> for Entry {
+    fn from(amulet: Amulet) -> Self {
+        Entry {
+            completed: false,
+            data_type: DataType::Amulet,
+            description: format!("{} {}", amulet.name, DataType::Amulet.icon()),
+            editing: false,
+        }
+    }
+}
+
 impl From<Emote> for Entry {
     fn from(emote: Emote) -> Self {
         Entry {
@@ -239,6 +269,14 @@ impl From<Trait> for Entry {
     }
 }
 
+pub fn amulets() -> Vec<Entry> {
+    let mut rdr = csv::Reader::from_reader(DataType::Amulet.data());
+    rdr.deserialize()
+        .filter_map(|t: Result<Amulet, _>| t.ok())
+        .map(Entry::from)
+        .collect()
+}
+
 pub fn emotes() -> Vec<Entry> {
     let mut rdr = csv::Reader::from_reader(DataType::Emote.data());
     rdr.deserialize()
@@ -290,6 +328,11 @@ pub fn rings() -> Vec<Entry> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn all_amulets_found() {
+        assert_eq!(22, amulets().len());
+    }
 
     #[test]
     fn all_hand_guns_found() {
