@@ -9,6 +9,7 @@ pub enum DataType {
     Emote,
     HandGun,
     HeadArmor,
+    LegArmor,
     LongGun,
     MeleeWeapon,
     Ring,
@@ -24,6 +25,7 @@ impl DataType {
             DataType::Emote => include_bytes!("../data/emotes.csv"),
             DataType::HeadArmor => include_bytes!("../data/head_armor.csv"),
             DataType::HandGun => include_bytes!("../data/hand_guns.csv"),
+            DataType::LegArmor => include_bytes!("../data/leg_armor.csv"),
             DataType::LongGun => include_bytes!("../data/long_guns.csv"),
             DataType::MeleeWeapon => include_bytes!("../data/melee_weapons.csv"),
             DataType::Ring => include_bytes!("../data/rings.csv"),
@@ -46,6 +48,7 @@ impl DataDisplay for DataType {
             DataType::Emote => '☺',
             DataType::HandGun => '⚒',
             DataType::HeadArmor => '💂',
+            DataType::LegArmor => '🧦',
             DataType::LongGun => '⚒',
             DataType::MeleeWeapon => '⚒',
             DataType::Ring => '💫',
@@ -61,6 +64,7 @@ impl DataDisplay for DataType {
             DataType::Emote => "Emotes",
             DataType::HandGun => "Hand Guns",
             DataType::HeadArmor => "Head Armor",
+            DataType::LegArmor => "Leg Armor",
             DataType::LongGun => "Long Guns",
             DataType::MeleeWeapon => "Melee Weapons",
             DataType::Ring => "Rings",
@@ -179,6 +183,42 @@ struct HandGun {
 
 #[derive(Debug, Deserialize)]
 struct HeadArmor {
+    #[serde(rename = "Armor")]
+    armor: f32,
+
+    #[serde(rename = "Armor Skill")]
+    armor_skill: String,
+
+    #[serde(rename = "Bleed")]
+    bleed: f32,
+
+    #[serde(rename = "Corrosive")]
+    corrosive: f32,
+
+    #[serde(rename = "Fire")]
+    fire: f32,
+
+    #[serde(rename = "Radiation")]
+    radiation: f32,
+
+    #[serde(rename = "Rot")]
+    rot: f32,
+
+    #[serde(rename = "Shock")]
+    shock: f32,
+
+    #[serde(rename = "Weight")]
+    weight: f32,
+
+    #[serde(rename = "ID")]
+    id: u32,
+
+    #[serde(rename = "Name")]
+    name: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct LegArmor {
     #[serde(rename = "Armor")]
     armor: f32,
 
@@ -354,6 +394,17 @@ impl From<HeadArmor> for Entry {
     }
 }
 
+impl From<LegArmor> for Entry {
+    fn from(leg_armor: LegArmor) -> Self {
+        Entry {
+            completed: false,
+            data_type: DataType::LegArmor,
+            description: format!("{} {}", leg_armor.name, DataType::LegArmor.icon()),
+            editing: false,
+        }
+    }
+}
+
 impl From<LongGun> for Entry {
     fn from(long_gun: LongGun) -> Self {
         Entry {
@@ -446,6 +497,14 @@ pub fn head_armor() -> Vec<Entry> {
         .collect()
 }
 
+pub fn leg_armor() -> Vec<Entry> {
+    let mut rdr = csv::Reader::from_reader(DataType::LegArmor.data());
+    rdr.deserialize()
+        .filter_map(|t: Result<LegArmor, _>| t.ok())
+        .map(Entry::from)
+        .collect()
+}
+
 pub fn long_guns() -> Vec<Entry> {
     let mut rdr = csv::Reader::from_reader(DataType::LongGun.data());
     rdr.deserialize()
@@ -510,6 +569,11 @@ mod tests {
     #[test]
     fn all_emotes_found() {
         assert_eq!(15, emotes().len());
+    }
+
+    #[test]
+    fn all_leg_armor_found() {
+        assert_eq!(17, leg_armor().len());
     }
 
     #[test]
