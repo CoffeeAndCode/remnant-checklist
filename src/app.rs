@@ -28,7 +28,6 @@ pub struct Entry {
     data_type: data::DataType,
     description: String,
     completed: bool,
-    editing: bool,
 }
 
 pub enum Msg {
@@ -155,9 +154,6 @@ impl App {
 
     fn view_entry(&self, (idx, entry): (usize, &Entry)) -> Html {
         let mut class = "todo".to_string();
-        if entry.editing {
-            class.push_str(" editing");
-        }
         if entry.completed {
             class.push_str(" completed");
         }

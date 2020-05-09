@@ -334,7 +334,6 @@ impl From<Amulet> for Entry {
             completed: false,
             data_type: DataType::Amulet,
             description: format!("{} {}", amulet.name, DataType::Amulet.icon()),
-            editing: false,
         }
     }
 }
@@ -345,7 +344,6 @@ impl From<ArmorSet> for Entry {
             completed: false,
             data_type: DataType::ArmorSet,
             description: format!("{} {}", armor_set.name, DataType::ArmorSet.icon()),
-            editing: false,
         }
     }
 }
@@ -356,7 +354,6 @@ impl From<BodyArmor> for Entry {
             completed: false,
             data_type: DataType::BodyArmor,
             description: format!("{} {}", body_armor.name, DataType::BodyArmor.icon()),
-            editing: false,
         }
     }
 }
@@ -367,7 +364,6 @@ impl From<Emote> for Entry {
             completed: false,
             data_type: DataType::Emote,
             description: format!("{} {}", emote.name, DataType::Emote.icon()),
-            editing: false,
         }
     }
 }
@@ -378,7 +374,6 @@ impl From<HandGun> for Entry {
             completed: false,
             data_type: DataType::HandGun,
             description: format!("{} {}", hand_gun.name, DataType::HandGun.icon()),
-            editing: false,
         }
     }
 }
@@ -389,7 +384,6 @@ impl From<HeadArmor> for Entry {
             completed: false,
             data_type: DataType::HeadArmor,
             description: format!("{} {}", head_armor.name, DataType::HeadArmor.icon()),
-            editing: false,
         }
     }
 }
@@ -400,7 +394,6 @@ impl From<LegArmor> for Entry {
             completed: false,
             data_type: DataType::LegArmor,
             description: format!("{} {}", leg_armor.name, DataType::LegArmor.icon()),
-            editing: false,
         }
     }
 }
@@ -411,7 +404,6 @@ impl From<LongGun> for Entry {
             completed: false,
             data_type: DataType::LongGun,
             description: format!("{} {}", long_gun.name, DataType::LongGun.icon()),
-            editing: false,
         }
     }
 }
@@ -422,7 +414,6 @@ impl From<MeleeWeapon> for Entry {
             completed: false,
             data_type: DataType::MeleeWeapon,
             description: format!("{} {}", melee_weapon.name, DataType::MeleeWeapon.icon()),
-            editing: false,
         }
     }
 }
@@ -433,7 +424,6 @@ impl From<Ring> for Entry {
             completed: false,
             data_type: DataType::MeleeWeapon,
             description: format!("{} {}", ring.name, DataType::Ring.icon()),
-            editing: false,
         }
     }
 }
@@ -444,7 +434,6 @@ impl From<Trait> for Entry {
             completed: false,
             data_type: DataType::Trait,
             description: format!("{} {}", remnant_trait.name, DataType::Trait.icon()),
-            editing: false,
         }
     }
 }
