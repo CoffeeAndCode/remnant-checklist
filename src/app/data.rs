@@ -4,6 +4,7 @@ use serde_derive::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize)]
 pub enum DataType {
     Amulet,
+    ArmorSet,
     Emote,
     HandGun,
     LongGun,
@@ -16,6 +17,7 @@ impl DataType {
     fn data(&self) -> &'static [u8] {
         match *self {
             DataType::Amulet => include_bytes!("../data/amulets.csv"),
+            DataType::ArmorSet => include_bytes!("../data/armor_sets.csv"),
             DataType::Emote => include_bytes!("../data/emotes.csv"),
             DataType::HandGun => include_bytes!("../data/hand_guns.csv"),
             DataType::LongGun => include_bytes!("../data/long_guns.csv"),
@@ -35,6 +37,7 @@ impl DataDisplay for DataType {
     fn icon(&self) -> char {
         match *self {
             DataType::Amulet => '💎',
+            DataType::ArmorSet => '👘',
             DataType::Emote => '☺',
             DataType::HandGun => '⚒',
             DataType::LongGun => '⚒',
@@ -47,6 +50,7 @@ impl DataDisplay for DataType {
     fn label(&self) -> &'static str {
         match *self {
             DataType::Amulet => "Amulets",
+            DataType::ArmorSet => "Armor Sets",
             DataType::Emote => "Emotes",
             DataType::HandGun => "Hand Guns",
             DataType::LongGun => "Long Guns",
@@ -70,6 +74,18 @@ struct Amulet {
 
     #[serde(rename = "Name")]
     name: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct ArmorSet {
+    #[serde(rename = "ID")]
+    id: u32,
+
+    #[serde(rename = "Name")]
+    name: String,
+
+    #[serde(rename = "Set Bonus")]
+    set_bonus: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -203,6 +219,17 @@ impl From<Amulet> for Entry {
     }
 }
 
+impl From<ArmorSet> for Entry {
+    fn from(armor_set: ArmorSet) -> Self {
+        Entry {
+            completed: false,
+            data_type: DataType::ArmorSet,
+            description: format!("{} {}", armor_set.name, DataType::ArmorSet.icon()),
+            editing: false,
+        }
+    }
+}
+
 impl From<Emote> for Entry {
     fn from(emote: Emote) -> Self {
         Entry {
@@ -277,6 +304,14 @@ pub fn amulets() -> Vec<Entry> {
         .collect()
 }
 
+pub fn armor_sets() -> Vec<Entry> {
+    let mut rdr = csv::Reader::from_reader(DataType::ArmorSet.data());
+    rdr.deserialize()
+        .filter_map(|t: Result<ArmorSet, _>| t.ok())
+        .map(Entry::from)
+        .collect()
+}
+
 pub fn emotes() -> Vec<Entry> {
     let mut rdr = csv::Reader::from_reader(DataType::Emote.data());
     rdr.deserialize()
@@ -332,6 +367,11 @@ mod tests {
     #[test]
     fn all_amulets_found() {
         assert_eq!(22, amulets().len());
+    }
+
+    #[test]
+    fn all_armor_sets_found() {
+        assert_eq!(17, armor_sets().len());
     }
 
     #[test]

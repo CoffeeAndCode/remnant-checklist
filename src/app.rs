@@ -53,6 +53,7 @@ impl Component for App {
             } else {
                 let mut entries = data::remnant_traits();
                 entries.append(&mut data::amulets());
+                entries.append(&mut data::armor_sets());
                 entries.append(&mut data::emotes());
                 entries.append(&mut data::rings());
                 entries.append(&mut data::hand_guns());
