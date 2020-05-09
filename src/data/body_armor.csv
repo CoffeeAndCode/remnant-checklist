@@ -1,0 +1,17 @@
+ID,Name,Armor,Weight,Armor Skill,Bleed,Fire,Rot,Radiation,Corrosive,Shock
+1,Adventurer Tunic,12,9,Treasure Hunter,-4,-2,3,2,1,3
+2,Akari Garb,19,12,Opportunist,5,-3,-2,2,0,1
+3,Bandit Jacket,15,8,Freeloader,4,-5,0,-2,3,-2
+4,Cultist Duster,20,12,Blood Pact,-2,3,-2,-2,0,3
+5,Drifter's Overcoat,23,15,Wanderer,-9,1,3,4,-2,3
+6,Elder Raiment,50.8,7,Believer,-3,3,-2,-4,-2,3
+7,Hunter Trenchcoat,18,11,Sharpshooter,0,-1,-3,4,3,-4
+8,Leto's Armor,51,45,Juggernaut,11,11,12,11,9,10
+9,Osseus Husk,25,19,Bloodlust,12,0,2,5,-11,-10
+10,Radiant Protector,31,34,Momentum,1,7,-9,-1,-7,9
+11,Scrapper Bodyplate,26,20,Challenger,4,5,0,-1,-4,-3
+12,Slayer Mantle,24,14,Assassin,4,-12,2,5,9,3
+13,Twisted Cage,32,17,Regrowth,-4,-10,12,-2,5,-1
+14,Void Carapace,34,35,Vengeance,3,0,2,9,-10,-5
+15,Labyrinth Armor,15,12,Power Surge,-2,2,2,0,2,-3
+16,Carapace Shell,35,31,Harden,1,-2,3,-3,5,-2
