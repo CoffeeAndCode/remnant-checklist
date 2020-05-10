@@ -1,11 +1,15 @@
-var CACHE_VERSION = "1";
+var CACHE_VERSION = "4";
 var CACHE_NAME = CACHE_VERSION + ":sw-cache-";
 
 var cachedURLs = [
-  "/application.js",
-  "/pkg/remnant.js",
-  "/pkg/remnant_bg.wasm",
-  "/index.html",
+  "https://remnant.coffee.dev/application.js",
+  "https://remnant.coffee.dev/pkg/remnant.js",
+  "https://remnant.coffee.dev/pkg/remnant_bg.wasm",
+  "https://remnant.coffee.dev/index.html",
+  "https://remnant.coffee.dev/images/icon-32.png",
+  "https://remnant.coffee.dev/images/icon-192.png",
+  "https://remnant.coffee.dev/images/icon-512.png",
+  "https://remnant.coffee.dev/manifest.webmanifest",
   "https://cdn.jsdelivr.net/npm/todomvc-app-css@2.1.2/index.css",
   "https://cdn.jsdelivr.net/npm/todomvc-common@1.0.5/base.css",
 ];
@@ -63,7 +67,7 @@ function onFetch(event) {
           // if not found in cache, return default offline content for navigate requests
           if (isHTMLRequest(event.request)) {
             console.log("[Serviceworker]", "Fetching offline content", event);
-            return caches.match("/offline.html");
+            return caches.match("/index.html");
           }
         });
       })
