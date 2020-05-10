@@ -1,0 +1,27 @@
+{
+  "background_color": "#ffffff",
+  "categories": ["remnant", "video games", "completionist"],
+  "description": "Remnant: From the Ashes - Checklist application for tracking what you've unlocked so far.",
+  "dir": "ltr",
+  "display": "standalone",
+  "icons": [
+    {
+      "sizes": "192x192",
+      "src": "/images/icon-192.png",
+      "type": "image/png"
+    },
+    {
+      "sizes": "512x512",
+      "src": "/images/icon-512.png",
+      "type": "image/png"
+    }
+  ],
+  "lang": "en-US",
+  "name": "Remnant: From the Ashes - Checklist",
+  "orientation": "any",
+  "related_applications": [],
+  "scope": "/",
+  "short_name": "Checklist",
+  "start_url": "/",
+  "theme_color": "#ffffff"
+}
