@@ -1,15 +1,15 @@
-var CACHE_VERSION = "4";
+var CACHE_VERSION = "10";
 var CACHE_NAME = CACHE_VERSION + ":sw-cache-";
 
 var cachedURLs = [
-  "https://remnant.coffee.dev/application.js",
-  "https://remnant.coffee.dev/pkg/remnant.js",
-  "https://remnant.coffee.dev/pkg/remnant_bg.wasm",
-  "https://remnant.coffee.dev/index.html",
-  "https://remnant.coffee.dev/images/icon-32.png",
-  "https://remnant.coffee.dev/images/icon-192.png",
-  "https://remnant.coffee.dev/images/icon-512.png",
-  "https://remnant.coffee.dev/manifest.webmanifest",
+  "/application.js",
+  "/pkg/remnant.js",
+  "/pkg/remnant_bg.wasm",
+  "/index.html",
+  "/images/icon-32.png",
+  "/images/icon-192.png",
+  "/images/icon-512.png",
+  "/manifest.webmanifest",
   "https://cdn.jsdelivr.net/npm/todomvc-app-css@2.1.2/index.css",
   "https://cdn.jsdelivr.net/npm/todomvc-common@1.0.5/base.css",
 ];
@@ -20,7 +20,7 @@ function onInstall(event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function prefill(cache) {
       return cache.addAll(cachedURLs);
-    })
+    }, console.error)
   );
 }
 
@@ -44,35 +44,30 @@ function onActivate(event) {
   );
 }
 
-function isHTMLRequest(request) {
-  return (
-    request.mode === "navigate" ||
-    (request.method === "GET" &&
-      request.headers.get("accept").includes("text/html"))
-  );
-}
-
 // Borrowed from https://github.com/TalAter/UpUp
 function onFetch(event) {
-  if (cachedURLs.includes(event.request.url) || isHTMLRequest(event.request)) {
-    event.respondWith(
-      // try to return untouched request from network first
-      fetch(event.request).catch(function () {
-        // if it fails, try to return request from the cache
-        return caches.match(event.request).then(function (response) {
-          if (response) {
-            return response;
-          }
+  event.respondWith(
+    // try to return untouched request from network first
+    fetch(event.request).catch(function () {
+      // if it fails, try to return request from the cache
+      return caches.match(event.request).then(function (response) {
+        if (response) {
+          return response;
+        }
 
-          // if not found in cache, return default offline content for navigate requests
-          if (isHTMLRequest(event.request)) {
-            console.log("[Serviceworker]", "Fetching offline content", event);
-            return caches.match("/index.html");
-          }
-        });
-      })
-    );
-  }
+        // if not found in cache, return default offline content
+        // (only if this is a navigation request. In older browsers we check if this is a text/html request. Thanks @jeffposnick)
+        if (
+          event.request.mode === "navigate" ||
+          (event.request.method === "GET" &&
+            event.request.headers.get("accept").includes("text/html"))
+        ) {
+          console.log("[Serviceworker]", "Fetching offline content", event);
+          return caches.match("/index.html");
+        }
+      });
+    })
+  );
 }
 
 self.addEventListener("install", onInstall);
