@@ -26,6 +26,7 @@ pub fn start() -> Result<(), JsValue> {
 }
 
 #[cfg(test)]
+#[allow(clippy::assertions_on_constants)]
 mod tests {
     #[test]
     fn test_example() {
