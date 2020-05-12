@@ -1,6 +1,5 @@
 mod data;
 
-use log::*;
 use serde_derive::{Deserialize, Serialize};
 use strum::IntoEnumIterator;
 use strum_macros::{EnumIter, ToString};
@@ -111,7 +110,6 @@ impl Component for App {
     }
 
     fn view(&self) -> Html {
-        info!("rendered!");
         html! {
             <div class="todomvc-wrapper">
                 <section class="todoapp">
