@@ -495,9 +495,12 @@ impl From<Trait> for Entry {
 
 fn amulets() -> Vec<Amulet> {
     let mut rdr = csv::Reader::from_reader(DataType::Amulet.data());
-    rdr.deserialize()
+    let mut amulets: Vec<Amulet> = rdr
+        .deserialize()
         .filter_map(|t: Result<Amulet, _>| t.ok())
-        .collect()
+        .collect();
+    amulets.sort_unstable_by(|a, b| a.name.cmp(&b.name));
+    amulets
 }
 
 pub fn amulet_entries() -> Vec<Entry> {
@@ -506,9 +509,12 @@ pub fn amulet_entries() -> Vec<Entry> {
 
 fn armor_sets() -> Vec<ArmorSet> {
     let mut rdr = csv::Reader::from_reader(DataType::ArmorSet.data());
-    rdr.deserialize()
+    let mut armor_sets: Vec<ArmorSet> = rdr
+        .deserialize()
         .filter_map(|t: Result<ArmorSet, _>| t.ok())
-        .collect()
+        .collect();
+    armor_sets.sort_unstable_by(|a, b| a.name.cmp(&b.name));
+    armor_sets
 }
 
 pub fn armor_set_entries() -> Vec<Entry> {
@@ -517,9 +523,12 @@ pub fn armor_set_entries() -> Vec<Entry> {
 
 fn body_armor() -> Vec<BodyArmor> {
     let mut rdr = csv::Reader::from_reader(DataType::BodyArmor.data());
-    rdr.deserialize()
+    let mut body_armor: Vec<BodyArmor> = rdr
+        .deserialize()
         .filter_map(|t: Result<BodyArmor, _>| t.ok())
-        .collect()
+        .collect();
+    body_armor.sort_unstable_by(|a, b| a.name.cmp(&b.name));
+    body_armor
 }
 
 pub fn body_armor_entries() -> Vec<Entry> {
@@ -528,9 +537,12 @@ pub fn body_armor_entries() -> Vec<Entry> {
 
 fn emotes() -> Vec<Emote> {
     let mut rdr = csv::Reader::from_reader(DataType::Emote.data());
-    rdr.deserialize()
+    let mut emotes: Vec<Emote> = rdr
+        .deserialize()
         .filter_map(|t: Result<Emote, _>| t.ok())
-        .collect()
+        .collect();
+    emotes.sort_unstable_by(|a, b| a.name.cmp(&b.name));
+    emotes
 }
 
 pub fn emote_entries() -> Vec<Entry> {
@@ -539,9 +551,12 @@ pub fn emote_entries() -> Vec<Entry> {
 
 fn hand_guns() -> Vec<HandGun> {
     let mut rdr = csv::Reader::from_reader(DataType::HandGun.data());
-    rdr.deserialize()
+    let mut hand_guns: Vec<HandGun> = rdr
+        .deserialize()
         .filter_map(|t: Result<HandGun, _>| t.ok())
-        .collect()
+        .collect();
+    hand_guns.sort_unstable_by(|a, b| a.name.cmp(&b.name));
+    hand_guns
 }
 
 pub fn hand_gun_entries() -> Vec<Entry> {
@@ -550,9 +565,12 @@ pub fn hand_gun_entries() -> Vec<Entry> {
 
 fn head_armor() -> Vec<HeadArmor> {
     let mut rdr = csv::Reader::from_reader(DataType::HeadArmor.data());
-    rdr.deserialize()
+    let mut head_armor: Vec<HeadArmor> = rdr
+        .deserialize()
         .filter_map(|t: Result<HeadArmor, _>| t.ok())
-        .collect()
+        .collect();
+    head_armor.sort_unstable_by(|a, b| a.name.cmp(&b.name));
+    head_armor
 }
 
 pub fn head_armor_entries() -> Vec<Entry> {
@@ -561,9 +579,12 @@ pub fn head_armor_entries() -> Vec<Entry> {
 
 fn leg_armor() -> Vec<LegArmor> {
     let mut rdr = csv::Reader::from_reader(DataType::LegArmor.data());
-    rdr.deserialize()
+    let mut leg_armor: Vec<LegArmor> = rdr
+        .deserialize()
         .filter_map(|t: Result<LegArmor, _>| t.ok())
-        .collect()
+        .collect();
+    leg_armor.sort_unstable_by(|a, b| a.name.cmp(&b.name));
+    leg_armor
 }
 
 pub fn leg_armor_entries() -> Vec<Entry> {
@@ -572,9 +593,12 @@ pub fn leg_armor_entries() -> Vec<Entry> {
 
 fn long_guns() -> Vec<LongGun> {
     let mut rdr = csv::Reader::from_reader(DataType::LongGun.data());
-    rdr.deserialize()
+    let mut long_guns: Vec<LongGun> = rdr
+        .deserialize()
         .filter_map(|t: Result<LongGun, _>| t.ok())
-        .collect()
+        .collect();
+    long_guns.sort_unstable_by(|a, b| a.name.cmp(&b.name));
+    long_guns
 }
 
 pub fn long_gun_entries() -> Vec<Entry> {
@@ -583,9 +607,12 @@ pub fn long_gun_entries() -> Vec<Entry> {
 
 fn melee_weapons() -> Vec<MeleeWeapon> {
     let mut rdr = csv::Reader::from_reader(DataType::MeleeWeapon.data());
-    rdr.deserialize()
+    let mut melee_weapons: Vec<MeleeWeapon> = rdr
+        .deserialize()
         .filter_map(|t: Result<MeleeWeapon, _>| t.ok())
-        .collect()
+        .collect();
+    melee_weapons.sort_unstable_by(|a, b| a.name.cmp(&b.name));
+    melee_weapons
 }
 
 pub fn melee_weapon_entries() -> Vec<Entry> {
@@ -594,9 +621,12 @@ pub fn melee_weapon_entries() -> Vec<Entry> {
 
 fn remnant_traits() -> Vec<Trait> {
     let mut rdr = csv::Reader::from_reader(DataType::Trait.data());
-    rdr.deserialize()
+    let mut traits: Vec<Trait> = rdr
+        .deserialize()
         .filter_map(|t: Result<Trait, _>| t.ok())
-        .collect()
+        .collect();
+    traits.sort_unstable_by(|a, b| a.name.cmp(&b.name));
+    traits
 }
 
 pub fn remnant_trait_entries() -> Vec<Entry> {
@@ -605,9 +635,12 @@ pub fn remnant_trait_entries() -> Vec<Entry> {
 
 fn rings() -> Vec<Ring> {
     let mut rdr = csv::Reader::from_reader(DataType::Ring.data());
-    rdr.deserialize()
+    let mut rings: Vec<Ring> = rdr
+        .deserialize()
         .filter_map(|t: Result<Ring, _>| t.ok())
-        .collect()
+        .collect();
+    rings.sort_unstable_by(|a, b| a.name.cmp(&b.name));
+    rings
 }
 
 pub fn ring_entries() -> Vec<Entry> {
@@ -643,6 +676,14 @@ mod tests {
     }
 
     #[test]
+    fn amulets_are_sorted_alphabetically() {
+        let amulets = amulets();
+        assert_eq!("Amulet of Epicaricacy", amulets[0].name);
+        assert_eq!("Amulet of Perseverance", amulets[1].name);
+        assert_eq!("Vengeance Idol", amulets[NUMBER_OF_AMULETS - 1].name);
+    }
+
+    #[test]
     fn all_armor_sets_found() {
         assert_eq!(NUMBER_OF_ARMOR_SETS, armor_sets().len());
     }
@@ -652,6 +693,14 @@ mod tests {
         let mut armor_sets = armor_sets();
         armor_sets.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_ARMOR_SETS, armor_sets.len());
+    }
+
+    #[test]
+    fn armor_sets_are_sorted_alphabetically() {
+        let armor_sets = armor_sets();
+        assert_eq!("Adventurer Set", armor_sets[0].name);
+        assert_eq!("Akari Set", armor_sets[1].name);
+        assert_eq!("Void Set", armor_sets[NUMBER_OF_ARMOR_SETS - 1].name);
     }
 
     #[test]
@@ -667,6 +716,14 @@ mod tests {
     }
 
     #[test]
+    fn body_armor_is_sorted_alphabetically() {
+        let body_armor = body_armor();
+        assert_eq!("Adventurer Tunic", body_armor[0].name);
+        assert_eq!("Akari Garb", body_armor[1].name);
+        assert_eq!("Void Carapace", body_armor[NUMBER_OF_BODY_ARMOR - 1].name);
+    }
+
+    #[test]
     fn all_hand_guns_found() {
         assert_eq!(NUMBER_OF_HAND_GUNS, hand_guns().len());
     }
@@ -676,6 +733,14 @@ mod tests {
         let mut hand_guns = hand_guns();
         hand_guns.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_HAND_GUNS, hand_guns.len());
+    }
+
+    #[test]
+    fn hand_guns_are_sorted_alphabetically() {
+        let hand_guns = hand_guns();
+        assert_eq!("Curse of the Jungle God", hand_guns[0].name);
+        assert_eq!("Defiler", hand_guns[1].name);
+        assert_eq!("Submachine Gun", hand_guns[NUMBER_OF_HAND_GUNS - 1].name);
     }
 
     #[test]
@@ -691,6 +756,14 @@ mod tests {
     }
 
     #[test]
+    fn head_armor_is_sorted_alphabetically() {
+        let head_armor = head_armor();
+        assert_eq!("Adventurer Goggles", head_armor[0].name);
+        assert_eq!("Akari Mask", head_armor[1].name);
+        assert_eq!("Void Skull", head_armor[NUMBER_OF_HEAD_ARMOR - 1].name);
+    }
+
+    #[test]
     fn all_emotes_found() {
         assert_eq!(NUMBER_OF_EMOTES, emotes().len());
     }
@@ -700,6 +773,14 @@ mod tests {
         let mut emotes = emotes();
         emotes.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_EMOTES, emotes.len());
+    }
+
+    #[test]
+    fn emotes_are_sorted_alphabetically() {
+        let emotes = emotes();
+        assert_eq!("Beckon Emote", emotes[0].name);
+        assert_eq!("Cheer Emote", emotes[1].name);
+        assert_eq!("Yes Emote", emotes[NUMBER_OF_EMOTES - 1].name);
     }
 
     #[test]
@@ -715,6 +796,14 @@ mod tests {
     }
 
     #[test]
+    fn leg_armor_is_sorted_alphabetically() {
+        let leg_armor = leg_armor();
+        assert_eq!("Adventurer Leggings", leg_armor[0].name);
+        assert_eq!("Akari Leggings", leg_armor[1].name);
+        assert_eq!("Void Greaves", leg_armor[NUMBER_OF_LEG_ARMOR - 1].name);
+    }
+
+    #[test]
     fn all_long_guns_found() {
         assert_eq!(NUMBER_OF_LONG_GUNS, long_guns().len());
     }
@@ -724,6 +813,14 @@ mod tests {
         let mut long_guns = long_guns();
         long_guns.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_LONG_GUNS, long_guns.len());
+    }
+
+    #[test]
+    fn long_guns_are_sorted_alphabetically() {
+        let long_guns = long_guns();
+        assert_eq!("Assault Rifle", long_guns[0].name);
+        assert_eq!("Beam Rifle", long_guns[1].name);
+        assert_eq!("Sporebloom", long_guns[NUMBER_OF_LONG_GUNS - 1].name);
     }
 
     #[test]
@@ -739,6 +836,17 @@ mod tests {
     }
 
     #[test]
+    fn melee_weapons_are_sorted_alphabetically() {
+        let melee_weapons = melee_weapons();
+        assert_eq!("Blade of Adventure", melee_weapons[0].name);
+        assert_eq!("Butchers Flail", melee_weapons[1].name);
+        assert_eq!(
+            "World Breaker",
+            melee_weapons[NUMBER_OF_MELEE_WEAPONS - 1].name
+        );
+    }
+
+    #[test]
     fn all_rings_found() {
         assert_eq!(NUMBER_OF_RINGS, rings().len());
     }
@@ -751,6 +859,14 @@ mod tests {
     }
 
     #[test]
+    fn rings_are_sorted_alphabetically() {
+        let rings = rings();
+        assert_eq!("Aggressor's Bane", rings[0].name);
+        assert_eq!("Akari War Band", rings[1].name);
+        assert_eq!("Stone Of Balance", rings[NUMBER_OF_RINGS - 1].name);
+    }
+
+    #[test]
     fn all_traits_found() {
         assert_eq!(NUMBER_OF_TRAITS, remnant_traits().len());
     }
@@ -760,5 +876,13 @@ mod tests {
         let mut traits = remnant_traits();
         traits.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_TRAITS, traits.len());
+    }
+
+    #[test]
+    fn traits_are_sorted_alphabetically() {
+        let traits = remnant_traits();
+        assert_eq!("Arcane Strike", traits[0].name);
+        assert_eq!("Bark Skin", traits[1].name);
+        assert_eq!("World Walker", traits[NUMBER_OF_TRAITS - 1].name);
     }
 }
