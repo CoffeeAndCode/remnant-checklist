@@ -86,6 +86,9 @@ struct Amulet {
 
     #[serde(rename = "Name")]
     name: String,
+
+    #[serde(rename = "Url")]
+    url: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -98,6 +101,9 @@ struct ArmorSet {
 
     #[serde(rename = "Set Bonus")]
     set_bonus: String,
+
+    #[serde(rename = "Url")]
+    url: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -134,6 +140,9 @@ struct BodyArmor {
 
     #[serde(rename = "Name")]
     name: String,
+
+    #[serde(rename = "Url")]
+    url: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -149,6 +158,9 @@ struct Emote {
 
     #[serde(rename = "Name")]
     name: String,
+
+    #[serde(rename = "Url")]
+    url: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -179,6 +191,9 @@ struct HandGun {
 
     #[serde(rename = "RPS")]
     rps: f32,
+
+    #[serde(rename = "Url")]
+    url: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -215,6 +230,9 @@ struct HeadArmor {
 
     #[serde(rename = "Name")]
     name: String,
+
+    #[serde(rename = "Url")]
+    url: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -251,6 +269,9 @@ struct LegArmor {
 
     #[serde(rename = "Name")]
     name: String,
+
+    #[serde(rename = "Url")]
+    url: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -281,6 +302,9 @@ struct LongGun {
 
     #[serde(rename = "RPS")]
     rps: f32,
+
+    #[serde(rename = "Url")]
+    url: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -299,6 +323,9 @@ struct MeleeWeapon {
 
     #[serde(rename = "Weapon Mod")]
     weapon_mod: Option<String>,
+
+    #[serde(rename = "Url")]
+    url: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -314,6 +341,9 @@ struct Ring {
 
     #[serde(rename = "Location")]
     location: String,
+
+    #[serde(rename = "Url")]
+    url: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -326,6 +356,9 @@ struct Trait {
 
     #[serde(rename = "Name")]
     name: String,
+
+    #[serde(rename = "Url")]
+    url: String,
 }
 
 impl From<Amulet> for Entry {
@@ -333,7 +366,9 @@ impl From<Amulet> for Entry {
         Entry {
             completed: false,
             data_type: DataType::Amulet,
-            description: format!("{} {}", amulet.name, DataType::Amulet.icon()),
+            icon: DataType::Amulet.icon(),
+            name: amulet.name,
+            url: amulet.url,
         }
     }
 }
@@ -343,7 +378,9 @@ impl From<ArmorSet> for Entry {
         Entry {
             completed: false,
             data_type: DataType::ArmorSet,
-            description: format!("{} {}", armor_set.name, DataType::ArmorSet.icon()),
+            icon: DataType::ArmorSet.icon(),
+            name: armor_set.name,
+            url: armor_set.url,
         }
     }
 }
@@ -353,7 +390,9 @@ impl From<BodyArmor> for Entry {
         Entry {
             completed: false,
             data_type: DataType::BodyArmor,
-            description: format!("{} {}", body_armor.name, DataType::BodyArmor.icon()),
+            icon: DataType::BodyArmor.icon(),
+            name: body_armor.name,
+            url: body_armor.url,
         }
     }
 }
@@ -363,7 +402,9 @@ impl From<Emote> for Entry {
         Entry {
             completed: false,
             data_type: DataType::Emote,
-            description: format!("{} {}", emote.name, DataType::Emote.icon()),
+            icon: DataType::Emote.icon(),
+            name: emote.name,
+            url: emote.url,
         }
     }
 }
@@ -373,7 +414,9 @@ impl From<HandGun> for Entry {
         Entry {
             completed: false,
             data_type: DataType::HandGun,
-            description: format!("{} {}", hand_gun.name, DataType::HandGun.icon()),
+            icon: DataType::HandGun.icon(),
+            name: hand_gun.name,
+            url: hand_gun.url,
         }
     }
 }
@@ -383,7 +426,9 @@ impl From<HeadArmor> for Entry {
         Entry {
             completed: false,
             data_type: DataType::HeadArmor,
-            description: format!("{} {}", head_armor.name, DataType::HeadArmor.icon()),
+            icon: DataType::HeadArmor.icon(),
+            name: head_armor.name,
+            url: head_armor.url,
         }
     }
 }
@@ -393,7 +438,9 @@ impl From<LegArmor> for Entry {
         Entry {
             completed: false,
             data_type: DataType::LegArmor,
-            description: format!("{} {}", leg_armor.name, DataType::LegArmor.icon()),
+            icon: DataType::LegArmor.icon(),
+            name: leg_armor.name,
+            url: leg_armor.url,
         }
     }
 }
@@ -403,7 +450,9 @@ impl From<LongGun> for Entry {
         Entry {
             completed: false,
             data_type: DataType::LongGun,
-            description: format!("{} {}", long_gun.name, DataType::LongGun.icon()),
+            icon: DataType::LongGun.icon(),
+            name: long_gun.name,
+            url: long_gun.url,
         }
     }
 }
@@ -413,7 +462,9 @@ impl From<MeleeWeapon> for Entry {
         Entry {
             completed: false,
             data_type: DataType::MeleeWeapon,
-            description: format!("{} {}", melee_weapon.name, DataType::MeleeWeapon.icon()),
+            icon: DataType::MeleeWeapon.icon(),
+            name: melee_weapon.name,
+            url: melee_weapon.url,
         }
     }
 }
@@ -423,7 +474,9 @@ impl From<Ring> for Entry {
         Entry {
             completed: false,
             data_type: DataType::MeleeWeapon,
-            description: format!("{} {}", ring.name, DataType::Ring.icon()),
+            icon: DataType::Ring.icon(),
+            name: ring.name,
+            url: ring.url,
         }
     }
 }
@@ -433,7 +486,9 @@ impl From<Trait> for Entry {
         Entry {
             completed: false,
             data_type: DataType::Trait,
-            description: format!("{} {}", remnant_trait.name, DataType::Trait.icon()),
+            icon: DataType::Trait.icon(),
+            name: remnant_trait.name,
+            url: remnant_trait.url,
         }
     }
 }
@@ -563,7 +618,7 @@ pub fn ring_entries() -> Vec<Entry> {
 mod tests {
     use super::*;
 
-    const NUMBER_OF_AMULETS: usize = 22;
+    const NUMBER_OF_AMULETS: usize = 23;
     const NUMBER_OF_ARMOR_SETS: usize = 17;
     const NUMBER_OF_BODY_ARMOR: usize = 16;
     const NUMBER_OF_HAND_GUNS: usize = 9;
@@ -572,7 +627,7 @@ mod tests {
     const NUMBER_OF_LEG_ARMOR: usize = 17;
     const NUMBER_OF_LONG_GUNS: usize = 15;
     const NUMBER_OF_MELEE_WEAPONS: usize = 17;
-    const NUMBER_OF_RINGS: usize = 45;
+    const NUMBER_OF_RINGS: usize = 47;
     const NUMBER_OF_TRAITS: usize = 40;
 
     #[test]

@@ -1,18 +1,18 @@
-ID,Name,Base Damage,Max Damage,Weapon Mod
-1,Scrap Sword,35,105,
-2,Scrap Hammer,52,156,
-3,Scrap Hatchet,40,120,
-4,Blade of Adventure,22,,
-5,Petrified Maul,50,150,Heavy Impact
-6,Wastelander Flail,30,90,
-7,Scythe,31,93,
-8,World Breaker,45,135,Force Burst
-9,Riven,45,115,Life Leach
-10,Spear,33,99,
-11,Scar of The Jungle God,27,81,Razor Sharp
-12,Smolder,30,90,Blaze
-13,Voice of The Tempest,31,93,Lightning Shock
-14,Butchers Flail,90,,Corrosive Strike
-15,Guardian Axe,34,102,Spirit Engine
-16,Lost Harpoon,28,84,Power Strike
-17,Hero's Sword,48,144,Energy Wave
+ID,Name,Base Damage,Max Damage,Weapon Mod,Url
+1,Scrap Sword,35,105,,https://remnantfromtheashes.wiki.fextralife.com/Scrap+Sword
+2,Scrap Hammer,52,156,,https://remnantfromtheashes.wiki.fextralife.com/Scrap+Hammer
+3,Scrap Hatchet,40,120,,https://remnantfromtheashes.wiki.fextralife.com/Scrap+Hatchet
+4,Blade of Adventure,22,,,https://remnantfromtheashes.wiki.fextralife.com/Blade+of+Adventure
+5,Petrified Maul,50,150,Heavy Impact,https://remnantfromtheashes.wiki.fextralife.com/Petrified+Maul
+6,Wastelander Flail,30,90,,https://remnantfromtheashes.wiki.fextralife.com/Wastelander+Flail
+7,Scythe,31,93,,https://remnantfromtheashes.wiki.fextralife.com/Scythe
+8,World Breaker,45,135,Force Burst,https://remnantfromtheashes.wiki.fextralife.com/World+Breaker
+9,Riven,45,115,Life Leach,https://remnantfromtheashes.wiki.fextralife.com/Riven
+10,Spear,33,99,,https://remnantfromtheashes.wiki.fextralife.com/Spear
+11,Scar of The Jungle God,27,81,Razor Sharp,https://remnantfromtheashes.wiki.fextralife.com/Scar+of+The+Jungle+God
+12,Smolder,30,90,Blaze,https://remnantfromtheashes.wiki.fextralife.com/Smolder
+13,Voice of The Tempest,31,93,Lightning Shock,https://remnantfromtheashes.wiki.fextralife.com/Voice+of+The+Tempest
+14,Butchers Flail,90,,Corrosive Strike,https://remnantfromtheashes.wiki.fextralife.com/Butchers+Flail
+15,Guardian Axe,34,102,Spirit Engine,https://remnantfromtheashes.wiki.fextralife.com/Guardian+Axe
+16,Lost Harpoon,28,84,Power Strike,https://remnantfromtheashes.wiki.fextralife.com/Lost+Harpoon
+17,Hero's Sword,48,144,Energy Wave,https://remnantfromtheashes.wiki.fextralife.com/Hero's+Sword

@@ -1,10 +1,10 @@
-ID,Name,Base Damage,Max Damage,RPS,Magazine,Ideal Range,Max Ammo,Crit Chance
-1,Repeater Pistol,17,51,7,13,18,104,5
-2,Magnum Revolver,65,189,1.4,6,18,30,5
-3,Defiler,52,156,2,6,13,36,5
-4,Hunting Pistol,105,315,1,1,22,19,15
-5,Submachine Gun,7,21,16,35,13,245,5
-6,Hive Cannon,57,210,1.8,5,16,25,5
-7,Spitfire,12,36,9.3,26,15,156,5
-8,Curse of the Jungle God,25,84,4,18,18,72,10
-9,Pride of the Iskal,11,,3.9,18,20,90,5
+ID,Name,Base Damage,Max Damage,RPS,Magazine,Ideal Range,Max Ammo,Crit Chance,Url
+1,Repeater Pistol,17,51,7,13,18,104,5,https://remnantfromtheashes.wiki.fextralife.com/Repeater+Pistol
+2,Magnum Revolver,65,189,1.4,6,18,30,5,https://remnantfromtheashes.wiki.fextralife.com/Magnum+Revolver
+3,Defiler,52,156,2,6,13,36,5,https://remnantfromtheashes.wiki.fextralife.com/Defiler+(Weapon)
+4,Hunting Pistol,105,315,1,1,22,19,15,https://remnantfromtheashes.wiki.fextralife.com/Hunting+Pistol
+5,Submachine Gun,7,21,16,35,13,245,5,https://remnantfromtheashes.wiki.fextralife.com/Submachine+Gun
+6,Hive Cannon,57,210,1.8,5,16,25,5,https://remnantfromtheashes.wiki.fextralife.com/Hive+Cannon
+7,Spitfire,12,36,9.3,26,15,156,5,https://remnantfromtheashes.wiki.fextralife.com/Spitfire
+8,Curse of the Jungle God,25,84,4,18,18,72,10,https://remnantfromtheashes.wiki.fextralife.com/Curse+of+the+Jungle+God
+9,Pride of the Iskal,11,,3.9,18,20,90,5,https://remnantfromtheashes.wiki.fextralife.com/Pride+of+the+Iskal

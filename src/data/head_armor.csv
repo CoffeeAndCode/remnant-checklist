@@ -1,19 +1,19 @@
-ID,Name,Armor,Weight,Armor Skill,Bleed,Fire,Rot,Radiation,Corrosive,Shock
-1,Adventurer Goggles,4,2,Treasure Hunter,-1,-2,1,3,0,1
-2,Akari Mask,7,5,Opportunist,4,-2,-7,5,-3,1
-3,Bandit's Mask,4,3,Freeloader,3,-3,2,-1,3,-5
-4,Bomber Hat,10,4,Team Player,3,3,3,3,3,3
-5,Cultist Hat,5,3,Blood Pact,0,2,-2,-1,0,1
-6,Drifter's Mask,13,7,Wanderer,-4,1,1,2,0,2
-7,Elder Headdress,52.2,8,Believer,-2,2,0,-1,0,2
-8,Hunter Shroud,7,4,Sharpshooter,1,0,-2,2,1,-1
-9,Leto's Helmet,20,18,Juggernaut,3,3,5,3,4,3
-10,Osseus Helm,12,10,Bloodlust,9,1,1,4,-7,-6
-11,Radiant Visage,56.8,12,Momentum,1,7,-9,-1,-7,9
-12,Scrapper Helmet,14,12,Challenger,2,1,1,-1,-2,-4
-13,Slayer Mask,11,8,Assassin,4,-9,2,2,6,5
-14,Twisted Hood,12,7,Regrowth,-3,-8,6,-1,3,0
-15,Twisted Mask,3,6,Regrowth,-6,-6,36,-6,-6,-6
-16,Void Skull,15,14,Vengeance,4,1,1,8,-8,-3
-17,Labyrinth Helm,15,12,Power Surge,-2,2,2,0,2,-3
-18,Carapace Great Helm,16,14,Harden,2,1,2,-4,4,-2
+ID,Name,Armor,Weight,Armor Skill,Bleed,Fire,Rot,Radiation,Corrosive,Shock,Url
+1,Adventurer Goggles,4,2,Treasure Hunter,-1,-2,1,3,0,1,https://remnantfromtheashes.wiki.fextralife.com/Adventurer+Goggles
+2,Akari Mask,7,5,Opportunist,4,-2,-7,5,-3,1,https://remnantfromtheashes.wiki.fextralife.com/Akari+Mask
+3,Bandit's Mask,4,3,Freeloader,3,-3,2,-1,3,-5,https://remnantfromtheashes.wiki.fextralife.com/Bandit's+Mask
+4,Bomber Hat,10,4,Team Player,3,3,3,3,3,3,https://twitter.com/Remnant_Game/status/1150812476986073093
+5,Cultist Hat,5,3,Blood Pact,0,2,-2,-1,0,1,https://remnantfromtheashes.wiki.fextralife.com/Cultist+Hat
+6,Drifter's Mask,13,7,Wanderer,-4,1,1,2,0,2,https://remnantfromtheashes.wiki.fextralife.com/Drifter's+Mask
+7,Elder Headdress,52.2,8,Believer,-2,2,0,-1,0,2,https://remnantfromtheashes.wiki.fextralife.com/Elder+Headdress
+8,Hunter Shroud,7,4,Sharpshooter,1,0,-2,2,1,-1,https://remnantfromtheashes.wiki.fextralife.com/Hunter+Shroud
+9,Leto's Helmet,20,18,Juggernaut,3,3,5,3,4,3,https://remnantfromtheashes.wiki.fextralife.com/Leto's+Helmet
+10,Osseus Helm,12,10,Bloodlust,9,1,1,4,-7,-6,https://remnantfromtheashes.wiki.fextralife.com/Osseous+Helm
+11,Radiant Visage,56.8,12,Momentum,1,7,-9,-1,-7,9,https://remnantfromtheashes.wiki.fextralife.com/Radiant+Visage
+12,Scrapper Helmet,14,12,Challenger,2,1,1,-1,-2,-4,https://remnantfromtheashes.wiki.fextralife.com/Scrapper+Helmet
+13,Slayer Mask,11,8,Assassin,4,-9,2,2,6,5,https://remnantfromtheashes.wiki.fextralife.com/Slayer+Mask
+14,Twisted Hood,12,7,Regrowth,-3,-8,6,-1,3,0,https://remnantfromtheashes.wiki.fextralife.com/Twisted+Hood
+15,Twisted Mask,3,6,Regrowth,-6,-6,36,-6,-6,-6,https://remnantfromtheashes.wiki.fextralife.com/Twisted+Mask
+16,Void Skull,15,14,Vengeance,4,1,1,8,-8,-3,https://remnantfromtheashes.wiki.fextralife.com/Void+Skull
+17,Labyrinth Helm,15,12,Power Surge,-2,2,2,0,2,-3,https://remnantfromtheashes.wiki.fextralife.com/Labyrinth+Helm
+18,Carapace Great Helm,16,14,Harden,2,1,2,-4,4,-2,https://remnantfromtheashes.wiki.fextralife.com/Carapace+Great+Helm

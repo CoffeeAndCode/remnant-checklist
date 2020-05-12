@@ -1,16 +1,16 @@
-ID,Name,Description,Location
-1,No Emote,Dissent with your head and arms.,Starting Emote
-2,This Way Emote,Use your arms to point out where to go,Starting Emote
-3,Yes Emote,Consent with your head and hand,Starting Emote
-4,Wave Emote,Wave with your hand,Party with another Player
-5,Cheer Emote,Cheer with your arms while screaming: "Aw Yeah!",Defeat The Ent
-6,Beckon Emote,Call someone with your hands,Defeat Singe
-7,Fail Emote,Put your hand on your face while dissenting,Defeat The Harrow
-8,Laugh Emote,Laugh and point with your fingers,Defeat Claviger
-9,Gravedigger Emote,Pretend to dig with a shovel using your arms,Defeat Undying King
-10,Exhausted Emote,Recover your breath while pointing up with one finger,Defeat The Unclean One
-11,Confused Emote,Look Around while moving your arms.,Defeat Ixillis
-12,Freeze Frame Emote,Jump while raising your arm. You'll remain still in the air for a moment.,Defeat The Ravager
-13,Tea Time Emote,Pretend to prepare tea with your arms.,Defeat Totem Father
-14,High Five Emote,Raise your hand to perform a High Five. If another player performs the same emotes you will clap your hands.,Defeat Nightmare on Hardcore Mode
-15,Praise The Gun Emote,Raise your hand above your head while looking at it.,Defeat Nightmare on Normal Mode.
+ID,Name,Description,Location,Url
+1,No Emote,Dissent with your head and arms.,Starting Emote,https://remnantfromtheashes.wiki.fextralife.com/No+Emote
+2,This Way Emote,Use your arms to point out where to go,Starting Emote,https://remnantfromtheashes.wiki.fextralife.com/This+Way+Emote
+3,Yes Emote,Consent with your head and hand,Starting Emote,https://remnantfromtheashes.wiki.fextralife.com/Yes+Emote
+4,Wave Emote,Wave with your hand,Party with another Player,https://remnantfromtheashes.wiki.fextralife.com/Wave+Emote
+5,Cheer Emote,"Cheer with your arms while screaming: ""Aw Yeah!""",Defeat The Ent,https://remnantfromtheashes.wiki.fextralife.com/Cheer+Emote
+6,Beckon Emote,Call someone with your hands,Defeat Singe,https://remnantfromtheashes.wiki.fextralife.com/Beckon+Emote
+7,Fail Emote,Put your hand on your face while dissenting,Defeat The Harrow,https://remnantfromtheashes.wiki.fextralife.com/Fail+Emote
+8,Laugh Emote,Laugh and point with your fingers,Defeat Claviger,https://remnantfromtheashes.wiki.fextralife.com/Laugh+Emote
+9,Gravedigger Emote,Pretend to dig with a shovel using your arms,Defeat Undying King,https://remnantfromtheashes.wiki.fextralife.com/Gravedigger+Emote
+10,Exhausted Emote,Recover your breath while pointing up with one finger,Defeat The Unclean One,https://remnantfromtheashes.wiki.fextralife.com/Exhausted+Emote
+11,Confused Emote,Look Around while moving your arms.,Defeat Ixillis,https://remnantfromtheashes.wiki.fextralife.com/Confused+Emote
+12,Freeze Frame Emote,Jump while raising your arm. You'll remain still in the air for a moment.,Defeat The Ravager,https://remnantfromtheashes.wiki.fextralife.com/Freeze+Frame+Emote
+13,Tea Time Emote,Pretend to prepare tea with your arms.,Defeat Totem Father,https://remnantfromtheashes.wiki.fextralife.com/Tea+Time+Emote
+14,High Five Emote,Raise your hand to perform a High Five. If another player performs the same emotes you will clap your hands.,Defeat Nightmare on Hardcore Mode,https://remnantfromtheashes.wiki.fextralife.com/High+Five+Emote
+15,Praise The Gun Emote,Raise your hand above your head while looking at it.,Defeat Nightmare on Normal Mode.,https://remnantfromtheashes.wiki.fextralife.com/Praise+The+Gun+Emote
