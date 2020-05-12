@@ -137,7 +137,7 @@ impl Component for App {
                     </footer>
                 </section>
                 <footer class="info">
-                    <p>{ "Written by " }<a href="https://coffee.dev" target="_blank">{ "Jonathan Knapp" }</a></p>
+                    <p>{ "Written by " }<a href="https://coffee.dev" rel="noopener noreferrer" target="_blank">{ "Jonathan Knapp" }</a></p>
                     { self.view_share() }
                 </footer>
             </div>
