@@ -46,11 +46,11 @@ impl DataDisplay for DataType {
             DataType::ArmorSet => '👘',
             DataType::BodyArmor => '🧥',
             DataType::Emote => '☺',
-            DataType::HandGun => '⚒',
+            DataType::HandGun => '🔫',
             DataType::HeadArmor => '💂',
             DataType::LegArmor => '🧦',
             DataType::LongGun => '⚒',
-            DataType::MeleeWeapon => '⚒',
+            DataType::MeleeWeapon => '🔱',
             DataType::Ring => '💫',
             DataType::Trait => '☯',
         }
