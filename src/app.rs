@@ -1,6 +1,5 @@
 mod data;
 
-use data::DataDisplay;
 use log::*;
 use serde_derive::{Deserialize, Serialize};
 use strum::IntoEnumIterator;
@@ -120,19 +119,9 @@ impl Component for App {
                             { for Filter::iter().map(|flt| self.view_filter(flt)) }
                         </ul>
                     </footer>
-                    <p>
-                        <button>
-                            { data::DataType::Emote.label() }
-                        </button>
-                        <button>
-                            { data::DataType::Trait.label() }
-                        </button>
-                    </p>
                 </section>
                 <footer class="info">
-                    <p>{ "Double-click to edit a todo" }</p>
-                    <p>{ "Written by " }<a href="https://github.com/DenisKolodin/" target="_blank">{ "Denis Kolodin" }</a></p>
-                    <p>{ "Part of " }<a href="http://todomvc.com/" target="_blank">{ "TodoMVC" }</a></p>
+                    <p>{ "Written by " }<a href="https://coffee.dev" target="_blank">{ "Jonathan Knapp" }</a></p>
                 </footer>
             </div>
         }
