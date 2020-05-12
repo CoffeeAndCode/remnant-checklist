@@ -4,6 +4,7 @@ use log::*;
 use serde_derive::{Deserialize, Serialize};
 use strum::IntoEnumIterator;
 use strum_macros::{EnumIter, ToString};
+use wasm_bindgen::prelude::*;
 use yew::format::Json;
 use yew::prelude::*;
 use yew::services::storage::{Area, StorageService};
@@ -33,8 +34,16 @@ pub struct Entry {
 
 pub enum Msg {
     SetFilter(Filter),
+    ShareApp(String),
     ToggleAll,
     Toggle(usize),
+}
+
+#[wasm_bindgen(module = "/src/js/share.js")]
+extern "C" {
+    #[wasm_bindgen(js_name = canShare)]
+    fn can_share() -> bool;
+    fn share(title: String, text: String, url: String) -> bool;
 }
 
 impl Component for App {
@@ -82,6 +91,13 @@ impl Component for App {
             Msg::SetFilter(filter) => {
                 self.state.filter = filter;
             }
+            Msg::ShareApp(url) => {
+                share(
+                    "Remnant Checklist".into(),
+                    "Track your unlocked items with an offline enabled webapp!".into(),
+                    url,
+                );
+            }
             Msg::ToggleAll => {
                 let status = !self.state.is_all_completed();
                 self.state.toggle_all(status);
@@ -122,6 +138,7 @@ impl Component for App {
                 </section>
                 <footer class="info">
                     <p>{ "Written by " }<a href="https://coffee.dev" target="_blank">{ "Jonathan Knapp" }</a></p>
+                    { self.view_share() }
                 </footer>
             </div>
         }
@@ -129,6 +146,18 @@ impl Component for App {
 }
 
 impl App {
+    fn view_share(&self) -> Html {
+        if can_share() {
+            html! {
+                <p>
+                    <button onclick=self.link.callback(|_| Msg::ShareApp(String::from("https://remnant.coffee.dev")))>{ "Share This App" }</button>
+                </p>
+            }
+        } else {
+            html! {}
+        }
+    }
+
     fn view_filter(&self, filter: Filter) -> Html {
         let flt = filter.clone();
 
