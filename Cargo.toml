@@ -1,8 +1,18 @@
 [package]
 name = "remnant"
 version = "0.1.0"
+publish = false
 authors = ["Jonathan Knapp <jon@coffeeandcode.com>"]
 edition = "2018"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/CoffeeAndCode/remnant-checklist"
+documentation = "https://github.com/CoffeeAndCode/remnant-checklist"
+homepage = "https://github.com/CoffeeAndCode/remnant-checklist"
+description = """
+Track your unlocked items in Remnant: From the Ashes with an offline enabled webapp!
+"""
+keywords = ["checklist", "completionist", "video games"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
