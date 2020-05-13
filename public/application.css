@@ -59,7 +59,8 @@ body {
 }
 
 .logo {
-  max-height: 200px;
+  margin-left: 10px;
+  max-height: 40px;
   transition: max-height 1s;
 }
 
@@ -117,20 +118,14 @@ body {
   overflow: scroll;
 }
 
-@media (max-height: 800px) {
-  .logo {
-    max-height: 100px;
-  }
-}
-
-@media (max-height: 500px) {
+@media (min-height: 500px) {
   .logo {
     max-height: 60px;
   }
 }
 
-@media (max-height: 300px) {
+@media (min-height: 800px) {
   .logo {
-    max-height: 40px;
+    max-height: 200px;
   }
 }
