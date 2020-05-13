@@ -18,6 +18,7 @@ pub struct App {
 pub struct State {
     entries: Vec<Entry>,
     filter: Filter,
+    search: String,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -33,6 +34,7 @@ pub enum Msg {
     SetFilter(Filter),
     ShareApp(String),
     Toggle(usize),
+    UpdateSearch(String),
 }
 
 #[wasm_bindgen(module = "/src/js/share.js")]
@@ -57,6 +59,7 @@ impl Component for App {
         let state = State {
             entries,
             filter: Filter::All,
+            search: "".into(),
         };
         App {
             link,
@@ -76,6 +79,9 @@ impl Component for App {
             Msg::Toggle(idx) => {
                 self.state.toggle(idx);
             }
+            Msg::UpdateSearch(value) => {
+                self.state.search = value;
+            }
         }
         self.storage.store(&self.state.entries);
         true
@@ -87,10 +93,17 @@ impl Component for App {
                 <section class="todoapp">
                     <header class="header">
                         <h1>{ "remnant" }</h1>
+                        <input
+                            class="input-search"
+                            placeholder="Search..."
+                            oninput=self.link.callback(|e: InputData| Msg::UpdateSearch(e.value))
+                            type="text"
+                            value=""
+                        />
                     </header>
                     <section class="main">
                         <ul class="todo-list">
-                            { for self.state.entries.iter().filter(|e| self.state.filter.fit(e))
+                            { for self.state.entries.iter().filter(|e| self.state.filter.fit(e) && e.name.to_lowercase().contains(&self.state.search.to_lowercase()))
                                 .enumerate()
                                 .map(|val| self.view_entry(val)) }
                         </ul>
