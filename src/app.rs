@@ -26,8 +26,15 @@ pub struct Entry {
     completed: bool,
     data_type: data::DataType,
     icon: char,
+    id: u32,
     name: String,
     url: String,
+}
+
+impl Entry {
+    fn id(&self) -> String {
+        format!("{}-{}", self.data_type, self.id)
+    }
 }
 
 pub enum Msg {
@@ -164,8 +171,8 @@ impl App {
             <li class=class>
                 <div class="row view">
                     <div>
-                        <input class="toggle" type="checkbox" checked={entry.completed} onclick=self.link.callback(move |_| Msg::Toggle(idx)) />
-                        <label>{ format!("{} {}", entry.name, entry.icon) }</label>
+                        <input class="toggle" id=entry.id() type="checkbox" checked={entry.completed} onclick=self.link.callback(move |_| Msg::Toggle(idx)) />
+                        <label for=entry.id()>{ format!("{} {}", entry.name, entry.icon) }</label>
                     </div>
                     <a class="wiki-link" href={ entry.url.clone() } rel="noopener noreferrer" target="_blank" title={format!("View {} on fextralife wiki", &entry.name)}>{ "wiki ↱" }</a>
                 </div>

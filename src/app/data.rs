@@ -65,6 +65,25 @@ impl DataType {
     }
 }
 
+impl Display for DataType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let str = match self {
+            DataType::Amulet => "amulet",
+            DataType::ArmorSet => "armor-set",
+            DataType::BodyArmor => "body-armor",
+            DataType::Emote => "emote",
+            DataType::HandGun => "hand-gun",
+            DataType::HeadArmor => "head-armor",
+            DataType::LegArmor => "leg-armor",
+            DataType::LongGun => "long-gun",
+            DataType::MeleeWeapon => "melee-weapon",
+            DataType::Ring => "ring",
+            DataType::Trait => "trait",
+        };
+        write!(f, "{}", str)
+    }
+}
+
 trait CsvDataSource<T> {
     fn data() -> &'static [u8];
     fn entries() -> Vec<Entry>;
@@ -78,6 +97,7 @@ pub trait DataDisplay {
 
 pub trait EntryCompatible {
     fn data_type() -> DataType;
+    fn id(&self) -> u32;
     fn icon() -> char;
     fn name(&self) -> &str;
     fn url(&self) -> &str;
@@ -440,6 +460,10 @@ impl EntryCompatible for Amulet {
         DataType::Amulet.icon()
     }
 
+    fn id(&self) -> u32 {
+        self.id
+    }
+
     fn name(&self) -> &str {
         &self.name
     }
@@ -456,6 +480,10 @@ impl EntryCompatible for ArmorSet {
 
     fn icon() -> char {
         DataType::ArmorSet.icon()
+    }
+
+    fn id(&self) -> u32 {
+        self.id
     }
 
     fn name(&self) -> &str {
@@ -476,6 +504,10 @@ impl EntryCompatible for BodyArmor {
         DataType::BodyArmor.icon()
     }
 
+    fn id(&self) -> u32 {
+        self.id
+    }
+
     fn name(&self) -> &str {
         &self.name
     }
@@ -492,6 +524,10 @@ impl EntryCompatible for Emote {
 
     fn icon() -> char {
         DataType::Emote.icon()
+    }
+
+    fn id(&self) -> u32 {
+        self.id
     }
 
     fn name(&self) -> &str {
@@ -512,6 +548,10 @@ impl EntryCompatible for HandGun {
         DataType::HandGun.icon()
     }
 
+    fn id(&self) -> u32 {
+        self.id
+    }
+
     fn name(&self) -> &str {
         &self.name
     }
@@ -528,6 +568,10 @@ impl EntryCompatible for HeadArmor {
 
     fn icon() -> char {
         DataType::HeadArmor.icon()
+    }
+
+    fn id(&self) -> u32 {
+        self.id
     }
 
     fn name(&self) -> &str {
@@ -548,6 +592,10 @@ impl EntryCompatible for LegArmor {
         DataType::LegArmor.icon()
     }
 
+    fn id(&self) -> u32 {
+        self.id
+    }
+
     fn name(&self) -> &str {
         &self.name
     }
@@ -564,6 +612,10 @@ impl EntryCompatible for LongGun {
 
     fn icon() -> char {
         DataType::LongGun.icon()
+    }
+
+    fn id(&self) -> u32 {
+        self.id
     }
 
     fn name(&self) -> &str {
@@ -584,6 +636,10 @@ impl EntryCompatible for MeleeWeapon {
         DataType::MeleeWeapon.icon()
     }
 
+    fn id(&self) -> u32 {
+        self.id
+    }
+
     fn name(&self) -> &str {
         &self.name
     }
@@ -600,6 +656,10 @@ impl EntryCompatible for Ring {
 
     fn icon() -> char {
         DataType::Ring.icon()
+    }
+
+    fn id(&self) -> u32 {
+        self.id
     }
 
     fn name(&self) -> &str {
@@ -620,6 +680,10 @@ impl EntryCompatible for Trait {
         DataType::Trait.icon()
     }
 
+    fn id(&self) -> u32 {
+        self.id
+    }
+
     fn name(&self) -> &str {
         &self.name
     }
@@ -635,6 +699,7 @@ impl<T: EntryCompatible> From<T> for Entry {
             completed: false,
             data_type: T::data_type(),
             icon: T::icon(),
+            id: item.id(),
             name: String::from(item.name()),
             url: String::from(item.url()),
         }
