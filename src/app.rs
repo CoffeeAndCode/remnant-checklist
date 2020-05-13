@@ -39,7 +39,7 @@ pub enum Msg {
 extern "C" {
     #[wasm_bindgen(js_name = canShare)]
     fn can_share() -> bool;
-    fn share(title: String, text: String, url: String) -> bool;
+    fn share(title: Option<String>, text: Option<String>, url: String) -> bool;
 }
 
 impl Component for App {
@@ -71,11 +71,7 @@ impl Component for App {
                 self.state.filter = filter;
             }
             Msg::ShareApp(url) => {
-                share(
-                    "Remnant Checklist".into(),
-                    "Track your unlocked items with an offline enabled webapp!".into(),
-                    url,
-                );
+                share(Some("Remnant Checklist".into()), None, url);
             }
             Msg::Toggle(idx) => {
                 self.state.toggle(idx);
