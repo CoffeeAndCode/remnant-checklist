@@ -101,7 +101,7 @@ impl Component for App {
                     </section>
                     <footer class="footer">
                         <span class="todo-count">
-                            <strong>{ self.state.total() }</strong>
+                            <strong>{ self.state.total_incomplete() }</strong>
                             { " item(s) left" }
                         </span>
                         <ul class="filters">
@@ -196,8 +196,11 @@ impl Filter {
 }
 
 impl State {
-    fn total(&self) -> usize {
-        self.entries.len()
+    fn total_incomplete(&self) -> usize {
+        self.entries
+            .iter()
+            .map(|x| if x.completed { 0 } else { 1 })
+            .sum()
     }
 
     fn toggle(&mut self, idx: usize) {
