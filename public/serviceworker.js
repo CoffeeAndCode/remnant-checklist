@@ -1,8 +1,10 @@
-var CACHE_VERSION = "10";
+var CACHE_VERSION = "11";
 var CACHE_NAME = CACHE_VERSION + ":sw-cache-";
 
 var cachedURLs = [
+  "/application.css",
   "/application.js",
+  "/css/todo.css",
   "/pkg/remnant.js",
   "/pkg/remnant_bg.wasm",
   "/index.html",
@@ -10,8 +12,7 @@ var cachedURLs = [
   "/images/icon-192.png",
   "/images/icon-512.png",
   "/manifest.webmanifest",
-  "https://cdn.jsdelivr.net/npm/todomvc-app-css@2.1.2/index.css",
-  "https://cdn.jsdelivr.net/npm/todomvc-common@1.0.5/base.css",
+  "/pkg/snippets/remnant-68c4c8796a519e8d/src/js/share.js",
 ];
 
 function onInstall(event) {
