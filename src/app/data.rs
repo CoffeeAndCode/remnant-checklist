@@ -34,9 +34,21 @@ impl DataType {
     }
 }
 
+trait CsvDataSource<T> {
+    fn entries(data_type: DataType) -> Vec<Entry>;
+    fn items(data_type: DataType) -> Vec<T>;
+}
+
 pub trait DataDisplay {
     fn icon(&self) -> char;
     fn label(&self) -> &'static str;
+}
+
+pub trait EntryCompatible {
+    fn data_type(&self) -> DataType;
+    fn icon(&self) -> char;
+    fn name(&self) -> &str;
+    fn url(&self) -> &str;
 }
 
 impl DataDisplay for DataType {
@@ -361,290 +373,280 @@ struct Trait {
     url: String,
 }
 
-impl From<Amulet> for Entry {
-    fn from(amulet: Amulet) -> Self {
-        Entry {
-            completed: false,
-            data_type: DataType::Amulet,
-            icon: DataType::Amulet.icon(),
-            name: amulet.name,
-            url: amulet.url,
-        }
+impl<'de, T> CsvDataSource<T> for T
+where
+    T: EntryCompatible + serde::de::DeserializeOwned,
+{
+    fn entries(data_type: DataType) -> Vec<Entry> {
+        <T as CsvDataSource<T>>::items(data_type)
+            .into_iter()
+            .map(Entry::from)
+            .collect()
+    }
+
+    fn items(data_type: DataType) -> Vec<T> {
+        let mut rdr = csv::Reader::from_reader(data_type.data());
+        let mut items: Vec<T> = rdr
+            .deserialize()
+            .filter_map(|t: Result<T, _>| t.ok())
+            .collect();
+        items.sort_unstable_by(|a, b| a.name().cmp(&b.name()));
+        items
     }
 }
 
-impl From<ArmorSet> for Entry {
-    fn from(armor_set: ArmorSet) -> Self {
-        Entry {
-            completed: false,
-            data_type: DataType::ArmorSet,
-            icon: DataType::ArmorSet.icon(),
-            name: armor_set.name,
-            url: armor_set.url,
-        }
+impl EntryCompatible for Amulet {
+    fn data_type(&self) -> DataType {
+        DataType::Amulet
+    }
+
+    fn icon(&self) -> char {
+        DataType::Amulet.icon()
+    }
+
+    fn name(&self) -> &str {
+        &self.name
+    }
+
+    fn url(&self) -> &str {
+        &self.url
     }
 }
 
-impl From<BodyArmor> for Entry {
-    fn from(body_armor: BodyArmor) -> Self {
-        Entry {
-            completed: false,
-            data_type: DataType::BodyArmor,
-            icon: DataType::BodyArmor.icon(),
-            name: body_armor.name,
-            url: body_armor.url,
-        }
+impl EntryCompatible for ArmorSet {
+    fn data_type(&self) -> DataType {
+        DataType::ArmorSet
+    }
+
+    fn icon(&self) -> char {
+        DataType::ArmorSet.icon()
+    }
+
+    fn name(&self) -> &str {
+        &self.name
+    }
+
+    fn url(&self) -> &str {
+        &self.url
     }
 }
 
-impl From<Emote> for Entry {
-    fn from(emote: Emote) -> Self {
-        Entry {
-            completed: false,
-            data_type: DataType::Emote,
-            icon: DataType::Emote.icon(),
-            name: emote.name,
-            url: emote.url,
-        }
+impl EntryCompatible for BodyArmor {
+    fn data_type(&self) -> DataType {
+        DataType::BodyArmor
+    }
+
+    fn icon(&self) -> char {
+        DataType::BodyArmor.icon()
+    }
+
+    fn name(&self) -> &str {
+        &self.name
+    }
+
+    fn url(&self) -> &str {
+        &self.url
     }
 }
 
-impl From<HandGun> for Entry {
-    fn from(hand_gun: HandGun) -> Self {
-        Entry {
-            completed: false,
-            data_type: DataType::HandGun,
-            icon: DataType::HandGun.icon(),
-            name: hand_gun.name,
-            url: hand_gun.url,
-        }
+impl EntryCompatible for Emote {
+    fn data_type(&self) -> DataType {
+        DataType::Emote
+    }
+
+    fn icon(&self) -> char {
+        DataType::Emote.icon()
+    }
+
+    fn name(&self) -> &str {
+        &self.name
+    }
+
+    fn url(&self) -> &str {
+        &self.url
     }
 }
 
-impl From<HeadArmor> for Entry {
-    fn from(head_armor: HeadArmor) -> Self {
-        Entry {
-            completed: false,
-            data_type: DataType::HeadArmor,
-            icon: DataType::HeadArmor.icon(),
-            name: head_armor.name,
-            url: head_armor.url,
-        }
+impl EntryCompatible for HandGun {
+    fn data_type(&self) -> DataType {
+        DataType::HandGun
+    }
+
+    fn icon(&self) -> char {
+        DataType::HandGun.icon()
+    }
+
+    fn name(&self) -> &str {
+        &self.name
+    }
+
+    fn url(&self) -> &str {
+        &self.url
     }
 }
 
-impl From<LegArmor> for Entry {
-    fn from(leg_armor: LegArmor) -> Self {
-        Entry {
-            completed: false,
-            data_type: DataType::LegArmor,
-            icon: DataType::LegArmor.icon(),
-            name: leg_armor.name,
-            url: leg_armor.url,
-        }
+impl EntryCompatible for HeadArmor {
+    fn data_type(&self) -> DataType {
+        DataType::HeadArmor
+    }
+
+    fn icon(&self) -> char {
+        DataType::HeadArmor.icon()
+    }
+
+    fn name(&self) -> &str {
+        &self.name
+    }
+
+    fn url(&self) -> &str {
+        &self.url
     }
 }
 
-impl From<LongGun> for Entry {
-    fn from(long_gun: LongGun) -> Self {
-        Entry {
-            completed: false,
-            data_type: DataType::LongGun,
-            icon: DataType::LongGun.icon(),
-            name: long_gun.name,
-            url: long_gun.url,
-        }
+impl EntryCompatible for LegArmor {
+    fn data_type(&self) -> DataType {
+        DataType::LegArmor
+    }
+
+    fn icon(&self) -> char {
+        DataType::LegArmor.icon()
+    }
+
+    fn name(&self) -> &str {
+        &self.name
+    }
+
+    fn url(&self) -> &str {
+        &self.url
     }
 }
 
-impl From<MeleeWeapon> for Entry {
-    fn from(melee_weapon: MeleeWeapon) -> Self {
-        Entry {
-            completed: false,
-            data_type: DataType::MeleeWeapon,
-            icon: DataType::MeleeWeapon.icon(),
-            name: melee_weapon.name,
-            url: melee_weapon.url,
-        }
+impl EntryCompatible for LongGun {
+    fn data_type(&self) -> DataType {
+        DataType::LongGun
+    }
+
+    fn icon(&self) -> char {
+        DataType::LongGun.icon()
+    }
+
+    fn name(&self) -> &str {
+        &self.name
+    }
+
+    fn url(&self) -> &str {
+        &self.url
     }
 }
 
-impl From<Ring> for Entry {
-    fn from(ring: Ring) -> Self {
-        Entry {
-            completed: false,
-            data_type: DataType::MeleeWeapon,
-            icon: DataType::Ring.icon(),
-            name: ring.name,
-            url: ring.url,
-        }
+impl EntryCompatible for MeleeWeapon {
+    fn data_type(&self) -> DataType {
+        DataType::MeleeWeapon
+    }
+
+    fn icon(&self) -> char {
+        DataType::MeleeWeapon.icon()
+    }
+
+    fn name(&self) -> &str {
+        &self.name
+    }
+
+    fn url(&self) -> &str {
+        &self.url
     }
 }
 
-impl From<Trait> for Entry {
-    fn from(remnant_trait: Trait) -> Self {
-        Entry {
-            completed: false,
-            data_type: DataType::Trait,
-            icon: DataType::Trait.icon(),
-            name: remnant_trait.name,
-            url: remnant_trait.url,
-        }
+impl EntryCompatible for Ring {
+    fn data_type(&self) -> DataType {
+        DataType::Ring
+    }
+
+    fn icon(&self) -> char {
+        DataType::Ring.icon()
+    }
+
+    fn name(&self) -> &str {
+        &self.name
+    }
+
+    fn url(&self) -> &str {
+        &self.url
     }
 }
 
-fn amulets() -> Vec<Amulet> {
-    let mut rdr = csv::Reader::from_reader(DataType::Amulet.data());
-    let mut amulets: Vec<Amulet> = rdr
-        .deserialize()
-        .filter_map(|t: Result<Amulet, _>| t.ok())
-        .collect();
-    amulets.sort_unstable_by(|a, b| a.name.cmp(&b.name));
-    amulets
+impl EntryCompatible for Trait {
+    fn data_type(&self) -> DataType {
+        DataType::Trait
+    }
+
+    fn icon(&self) -> char {
+        DataType::Trait.icon()
+    }
+
+    fn name(&self) -> &str {
+        &self.name
+    }
+
+    fn url(&self) -> &str {
+        &self.url
+    }
+}
+
+impl<T: EntryCompatible> From<T> for Entry {
+    fn from(item: T) -> Self {
+        Entry {
+            completed: false,
+            data_type: item.data_type(),
+            icon: item.icon(),
+            name: String::from(item.name()),
+            url: String::from(item.url()),
+        }
+    }
 }
 
 pub fn amulet_entries() -> Vec<Entry> {
-    amulets().into_iter().map(Entry::from).collect()
-}
-
-fn armor_sets() -> Vec<ArmorSet> {
-    let mut rdr = csv::Reader::from_reader(DataType::ArmorSet.data());
-    let mut armor_sets: Vec<ArmorSet> = rdr
-        .deserialize()
-        .filter_map(|t: Result<ArmorSet, _>| t.ok())
-        .collect();
-    armor_sets.sort_unstable_by(|a, b| a.name.cmp(&b.name));
-    armor_sets
+    Amulet::entries(DataType::Amulet)
 }
 
 pub fn armor_set_entries() -> Vec<Entry> {
-    armor_sets().into_iter().map(Entry::from).collect()
-}
-
-fn body_armor() -> Vec<BodyArmor> {
-    let mut rdr = csv::Reader::from_reader(DataType::BodyArmor.data());
-    let mut body_armor: Vec<BodyArmor> = rdr
-        .deserialize()
-        .filter_map(|t: Result<BodyArmor, _>| t.ok())
-        .collect();
-    body_armor.sort_unstable_by(|a, b| a.name.cmp(&b.name));
-    body_armor
+    ArmorSet::entries(DataType::ArmorSet)
 }
 
 pub fn body_armor_entries() -> Vec<Entry> {
-    body_armor().into_iter().map(Entry::from).collect()
-}
-
-fn emotes() -> Vec<Emote> {
-    let mut rdr = csv::Reader::from_reader(DataType::Emote.data());
-    let mut emotes: Vec<Emote> = rdr
-        .deserialize()
-        .filter_map(|t: Result<Emote, _>| t.ok())
-        .collect();
-    emotes.sort_unstable_by(|a, b| a.name.cmp(&b.name));
-    emotes
+    BodyArmor::entries(DataType::BodyArmor)
 }
 
 pub fn emote_entries() -> Vec<Entry> {
-    emotes().into_iter().map(Entry::from).collect()
-}
-
-fn hand_guns() -> Vec<HandGun> {
-    let mut rdr = csv::Reader::from_reader(DataType::HandGun.data());
-    let mut hand_guns: Vec<HandGun> = rdr
-        .deserialize()
-        .filter_map(|t: Result<HandGun, _>| t.ok())
-        .collect();
-    hand_guns.sort_unstable_by(|a, b| a.name.cmp(&b.name));
-    hand_guns
+    Emote::entries(DataType::Emote)
 }
 
 pub fn hand_gun_entries() -> Vec<Entry> {
-    hand_guns().into_iter().map(Entry::from).collect()
-}
-
-fn head_armor() -> Vec<HeadArmor> {
-    let mut rdr = csv::Reader::from_reader(DataType::HeadArmor.data());
-    let mut head_armor: Vec<HeadArmor> = rdr
-        .deserialize()
-        .filter_map(|t: Result<HeadArmor, _>| t.ok())
-        .collect();
-    head_armor.sort_unstable_by(|a, b| a.name.cmp(&b.name));
-    head_armor
+    HandGun::entries(DataType::HandGun)
 }
 
 pub fn head_armor_entries() -> Vec<Entry> {
-    head_armor().into_iter().map(Entry::from).collect()
-}
-
-fn leg_armor() -> Vec<LegArmor> {
-    let mut rdr = csv::Reader::from_reader(DataType::LegArmor.data());
-    let mut leg_armor: Vec<LegArmor> = rdr
-        .deserialize()
-        .filter_map(|t: Result<LegArmor, _>| t.ok())
-        .collect();
-    leg_armor.sort_unstable_by(|a, b| a.name.cmp(&b.name));
-    leg_armor
+    HeadArmor::entries(DataType::HeadArmor)
 }
 
 pub fn leg_armor_entries() -> Vec<Entry> {
-    leg_armor().into_iter().map(Entry::from).collect()
-}
-
-fn long_guns() -> Vec<LongGun> {
-    let mut rdr = csv::Reader::from_reader(DataType::LongGun.data());
-    let mut long_guns: Vec<LongGun> = rdr
-        .deserialize()
-        .filter_map(|t: Result<LongGun, _>| t.ok())
-        .collect();
-    long_guns.sort_unstable_by(|a, b| a.name.cmp(&b.name));
-    long_guns
+    LegArmor::entries(DataType::LegArmor)
 }
 
 pub fn long_gun_entries() -> Vec<Entry> {
-    long_guns().into_iter().map(Entry::from).collect()
-}
-
-fn melee_weapons() -> Vec<MeleeWeapon> {
-    let mut rdr = csv::Reader::from_reader(DataType::MeleeWeapon.data());
-    let mut melee_weapons: Vec<MeleeWeapon> = rdr
-        .deserialize()
-        .filter_map(|t: Result<MeleeWeapon, _>| t.ok())
-        .collect();
-    melee_weapons.sort_unstable_by(|a, b| a.name.cmp(&b.name));
-    melee_weapons
+    LongGun::entries(DataType::LongGun)
 }
 
 pub fn melee_weapon_entries() -> Vec<Entry> {
-    melee_weapons().into_iter().map(Entry::from).collect()
-}
-
-fn remnant_traits() -> Vec<Trait> {
-    let mut rdr = csv::Reader::from_reader(DataType::Trait.data());
-    let mut traits: Vec<Trait> = rdr
-        .deserialize()
-        .filter_map(|t: Result<Trait, _>| t.ok())
-        .collect();
-    traits.sort_unstable_by(|a, b| a.name.cmp(&b.name));
-    traits
+    MeleeWeapon::entries(DataType::MeleeWeapon)
 }
 
 pub fn remnant_trait_entries() -> Vec<Entry> {
-    remnant_traits().into_iter().map(Entry::from).collect()
-}
-
-fn rings() -> Vec<Ring> {
-    let mut rdr = csv::Reader::from_reader(DataType::Ring.data());
-    let mut rings: Vec<Ring> = rdr
-        .deserialize()
-        .filter_map(|t: Result<Ring, _>| t.ok())
-        .collect();
-    rings.sort_unstable_by(|a, b| a.name.cmp(&b.name));
-    rings
+    Trait::entries(DataType::Trait)
 }
 
 pub fn ring_entries() -> Vec<Entry> {
-    rings().into_iter().map(Entry::from).collect()
+    Ring::entries(DataType::Ring)
 }
 
 #[cfg(test)]
@@ -665,19 +667,19 @@ mod tests {
 
     #[test]
     fn all_amulets_found() {
-        assert_eq!(NUMBER_OF_AMULETS, amulets().len());
+        assert_eq!(NUMBER_OF_AMULETS, Amulet::items(DataType::Amulet).len());
     }
 
     #[test]
     fn all_amulet_ids_unique() {
-        let mut amulets = amulets();
+        let mut amulets = Amulet::items(DataType::Amulet);
         amulets.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_AMULETS, amulets.len());
     }
 
     #[test]
     fn amulets_are_sorted_alphabetically() {
-        let amulets = amulets();
+        let amulets = Amulet::items(DataType::Amulet);
         assert_eq!("Amulet of Epicaricacy", amulets[0].name);
         assert_eq!("Amulet of Perseverance", amulets[1].name);
         assert_eq!("Vengeance Idol", amulets[NUMBER_OF_AMULETS - 1].name);
@@ -685,19 +687,22 @@ mod tests {
 
     #[test]
     fn all_armor_sets_found() {
-        assert_eq!(NUMBER_OF_ARMOR_SETS, armor_sets().len());
+        assert_eq!(
+            NUMBER_OF_ARMOR_SETS,
+            ArmorSet::items(DataType::ArmorSet).len()
+        );
     }
 
     #[test]
     fn all_armor_set_ids_unique() {
-        let mut armor_sets = armor_sets();
+        let mut armor_sets = ArmorSet::items(DataType::ArmorSet);
         armor_sets.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_ARMOR_SETS, armor_sets.len());
     }
 
     #[test]
     fn armor_sets_are_sorted_alphabetically() {
-        let armor_sets = armor_sets();
+        let armor_sets = ArmorSet::items(DataType::ArmorSet);
         assert_eq!("Adventurer Set", armor_sets[0].name);
         assert_eq!("Akari Set", armor_sets[1].name);
         assert_eq!("Void Set", armor_sets[NUMBER_OF_ARMOR_SETS - 1].name);
@@ -705,19 +710,22 @@ mod tests {
 
     #[test]
     fn all_body_armor_found() {
-        assert_eq!(NUMBER_OF_BODY_ARMOR, body_armor().len());
+        assert_eq!(
+            NUMBER_OF_BODY_ARMOR,
+            BodyArmor::items(DataType::BodyArmor).len()
+        );
     }
 
     #[test]
     fn all_body_armor_ids_unique() {
-        let mut body_armor = body_armor();
+        let mut body_armor = BodyArmor::items(DataType::BodyArmor);
         body_armor.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_BODY_ARMOR, body_armor.len());
     }
 
     #[test]
     fn body_armor_is_sorted_alphabetically() {
-        let body_armor = body_armor();
+        let body_armor = BodyArmor::items(DataType::BodyArmor);
         assert_eq!("Adventurer Tunic", body_armor[0].name);
         assert_eq!("Akari Garb", body_armor[1].name);
         assert_eq!("Void Carapace", body_armor[NUMBER_OF_BODY_ARMOR - 1].name);
@@ -725,19 +733,19 @@ mod tests {
 
     #[test]
     fn all_hand_guns_found() {
-        assert_eq!(NUMBER_OF_HAND_GUNS, hand_guns().len());
+        assert_eq!(NUMBER_OF_HAND_GUNS, HandGun::items(DataType::HandGun).len());
     }
 
     #[test]
     fn all_hand_gun_ids_unique() {
-        let mut hand_guns = hand_guns();
+        let mut hand_guns = HandGun::items(DataType::HandGun);
         hand_guns.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_HAND_GUNS, hand_guns.len());
     }
 
     #[test]
     fn hand_guns_are_sorted_alphabetically() {
-        let hand_guns = hand_guns();
+        let hand_guns = HandGun::items(DataType::HandGun);
         assert_eq!("Curse of the Jungle God", hand_guns[0].name);
         assert_eq!("Defiler", hand_guns[1].name);
         assert_eq!("Submachine Gun", hand_guns[NUMBER_OF_HAND_GUNS - 1].name);
@@ -745,19 +753,22 @@ mod tests {
 
     #[test]
     fn all_head_armor_found() {
-        assert_eq!(NUMBER_OF_HEAD_ARMOR, head_armor().len());
+        assert_eq!(
+            NUMBER_OF_HEAD_ARMOR,
+            HeadArmor::items(DataType::HeadArmor).len()
+        );
     }
 
     #[test]
     fn all_head_armor_ids_unique() {
-        let mut head_armor = head_armor();
+        let mut head_armor = HeadArmor::items(DataType::HeadArmor);
         head_armor.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_HEAD_ARMOR, head_armor.len());
     }
 
     #[test]
     fn head_armor_is_sorted_alphabetically() {
-        let head_armor = head_armor();
+        let head_armor = HeadArmor::items(DataType::HeadArmor);
         assert_eq!("Adventurer Goggles", head_armor[0].name);
         assert_eq!("Akari Mask", head_armor[1].name);
         assert_eq!("Void Skull", head_armor[NUMBER_OF_HEAD_ARMOR - 1].name);
@@ -765,19 +776,19 @@ mod tests {
 
     #[test]
     fn all_emotes_found() {
-        assert_eq!(NUMBER_OF_EMOTES, emotes().len());
+        assert_eq!(NUMBER_OF_EMOTES, Emote::items(DataType::Emote).len());
     }
 
     #[test]
     fn all_emote_ids_unique() {
-        let mut emotes = emotes();
+        let mut emotes = Emote::items(DataType::Emote);
         emotes.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_EMOTES, emotes.len());
     }
 
     #[test]
     fn emotes_are_sorted_alphabetically() {
-        let emotes = emotes();
+        let emotes = Emote::items(DataType::Emote);
         assert_eq!("Beckon Emote", emotes[0].name);
         assert_eq!("Cheer Emote", emotes[1].name);
         assert_eq!("Yes Emote", emotes[NUMBER_OF_EMOTES - 1].name);
@@ -785,19 +796,22 @@ mod tests {
 
     #[test]
     fn all_leg_armor_found() {
-        assert_eq!(NUMBER_OF_LEG_ARMOR, leg_armor().len());
+        assert_eq!(
+            NUMBER_OF_LEG_ARMOR,
+            LegArmor::items(DataType::LegArmor).len()
+        );
     }
 
     #[test]
     fn all_leg_armor_ids_unique() {
-        let mut leg_armor = leg_armor();
+        let mut leg_armor = LegArmor::items(DataType::LegArmor);
         leg_armor.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_LEG_ARMOR, leg_armor.len());
     }
 
     #[test]
     fn leg_armor_is_sorted_alphabetically() {
-        let leg_armor = leg_armor();
+        let leg_armor = LegArmor::items(DataType::LegArmor);
         assert_eq!("Adventurer Leggings", leg_armor[0].name);
         assert_eq!("Akari Leggings", leg_armor[1].name);
         assert_eq!("Void Greaves", leg_armor[NUMBER_OF_LEG_ARMOR - 1].name);
@@ -805,19 +819,19 @@ mod tests {
 
     #[test]
     fn all_long_guns_found() {
-        assert_eq!(NUMBER_OF_LONG_GUNS, long_guns().len());
+        assert_eq!(NUMBER_OF_LONG_GUNS, LongGun::items(DataType::LongGun).len());
     }
 
     #[test]
     fn all_long_gun_ids_unique() {
-        let mut long_guns = long_guns();
+        let mut long_guns = LongGun::items(DataType::LongGun);
         long_guns.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_LONG_GUNS, long_guns.len());
     }
 
     #[test]
     fn long_guns_are_sorted_alphabetically() {
-        let long_guns = long_guns();
+        let long_guns = LongGun::items(DataType::LongGun);
         assert_eq!("Assault Rifle", long_guns[0].name);
         assert_eq!("Beam Rifle", long_guns[1].name);
         assert_eq!("Sporebloom", long_guns[NUMBER_OF_LONG_GUNS - 1].name);
@@ -825,19 +839,22 @@ mod tests {
 
     #[test]
     fn all_melee_weapons_found() {
-        assert_eq!(NUMBER_OF_MELEE_WEAPONS, melee_weapons().len());
+        assert_eq!(
+            NUMBER_OF_MELEE_WEAPONS,
+            MeleeWeapon::items(DataType::MeleeWeapon).len()
+        );
     }
 
     #[test]
     fn all_melee_weapon_ids_unique() {
-        let mut melee_weapons = melee_weapons();
+        let mut melee_weapons = MeleeWeapon::items(DataType::MeleeWeapon);
         melee_weapons.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_MELEE_WEAPONS, melee_weapons.len());
     }
 
     #[test]
     fn melee_weapons_are_sorted_alphabetically() {
-        let melee_weapons = melee_weapons();
+        let melee_weapons = MeleeWeapon::items(DataType::MeleeWeapon);
         assert_eq!("Blade of Adventure", melee_weapons[0].name);
         assert_eq!("Butchers Flail", melee_weapons[1].name);
         assert_eq!(
@@ -848,19 +865,19 @@ mod tests {
 
     #[test]
     fn all_rings_found() {
-        assert_eq!(NUMBER_OF_RINGS, rings().len());
+        assert_eq!(NUMBER_OF_RINGS, Ring::items(DataType::Ring).len());
     }
 
     #[test]
     fn all_ring_ids_unique() {
-        let mut rings = rings();
+        let mut rings = Ring::items(DataType::Ring);
         rings.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_RINGS, rings.len());
     }
 
     #[test]
     fn rings_are_sorted_alphabetically() {
-        let rings = rings();
+        let rings = Ring::items(DataType::Ring);
         assert_eq!("Aggressor's Bane", rings[0].name);
         assert_eq!("Akari War Band", rings[1].name);
         assert_eq!("Stone Of Balance", rings[NUMBER_OF_RINGS - 1].name);
@@ -868,19 +885,19 @@ mod tests {
 
     #[test]
     fn all_traits_found() {
-        assert_eq!(NUMBER_OF_TRAITS, remnant_traits().len());
+        assert_eq!(NUMBER_OF_TRAITS, Trait::items(DataType::Trait).len());
     }
 
     #[test]
     fn all_trait_ids_unique() {
-        let mut traits = remnant_traits();
+        let mut traits = Trait::items(DataType::Trait);
         traits.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_TRAITS, traits.len());
     }
 
     #[test]
     fn traits_are_sorted_alphabetically() {
-        let traits = remnant_traits();
+        let traits = Trait::items(DataType::Trait);
         assert_eq!("Arcane Strike", traits[0].name);
         assert_eq!("Bark Skin", traits[1].name);
         assert_eq!("World Walker", traits[NUMBER_OF_TRAITS - 1].name);
