@@ -35,8 +35,9 @@ impl DataType {
 }
 
 trait CsvDataSource<T> {
-    fn entries(data_type: DataType) -> Vec<Entry>;
-    fn items(data_type: DataType) -> Vec<T>;
+    fn data() -> &'static [u8];
+    fn entries() -> Vec<Entry>;
+    fn items() -> Vec<T>;
 }
 
 pub trait DataDisplay {
@@ -45,8 +46,8 @@ pub trait DataDisplay {
 }
 
 pub trait EntryCompatible {
-    fn data_type(&self) -> DataType;
-    fn icon(&self) -> char;
+    fn data_type() -> DataType;
+    fn icon() -> char;
     fn name(&self) -> &str;
     fn url(&self) -> &str;
 }
@@ -377,15 +378,19 @@ impl<'de, T> CsvDataSource<T> for T
 where
     T: EntryCompatible + serde::de::DeserializeOwned,
 {
-    fn entries(data_type: DataType) -> Vec<Entry> {
-        <T as CsvDataSource<T>>::items(data_type)
+    fn data() -> &'static [u8] {
+        T::data_type().data()
+    }
+
+    fn entries() -> Vec<Entry> {
+        <T as CsvDataSource<T>>::items()
             .into_iter()
             .map(Entry::from)
             .collect()
     }
 
-    fn items(data_type: DataType) -> Vec<T> {
-        let mut rdr = csv::Reader::from_reader(data_type.data());
+    fn items() -> Vec<T> {
+        let mut rdr = csv::Reader::from_reader(<T as CsvDataSource<T>>::data());
         let mut items: Vec<T> = rdr
             .deserialize()
             .filter_map(|t: Result<T, _>| t.ok())
@@ -396,11 +401,11 @@ where
 }
 
 impl EntryCompatible for Amulet {
-    fn data_type(&self) -> DataType {
+    fn data_type() -> DataType {
         DataType::Amulet
     }
 
-    fn icon(&self) -> char {
+    fn icon() -> char {
         DataType::Amulet.icon()
     }
 
@@ -414,11 +419,11 @@ impl EntryCompatible for Amulet {
 }
 
 impl EntryCompatible for ArmorSet {
-    fn data_type(&self) -> DataType {
+    fn data_type() -> DataType {
         DataType::ArmorSet
     }
 
-    fn icon(&self) -> char {
+    fn icon() -> char {
         DataType::ArmorSet.icon()
     }
 
@@ -432,11 +437,11 @@ impl EntryCompatible for ArmorSet {
 }
 
 impl EntryCompatible for BodyArmor {
-    fn data_type(&self) -> DataType {
+    fn data_type() -> DataType {
         DataType::BodyArmor
     }
 
-    fn icon(&self) -> char {
+    fn icon() -> char {
         DataType::BodyArmor.icon()
     }
 
@@ -450,11 +455,11 @@ impl EntryCompatible for BodyArmor {
 }
 
 impl EntryCompatible for Emote {
-    fn data_type(&self) -> DataType {
+    fn data_type() -> DataType {
         DataType::Emote
     }
 
-    fn icon(&self) -> char {
+    fn icon() -> char {
         DataType::Emote.icon()
     }
 
@@ -468,11 +473,11 @@ impl EntryCompatible for Emote {
 }
 
 impl EntryCompatible for HandGun {
-    fn data_type(&self) -> DataType {
+    fn data_type() -> DataType {
         DataType::HandGun
     }
 
-    fn icon(&self) -> char {
+    fn icon() -> char {
         DataType::HandGun.icon()
     }
 
@@ -486,11 +491,11 @@ impl EntryCompatible for HandGun {
 }
 
 impl EntryCompatible for HeadArmor {
-    fn data_type(&self) -> DataType {
+    fn data_type() -> DataType {
         DataType::HeadArmor
     }
 
-    fn icon(&self) -> char {
+    fn icon() -> char {
         DataType::HeadArmor.icon()
     }
 
@@ -504,11 +509,11 @@ impl EntryCompatible for HeadArmor {
 }
 
 impl EntryCompatible for LegArmor {
-    fn data_type(&self) -> DataType {
+    fn data_type() -> DataType {
         DataType::LegArmor
     }
 
-    fn icon(&self) -> char {
+    fn icon() -> char {
         DataType::LegArmor.icon()
     }
 
@@ -522,11 +527,11 @@ impl EntryCompatible for LegArmor {
 }
 
 impl EntryCompatible for LongGun {
-    fn data_type(&self) -> DataType {
+    fn data_type() -> DataType {
         DataType::LongGun
     }
 
-    fn icon(&self) -> char {
+    fn icon() -> char {
         DataType::LongGun.icon()
     }
 
@@ -540,11 +545,11 @@ impl EntryCompatible for LongGun {
 }
 
 impl EntryCompatible for MeleeWeapon {
-    fn data_type(&self) -> DataType {
+    fn data_type() -> DataType {
         DataType::MeleeWeapon
     }
 
-    fn icon(&self) -> char {
+    fn icon() -> char {
         DataType::MeleeWeapon.icon()
     }
 
@@ -558,11 +563,11 @@ impl EntryCompatible for MeleeWeapon {
 }
 
 impl EntryCompatible for Ring {
-    fn data_type(&self) -> DataType {
+    fn data_type() -> DataType {
         DataType::Ring
     }
 
-    fn icon(&self) -> char {
+    fn icon() -> char {
         DataType::Ring.icon()
     }
 
@@ -576,11 +581,11 @@ impl EntryCompatible for Ring {
 }
 
 impl EntryCompatible for Trait {
-    fn data_type(&self) -> DataType {
+    fn data_type() -> DataType {
         DataType::Trait
     }
 
-    fn icon(&self) -> char {
+    fn icon() -> char {
         DataType::Trait.icon()
     }
 
@@ -597,8 +602,8 @@ impl<T: EntryCompatible> From<T> for Entry {
     fn from(item: T) -> Self {
         Entry {
             completed: false,
-            data_type: item.data_type(),
-            icon: item.icon(),
+            data_type: T::data_type(),
+            icon: T::icon(),
             name: String::from(item.name()),
             url: String::from(item.url()),
         }
@@ -606,47 +611,47 @@ impl<T: EntryCompatible> From<T> for Entry {
 }
 
 pub fn amulet_entries() -> Vec<Entry> {
-    Amulet::entries(DataType::Amulet)
+    Amulet::entries()
 }
 
 pub fn armor_set_entries() -> Vec<Entry> {
-    ArmorSet::entries(DataType::ArmorSet)
+    ArmorSet::entries()
 }
 
 pub fn body_armor_entries() -> Vec<Entry> {
-    BodyArmor::entries(DataType::BodyArmor)
+    BodyArmor::entries()
 }
 
 pub fn emote_entries() -> Vec<Entry> {
-    Emote::entries(DataType::Emote)
+    Emote::entries()
 }
 
 pub fn hand_gun_entries() -> Vec<Entry> {
-    HandGun::entries(DataType::HandGun)
+    HandGun::entries()
 }
 
 pub fn head_armor_entries() -> Vec<Entry> {
-    HeadArmor::entries(DataType::HeadArmor)
+    HeadArmor::entries()
 }
 
 pub fn leg_armor_entries() -> Vec<Entry> {
-    LegArmor::entries(DataType::LegArmor)
+    LegArmor::entries()
 }
 
 pub fn long_gun_entries() -> Vec<Entry> {
-    LongGun::entries(DataType::LongGun)
+    LongGun::entries()
 }
 
 pub fn melee_weapon_entries() -> Vec<Entry> {
-    MeleeWeapon::entries(DataType::MeleeWeapon)
+    MeleeWeapon::entries()
 }
 
 pub fn remnant_trait_entries() -> Vec<Entry> {
-    Trait::entries(DataType::Trait)
+    Trait::entries()
 }
 
 pub fn ring_entries() -> Vec<Entry> {
-    Ring::entries(DataType::Ring)
+    Ring::entries()
 }
 
 #[cfg(test)]
@@ -667,19 +672,19 @@ mod tests {
 
     #[test]
     fn all_amulets_found() {
-        assert_eq!(NUMBER_OF_AMULETS, Amulet::items(DataType::Amulet).len());
+        assert_eq!(NUMBER_OF_AMULETS, Amulet::items().len());
     }
 
     #[test]
     fn all_amulet_ids_unique() {
-        let mut amulets = Amulet::items(DataType::Amulet);
+        let mut amulets = Amulet::items();
         amulets.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_AMULETS, amulets.len());
     }
 
     #[test]
     fn amulets_are_sorted_alphabetically() {
-        let amulets = Amulet::items(DataType::Amulet);
+        let amulets = Amulet::items();
         assert_eq!("Amulet of Epicaricacy", amulets[0].name);
         assert_eq!("Amulet of Perseverance", amulets[1].name);
         assert_eq!("Vengeance Idol", amulets[NUMBER_OF_AMULETS - 1].name);
@@ -687,22 +692,19 @@ mod tests {
 
     #[test]
     fn all_armor_sets_found() {
-        assert_eq!(
-            NUMBER_OF_ARMOR_SETS,
-            ArmorSet::items(DataType::ArmorSet).len()
-        );
+        assert_eq!(NUMBER_OF_ARMOR_SETS, ArmorSet::items().len());
     }
 
     #[test]
     fn all_armor_set_ids_unique() {
-        let mut armor_sets = ArmorSet::items(DataType::ArmorSet);
+        let mut armor_sets = ArmorSet::items();
         armor_sets.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_ARMOR_SETS, armor_sets.len());
     }
 
     #[test]
     fn armor_sets_are_sorted_alphabetically() {
-        let armor_sets = ArmorSet::items(DataType::ArmorSet);
+        let armor_sets = ArmorSet::items();
         assert_eq!("Adventurer Set", armor_sets[0].name);
         assert_eq!("Akari Set", armor_sets[1].name);
         assert_eq!("Void Set", armor_sets[NUMBER_OF_ARMOR_SETS - 1].name);
@@ -710,22 +712,19 @@ mod tests {
 
     #[test]
     fn all_body_armor_found() {
-        assert_eq!(
-            NUMBER_OF_BODY_ARMOR,
-            BodyArmor::items(DataType::BodyArmor).len()
-        );
+        assert_eq!(NUMBER_OF_BODY_ARMOR, BodyArmor::items().len());
     }
 
     #[test]
     fn all_body_armor_ids_unique() {
-        let mut body_armor = BodyArmor::items(DataType::BodyArmor);
+        let mut body_armor = BodyArmor::items();
         body_armor.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_BODY_ARMOR, body_armor.len());
     }
 
     #[test]
     fn body_armor_is_sorted_alphabetically() {
-        let body_armor = BodyArmor::items(DataType::BodyArmor);
+        let body_armor = BodyArmor::items();
         assert_eq!("Adventurer Tunic", body_armor[0].name);
         assert_eq!("Akari Garb", body_armor[1].name);
         assert_eq!("Void Carapace", body_armor[NUMBER_OF_BODY_ARMOR - 1].name);
@@ -733,19 +732,19 @@ mod tests {
 
     #[test]
     fn all_hand_guns_found() {
-        assert_eq!(NUMBER_OF_HAND_GUNS, HandGun::items(DataType::HandGun).len());
+        assert_eq!(NUMBER_OF_HAND_GUNS, HandGun::items().len());
     }
 
     #[test]
     fn all_hand_gun_ids_unique() {
-        let mut hand_guns = HandGun::items(DataType::HandGun);
+        let mut hand_guns = HandGun::items();
         hand_guns.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_HAND_GUNS, hand_guns.len());
     }
 
     #[test]
     fn hand_guns_are_sorted_alphabetically() {
-        let hand_guns = HandGun::items(DataType::HandGun);
+        let hand_guns = HandGun::items();
         assert_eq!("Curse of the Jungle God", hand_guns[0].name);
         assert_eq!("Defiler", hand_guns[1].name);
         assert_eq!("Submachine Gun", hand_guns[NUMBER_OF_HAND_GUNS - 1].name);
@@ -753,22 +752,19 @@ mod tests {
 
     #[test]
     fn all_head_armor_found() {
-        assert_eq!(
-            NUMBER_OF_HEAD_ARMOR,
-            HeadArmor::items(DataType::HeadArmor).len()
-        );
+        assert_eq!(NUMBER_OF_HEAD_ARMOR, HeadArmor::items().len());
     }
 
     #[test]
     fn all_head_armor_ids_unique() {
-        let mut head_armor = HeadArmor::items(DataType::HeadArmor);
+        let mut head_armor = HeadArmor::items();
         head_armor.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_HEAD_ARMOR, head_armor.len());
     }
 
     #[test]
     fn head_armor_is_sorted_alphabetically() {
-        let head_armor = HeadArmor::items(DataType::HeadArmor);
+        let head_armor = HeadArmor::items();
         assert_eq!("Adventurer Goggles", head_armor[0].name);
         assert_eq!("Akari Mask", head_armor[1].name);
         assert_eq!("Void Skull", head_armor[NUMBER_OF_HEAD_ARMOR - 1].name);
@@ -776,19 +772,19 @@ mod tests {
 
     #[test]
     fn all_emotes_found() {
-        assert_eq!(NUMBER_OF_EMOTES, Emote::items(DataType::Emote).len());
+        assert_eq!(NUMBER_OF_EMOTES, Emote::items().len());
     }
 
     #[test]
     fn all_emote_ids_unique() {
-        let mut emotes = Emote::items(DataType::Emote);
+        let mut emotes = Emote::items();
         emotes.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_EMOTES, emotes.len());
     }
 
     #[test]
     fn emotes_are_sorted_alphabetically() {
-        let emotes = Emote::items(DataType::Emote);
+        let emotes = Emote::items();
         assert_eq!("Beckon Emote", emotes[0].name);
         assert_eq!("Cheer Emote", emotes[1].name);
         assert_eq!("Yes Emote", emotes[NUMBER_OF_EMOTES - 1].name);
@@ -796,22 +792,19 @@ mod tests {
 
     #[test]
     fn all_leg_armor_found() {
-        assert_eq!(
-            NUMBER_OF_LEG_ARMOR,
-            LegArmor::items(DataType::LegArmor).len()
-        );
+        assert_eq!(NUMBER_OF_LEG_ARMOR, LegArmor::items().len());
     }
 
     #[test]
     fn all_leg_armor_ids_unique() {
-        let mut leg_armor = LegArmor::items(DataType::LegArmor);
+        let mut leg_armor = LegArmor::items();
         leg_armor.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_LEG_ARMOR, leg_armor.len());
     }
 
     #[test]
     fn leg_armor_is_sorted_alphabetically() {
-        let leg_armor = LegArmor::items(DataType::LegArmor);
+        let leg_armor = LegArmor::items();
         assert_eq!("Adventurer Leggings", leg_armor[0].name);
         assert_eq!("Akari Leggings", leg_armor[1].name);
         assert_eq!("Void Greaves", leg_armor[NUMBER_OF_LEG_ARMOR - 1].name);
@@ -819,19 +812,19 @@ mod tests {
 
     #[test]
     fn all_long_guns_found() {
-        assert_eq!(NUMBER_OF_LONG_GUNS, LongGun::items(DataType::LongGun).len());
+        assert_eq!(NUMBER_OF_LONG_GUNS, LongGun::items().len());
     }
 
     #[test]
     fn all_long_gun_ids_unique() {
-        let mut long_guns = LongGun::items(DataType::LongGun);
+        let mut long_guns = LongGun::items();
         long_guns.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_LONG_GUNS, long_guns.len());
     }
 
     #[test]
     fn long_guns_are_sorted_alphabetically() {
-        let long_guns = LongGun::items(DataType::LongGun);
+        let long_guns = LongGun::items();
         assert_eq!("Assault Rifle", long_guns[0].name);
         assert_eq!("Beam Rifle", long_guns[1].name);
         assert_eq!("Sporebloom", long_guns[NUMBER_OF_LONG_GUNS - 1].name);
@@ -839,22 +832,19 @@ mod tests {
 
     #[test]
     fn all_melee_weapons_found() {
-        assert_eq!(
-            NUMBER_OF_MELEE_WEAPONS,
-            MeleeWeapon::items(DataType::MeleeWeapon).len()
-        );
+        assert_eq!(NUMBER_OF_MELEE_WEAPONS, MeleeWeapon::items().len());
     }
 
     #[test]
     fn all_melee_weapon_ids_unique() {
-        let mut melee_weapons = MeleeWeapon::items(DataType::MeleeWeapon);
+        let mut melee_weapons = MeleeWeapon::items();
         melee_weapons.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_MELEE_WEAPONS, melee_weapons.len());
     }
 
     #[test]
     fn melee_weapons_are_sorted_alphabetically() {
-        let melee_weapons = MeleeWeapon::items(DataType::MeleeWeapon);
+        let melee_weapons = MeleeWeapon::items();
         assert_eq!("Blade of Adventure", melee_weapons[0].name);
         assert_eq!("Butchers Flail", melee_weapons[1].name);
         assert_eq!(
@@ -865,19 +855,19 @@ mod tests {
 
     #[test]
     fn all_rings_found() {
-        assert_eq!(NUMBER_OF_RINGS, Ring::items(DataType::Ring).len());
+        assert_eq!(NUMBER_OF_RINGS, Ring::items().len());
     }
 
     #[test]
     fn all_ring_ids_unique() {
-        let mut rings = Ring::items(DataType::Ring);
+        let mut rings = Ring::items();
         rings.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_RINGS, rings.len());
     }
 
     #[test]
     fn rings_are_sorted_alphabetically() {
-        let rings = Ring::items(DataType::Ring);
+        let rings = Ring::items();
         assert_eq!("Aggressor's Bane", rings[0].name);
         assert_eq!("Akari War Band", rings[1].name);
         assert_eq!("Stone Of Balance", rings[NUMBER_OF_RINGS - 1].name);
@@ -885,19 +875,19 @@ mod tests {
 
     #[test]
     fn all_traits_found() {
-        assert_eq!(NUMBER_OF_TRAITS, Trait::items(DataType::Trait).len());
+        assert_eq!(NUMBER_OF_TRAITS, Trait::items().len());
     }
 
     #[test]
     fn all_trait_ids_unique() {
-        let mut traits = Trait::items(DataType::Trait);
+        let mut traits = Trait::items();
         traits.dedup_by_key(|x| x.id);
         assert_eq!(NUMBER_OF_TRAITS, traits.len());
     }
 
     #[test]
     fn traits_are_sorted_alphabetically() {
-        let traits = Trait::items(DataType::Trait);
+        let traits = Trait::items();
         assert_eq!("Arcane Strike", traits[0].name);
         assert_eq!("Bark Skin", traits[1].name);
         assert_eq!("World Walker", traits[NUMBER_OF_TRAITS - 1].name);
