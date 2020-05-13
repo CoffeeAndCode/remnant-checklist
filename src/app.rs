@@ -34,7 +34,6 @@ pub struct Entry {
 pub enum Msg {
     SetFilter(Filter),
     ShareApp(String),
-    ToggleAll,
     Toggle(usize),
 }
 
@@ -97,10 +96,6 @@ impl Component for App {
                     url,
                 );
             }
-            Msg::ToggleAll => {
-                let status = !self.state.is_all_completed();
-                self.state.toggle_all(status);
-            }
             Msg::Toggle(idx) => {
                 self.state.toggle(idx);
             }
@@ -117,7 +112,6 @@ impl Component for App {
                         <h1>{ "remnant" }</h1>
                     </header>
                     <section class="main">
-                        <input class="toggle-all" type="checkbox" checked=self.state.is_all_completed() onclick=self.link.callback(|_| Msg::ToggleAll) />
                         <ul class="todo-list">
                             { for self.state.entries.iter().filter(|e| self.state.filter.fit(e))
                                 .enumerate()
@@ -220,28 +214,6 @@ impl Filter {
 impl State {
     fn total(&self) -> usize {
         self.entries.len()
-    }
-
-    fn is_all_completed(&self) -> bool {
-        let mut filtered_iter = self
-            .entries
-            .iter()
-            .filter(|e| self.filter.fit(e))
-            .peekable();
-
-        if filtered_iter.peek().is_none() {
-            return false;
-        }
-
-        filtered_iter.all(|e| e.completed)
-    }
-
-    fn toggle_all(&mut self, value: bool) {
-        for entry in self.entries.iter_mut() {
-            if self.filter.fit(entry) {
-                entry.completed = value;
-            }
-        }
     }
 
     fn toggle(&mut self, idx: usize) {
