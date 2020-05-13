@@ -6,7 +6,6 @@ use storage::StorageService;
 use strum::IntoEnumIterator;
 use strum_macros::{EnumIter, ToString};
 use wasm_bindgen::prelude::*;
-use yew::format::Json;
 use yew::prelude::*;
 
 pub struct App {
@@ -53,24 +52,7 @@ impl Component for App {
 
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
         let storage = StorageService::new().unwrap();
-        let entries = {
-            if let Json(Ok(restored_entries)) = storage.restore() {
-                restored_entries
-            } else {
-                let mut entries = data::remnant_trait_entries();
-                entries.append(&mut data::amulet_entries());
-                entries.append(&mut data::armor_set_entries());
-                entries.append(&mut data::head_armor_entries());
-                entries.append(&mut data::body_armor_entries());
-                entries.append(&mut data::leg_armor_entries());
-                entries.append(&mut data::emote_entries());
-                entries.append(&mut data::ring_entries());
-                entries.append(&mut data::hand_gun_entries());
-                entries.append(&mut data::long_gun_entries());
-                entries.append(&mut data::melee_weapon_entries());
-                entries
-            }
-        };
+        let entries = storage.restore_or_default();
 
         let state = State {
             entries,
@@ -99,7 +81,7 @@ impl Component for App {
                 self.state.toggle(idx);
             }
         }
-        self.storage.store(Json(&self.state.entries));
+        self.storage.store(&self.state.entries);
         true
     }
 
