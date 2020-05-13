@@ -1,14 +1,13 @@
 mod data;
+mod storage;
 
 use serde_derive::{Deserialize, Serialize};
+use storage::StorageService;
 use strum::IntoEnumIterator;
 use strum_macros::{EnumIter, ToString};
 use wasm_bindgen::prelude::*;
 use yew::format::Json;
 use yew::prelude::*;
-use yew::services::storage::{Area, StorageService};
-
-const KEY: &str = "yew.todomvc.self";
 
 pub struct App {
     link: ComponentLink<Self>,
@@ -53,9 +52,9 @@ impl Component for App {
     }
 
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
-        let storage = StorageService::new(Area::Local).unwrap();
+        let storage = StorageService::new().unwrap();
         let entries = {
-            if let Json(Ok(restored_entries)) = storage.restore(KEY) {
+            if let Json(Ok(restored_entries)) = storage.restore() {
                 restored_entries
             } else {
                 let mut entries = data::remnant_trait_entries();
@@ -100,7 +99,7 @@ impl Component for App {
                 self.state.toggle(idx);
             }
         }
-        self.storage.store(KEY, Json(&self.state.entries));
+        self.storage.store(Json(&self.state.entries));
         true
     }
 
