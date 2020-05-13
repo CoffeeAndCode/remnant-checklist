@@ -1,9 +1,5 @@
 import init, { start } from "./pkg/remnant.js";
 
-document.body.addEventListener("touchmove", function (event) {
-  event.preventDefault();
-});
-
 init("./pkg/remnant_bg.wasm").then((_) => {
   start();
 }, console.error);
