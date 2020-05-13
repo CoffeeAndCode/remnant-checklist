@@ -1,4 +1,4 @@
-var CACHE_VERSION = "11";
+var CACHE_VERSION = "12";
 var CACHE_NAME = CACHE_VERSION + ":sw-cache-";
 
 var cachedURLs = [
@@ -9,6 +9,7 @@ var cachedURLs = [
   "/pkg/remnant_bg.wasm",
   "/index.html",
   "/images/icon-32.png",
+  "/images/icon-180.png",
   "/images/icon-192.png",
   "/images/icon-512.png",
   "/manifest.webmanifest",
