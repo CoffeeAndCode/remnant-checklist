@@ -1,5 +1,36 @@
 use super::Entry;
 use serde_derive::{Deserialize, Serialize};
+use std::fmt::Display;
+
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
+pub enum World {
+    Corsus,
+    Earth,
+    Labyrinth,
+    Rhom,
+    Ward13,
+    Yaesha,
+}
+
+impl Default for World {
+    fn default() -> World {
+        World::Ward13
+    }
+}
+
+impl Display for World {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let world_str = match self {
+            World::Corsus => "corsus",
+            World::Earth => "earth",
+            World::Labyrinth => "labyrinth",
+            World::Rhom => "rhom",
+            World::Ward13 => "ward13",
+            World::Yaesha => "yaesha",
+        };
+        write!(f, "{}", world_str)
+    }
+}
 
 #[derive(Serialize, Deserialize)]
 pub enum DataType {
