@@ -3,11 +3,34 @@
 :root {
   --color-dark: #323232;
   --color-faded: #d9d9d9;
-  --color-light: #bebebe;
+  --color-light-rgb: 190, 190, 190;
+  --color-light: rgb(var(--color-light-rgb));
+}
+
+body,
+html {
+  height: 100%;
+  width: 100%;
 }
 
 body {
   background-color: #ffffff;
+}
+
+.btn-share {
+  background-color: rgba(var(--color-light-rgb), 0.2);
+  border: 1px solid var(--color-light);
+  border-radius: 5px;
+  color: var(--color-dark);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px 10px;
+}
+
+.info {
+  font-size: 14px;
+  margin: 0;
+  padding-bottom: 20px;
 }
 
 .row {
@@ -27,4 +50,32 @@ body {
 
 .wiki-link:hover {
   color: var(--color-dark);
+}
+
+#app {
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-wrapper {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr minmax(min-content, max-content);
+  height: 100%;
+  overflow: hidden;
+}
+
+.todoapp {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: minmax(min-content, max-content) 1fr minmax(
+      min-content,
+      max-content
+    );
+  margin: 0;
+  overflow: hidden;
+}
+
+.todoapp > .main {
+  overflow: scroll;
 }

@@ -87,7 +87,7 @@ impl Component for App {
 
     fn view(&self) -> Html {
         html! {
-            <div class="todomvc-wrapper">
+            <div class="app-wrapper">
                 <section class="todoapp">
                     <header class="header">
                         <h1>{ "remnant" }</h1>
@@ -110,7 +110,7 @@ impl Component for App {
                     </footer>
                 </section>
                 <footer class="info">
-                    <p>{ "Written by " }<a href="https://coffee.dev" rel="noopener noreferrer" target="_blank">{ "Jonathan Knapp" }</a></p>
+                    <p>{ "Created by " }<a href="https://coffee.dev" rel="noopener noreferrer" target="_blank">{ "Jonathan Knapp" }</a></p>
                     { self.view_share() }
                 </footer>
             </div>
@@ -123,7 +123,7 @@ impl App {
         if can_share() {
             html! {
                 <p>
-                    <button onclick=self.link.callback(|_| Msg::ShareApp(String::from("https://remnant.coffee.dev")))>{ "Share This App" }</button>
+                    <button class="btn-share" onclick=self.link.callback(|_| Msg::ShareApp(String::from("https://remnant.coffee.dev")))>{ "Share This App" }</button>
                 </p>
             }
         } else {
