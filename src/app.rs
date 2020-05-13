@@ -58,7 +58,7 @@ impl Component for App {
 
         let state = State {
             entries,
-            filter: Filter::All,
+            filter: Filter::Active,
             search: "".into(),
         };
         App {
