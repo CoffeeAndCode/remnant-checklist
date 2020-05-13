@@ -35,6 +35,7 @@ impl StorageService {
         }
     }
 
+    #[allow(clippy::ptr_arg)]
     pub fn store(&mut self, value: &Vec<Entry>) {
         self.storage_service.store(KEY, Json(value))
     }
