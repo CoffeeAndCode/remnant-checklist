@@ -1,4 +1,4 @@
-var CACHE_VERSION = "12";
+var CACHE_VERSION = "13";
 var CACHE_NAME = CACHE_VERSION + ":sw-cache-";
 
 var cachedURLs = [
@@ -12,6 +12,7 @@ var cachedURLs = [
   "/images/icon-180.png",
   "/images/icon-192.png",
   "/images/icon-512.png",
+  "/images/remnant-logo.png",
   "/manifest.webmanifest",
   "/pkg/snippets/remnant-68c4c8796a519e8d/src/js/share.js",
 ];

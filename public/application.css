@@ -29,6 +29,11 @@ body {
   padding: 5px 10px;
 }
 
+.img-fluid {
+  height: auto;
+  max-width: 100%;
+}
+
 .info {
   font-size: 14px;
   margin: 0;
@@ -51,6 +56,18 @@ body {
 .input-search:focus {
   border-color: var(--color-highlight);
   opacity: 1;
+}
+
+.logo {
+  max-height: 200px;
+  transition: max-height 1s;
+}
+
+.logo-container {
+  margin: 0;
+  max-width: 100%;
+  padding: 10px;
+  text-align: center;
 }
 
 .row {
@@ -98,4 +115,22 @@ body {
 
 .todoapp > .main {
   overflow: scroll;
+}
+
+@media (max-height: 800px) {
+  .logo {
+    max-height: 100px;
+  }
+}
+
+@media (max-height: 500px) {
+  .logo {
+    max-height: 60px;
+  }
+}
+
+@media (max-height: 300px) {
+  .logo {
+    max-height: 40px;
+  }
 }

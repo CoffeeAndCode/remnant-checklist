@@ -92,7 +92,7 @@ impl Component for App {
             <div class="app-wrapper">
                 <section class="todoapp">
                     <header class="header">
-                        <h1>{ "remnant" }</h1>
+                        <h1 class="logo-container"><img alt="Remnant logo" class="img-fluid logo" src="/images/remnant-logo.png" /></h1>
                         <input
                             class="input-search"
                             placeholder="Search..."
