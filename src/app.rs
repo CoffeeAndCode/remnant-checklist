@@ -184,7 +184,7 @@ pub enum Filter {
     All,
     Active,
     Completed,
-    World(data::World),
+    // World(data::World),
 }
 
 impl<'a> Into<Href> for &'a Filter {
@@ -193,7 +193,7 @@ impl<'a> Into<Href> for &'a Filter {
             Filter::All => "#/".into(),
             Filter::Active => "#/active".into(),
             Filter::Completed => "#/completed".into(),
-            Filter::World(world) => format!("#/world/{}", world).into(),
+            // Filter::World(world) => format!("#/world/{}", world).into(),
         }
     }
 }
@@ -204,7 +204,7 @@ impl Filter {
             Filter::All => true,
             Filter::Active => !entry.completed,
             Filter::Completed => entry.completed,
-            Filter::World(_) => true,
+            // Filter::World(_) => true,
         }
     }
 }
