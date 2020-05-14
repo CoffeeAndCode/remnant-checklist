@@ -41,6 +41,7 @@ pub enum Msg {
     SetFilter(Filter),
     ShareApp(String),
     Toggle(String),
+    TrackPersonalLinkClick,
     UpdateSearch(String),
 }
 
@@ -49,6 +50,14 @@ extern "C" {
     #[wasm_bindgen(js_name = canShare)]
     fn can_share() -> bool;
     fn share(title: Option<String>, text: Option<String>, url: String) -> bool;
+}
+
+#[wasm_bindgen(module = "/src/js/stats.js")]
+extern "C" {
+    #[wasm_bindgen(js_name = shareApp)]
+    fn track_share_app();
+    #[wasm_bindgen(js_name = visitPersonalSite)]
+    fn track_visit_personal_site();
 }
 
 impl Component for App {
@@ -82,9 +91,13 @@ impl Component for App {
             }
             Msg::ShareApp(url) => {
                 share(Some("Remnant Checklist".into()), None, url);
+                track_share_app();
             }
             Msg::Toggle(id) => {
                 self.state.toggle(id);
+            }
+            Msg::TrackPersonalLinkClick => {
+                track_visit_personal_site();
             }
             Msg::UpdateSearch(value) => {
                 self.state.search = value;
@@ -126,7 +139,7 @@ impl Component for App {
                 </section>
                 <footer class="info">
                     <ul class="list-unstyled m0">
-                        <li>{ "Created by " }<a href="https://coffee.dev" rel="noopener noreferrer" target="_blank">{ "Jonathan Knapp" }</a></li>
+                        <li>{ "Created by " }<a href="https://coffee.dev" onclick=self.link.callback(|_| Msg::TrackPersonalLinkClick) rel="noopener noreferrer" target="_blank">{ "Jonathan Knapp" }</a></li>
                         <li>{ "Game and artwork © " }<a href="https://www.remnantgame.com" rel="noopener noreferrer" target="_blank">{ "Gunfire Games, LLC" }</a></li>
                     </ul>
                     { self.view_share() }

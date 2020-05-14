@@ -1,4 +1,4 @@
-var CACHE_VERSION = "13";
+var CACHE_VERSION = "14";
 var CACHE_NAME = CACHE_VERSION + ":sw-cache-";
 
 var cachedURLs = [
@@ -15,6 +15,7 @@ var cachedURLs = [
   "/images/remnant-logo.png",
   "/manifest.webmanifest",
   "/pkg/snippets/remnant-68c4c8796a519e8d/src/js/share.js",
+  "/pkg/snippets/remnant-68c4c8796a519e8d/src/js/stats.js",
 ];
 
 function onInstall(event) {
