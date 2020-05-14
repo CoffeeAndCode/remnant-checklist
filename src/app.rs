@@ -37,11 +37,18 @@ impl Entry {
     }
 }
 
+pub enum Goal {
+    MarkItemAsComplete,
+    MarkItemAsIncomplete,
+    VisitGunfireGames,
+    VisitPersonalSite,
+}
+
 pub enum Msg {
     SetFilter(Filter),
     ShareApp(String),
     Toggle(String),
-    TrackPersonalLinkClick,
+    TrackGoal(Goal),
     UpdateSearch(String),
 }
 
@@ -54,8 +61,14 @@ extern "C" {
 
 #[wasm_bindgen(module = "/src/js/stats.js")]
 extern "C" {
+    #[wasm_bindgen(js_name = markItemAsComplete)]
+    fn track_mark_item_as_complete();
+    #[wasm_bindgen(js_name = markItemAsIncomplete)]
+    fn track_mark_item_as_incomplete();
     #[wasm_bindgen(js_name = visitPersonalSite)]
     fn track_visit_personal_site();
+    #[wasm_bindgen(js_name = visitGunfireGamesSite)]
+    fn track_visit_gunfire_games_site();
 }
 
 impl Component for App {
@@ -91,11 +104,19 @@ impl Component for App {
                 share(Some("Remnant Checklist".into()), None, url);
             }
             Msg::Toggle(id) => {
-                self.state.toggle(id);
+                let goal = if self.state.toggle(id) {
+                    Goal::MarkItemAsComplete
+                } else {
+                    Goal::MarkItemAsIncomplete
+                };
+                self.link.send_message(Msg::TrackGoal(goal));
             }
-            Msg::TrackPersonalLinkClick => {
-                track_visit_personal_site();
-            }
+            Msg::TrackGoal(goal) => match goal {
+                Goal::MarkItemAsComplete => track_mark_item_as_complete(),
+                Goal::MarkItemAsIncomplete => track_mark_item_as_incomplete(),
+                Goal::VisitGunfireGames => track_visit_gunfire_games_site(),
+                Goal::VisitPersonalSite => track_visit_personal_site(),
+            },
             Msg::UpdateSearch(value) => {
                 self.state.search = value;
             }
@@ -136,8 +157,11 @@ impl Component for App {
                 </section>
                 <footer class="info">
                     <ul class="list-unstyled m0">
-                        <li>{ "Created by " }<a href="https://coffee.dev" onclick=self.link.callback(|_| Msg::TrackPersonalLinkClick) rel="noopener noreferrer" target="_blank">{ "Jonathan Knapp" }</a></li>
-                        <li>{ "Game and artwork © " }<a href="https://www.remnantgame.com" rel="noopener noreferrer" target="_blank">{ "Gunfire Games, LLC" }</a></li>
+                        <li>{ "Created by " }<a href="https://coffee.dev" onclick=self.link.callback(|_| Msg::TrackGoal(Goal::VisitPersonalSite)) rel="noopener noreferrer" target="_blank">{ "Jonathan Knapp" }</a></li>
+                        <li>
+                            { "Game and artwork © " }
+                            <a href="https://www.remnantgame.com" onclick=self.link.callback(|_| Msg::TrackGoal(Goal::VisitGunfireGames)) rel="noopener noreferrer" target="_blank">{ "Gunfire Games, LLC" }</a>
+                        </li>
                     </ul>
                     { self.view_share() }
                 </footer>
@@ -230,8 +254,9 @@ impl State {
             .sum()
     }
 
-    fn toggle(&mut self, id: String) {
+    fn toggle(&mut self, id: String) -> bool {
         let mut entry = self.entries.iter_mut().find(|x| x.id() == id).unwrap();
         entry.completed = !entry.completed;
+        entry.completed
     }
 }
