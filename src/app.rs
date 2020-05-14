@@ -54,8 +54,6 @@ extern "C" {
 
 #[wasm_bindgen(module = "/src/js/stats.js")]
 extern "C" {
-    #[wasm_bindgen(js_name = shareApp)]
-    fn track_share_app();
     #[wasm_bindgen(js_name = visitPersonalSite)]
     fn track_visit_personal_site();
 }
@@ -91,7 +89,6 @@ impl Component for App {
             }
             Msg::ShareApp(url) => {
                 share(Some("Remnant Checklist".into()), None, url);
-                track_share_app();
             }
             Msg::Toggle(id) => {
                 self.state.toggle(id);
