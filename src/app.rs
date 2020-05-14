@@ -137,9 +137,7 @@ impl App {
     fn view_share(&self) -> Html {
         if can_share() {
             html! {
-                <p>
-                    <button class="btn-share" onclick=self.link.callback(|_| Msg::ShareApp(String::from("https://remnant.coffee.dev")))>{ "Share This App" }</button>
-                </p>
+                <button class="btn-share" onclick=self.link.callback(|_| Msg::ShareApp(String::from("https://remnant.coffee.dev")))>{ "Share This App" }</button>
             }
         } else {
             html! {}
