@@ -125,7 +125,10 @@ impl Component for App {
                     </footer>
                 </section>
                 <footer class="info">
-                    <p>{ "Created by " }<a href="https://coffee.dev" rel="noopener noreferrer" target="_blank">{ "Jonathan Knapp" }</a></p>
+                    <ul class="list-unstyled m0">
+                        <li>{ "Created by " }<a href="https://coffee.dev" rel="noopener noreferrer" target="_blank">{ "Jonathan Knapp" }</a></li>
+                        <li>{ "Game and artwork © " }<a href="https://www.remnantgame.com" rel="noopener noreferrer" target="_blank">{ "Gunfire Games, LLC" }</a></li>
+                    </ul>
                     { self.view_share() }
                 </footer>
             </div>

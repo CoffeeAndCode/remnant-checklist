@@ -38,6 +38,7 @@ body {
   font-size: 14px;
   margin: 0;
   padding-bottom: 20px;
+  padding-top: 14px;
 }
 
 .input-search {
@@ -58,6 +59,11 @@ body {
   opacity: 1;
 }
 
+.list-unstyled {
+  list-style: none;
+  padding-left: 0;
+}
+
 .logo {
   margin-left: 10px;
   max-height: 40px;
@@ -69,6 +75,10 @@ body {
   max-width: 100%;
   padding: 10px;
   text-align: center;
+}
+
+.m0 {
+  margin: 0;
 }
 
 .row {
