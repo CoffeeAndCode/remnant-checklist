@@ -40,7 +40,7 @@ impl Entry {
 pub enum Msg {
     SetFilter(Filter),
     ShareApp(String),
-    Toggle(Box<String>),
+    Toggle(String),
     UpdateSearch(String),
 }
 
@@ -171,7 +171,7 @@ impl App {
             <li class=class key=entry.id()>
                 <div class="row view">
                     <div>
-                        <input class="toggle" id=entry.id() type="checkbox" checked={entry.completed} onclick=self.link.callback(move |_| Msg::Toggle(Box::new(id.clone()))) />
+                        <input class="toggle" id=entry.id() type="checkbox" checked={entry.completed} onclick=self.link.callback(move |_| Msg::Toggle(id.clone())) />
                         <label for=entry.id()>{ format!("{} {}", entry.name, entry.icon) }</label>
                     </div>
                     <a class="wiki-link" href={ entry.url.clone() } rel="noopener noreferrer" target="_blank" title={format!("View {} on fextralife wiki", &entry.name)}>{ "wiki ↱" }</a>
@@ -219,8 +219,8 @@ impl State {
             .sum()
     }
 
-    fn toggle(&mut self, id: Box<String>) {
-        let mut entry = self.entries.iter_mut().find(|x| x.id() == *id).unwrap();
+    fn toggle(&mut self, id: String) {
+        let mut entry = self.entries.iter_mut().find(|x| x.id() == id).unwrap();
         entry.completed = !entry.completed;
     }
 }
