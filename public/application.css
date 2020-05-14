@@ -133,6 +133,12 @@ body {
   overflow: scroll;
 }
 
+@media (min-width: 0) and (max-width: 500px) {
+  .d-sm-none {
+    display: none !important;
+  }
+}
+
 @media (min-height: 500px) {
   .logo {
     max-height: 60px;
