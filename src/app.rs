@@ -40,7 +40,7 @@ impl Entry {
 pub enum Msg {
     SetFilter(Filter),
     ShareApp(String),
-    Toggle(usize),
+    Toggle(Box<String>),
     UpdateSearch(String),
 }
 
@@ -83,8 +83,8 @@ impl Component for App {
             Msg::ShareApp(url) => {
                 share(Some("Remnant Checklist".into()), None, url);
             }
-            Msg::Toggle(idx) => {
-                self.state.toggle(idx);
+            Msg::Toggle(id) => {
+                self.state.toggle(id);
             }
             Msg::UpdateSearch(value) => {
                 self.state.search = value;
@@ -111,7 +111,6 @@ impl Component for App {
                     <section class="main">
                         <ul class="todo-list">
                             { for self.state.entries.iter().filter(|e| self.state.filter.fit(e) && e.name.to_lowercase().contains(&self.state.search.to_lowercase()))
-                                .enumerate()
                                 .map(|val| self.view_entry(val)) }
                         </ul>
                     </section>
@@ -161,17 +160,18 @@ impl App {
         }
     }
 
-    fn view_entry(&self, (idx, entry): (usize, &Entry)) -> Html {
+    fn view_entry(&self, entry: &Entry) -> Html {
         let mut class = "todo".to_string();
         if entry.completed {
             class.push_str(" completed");
         }
+        let id = entry.id();
 
         html! {
-            <li class=class>
+            <li class=class key=entry.id()>
                 <div class="row view">
                     <div>
-                        <input class="toggle" id=entry.id() type="checkbox" checked={entry.completed} onclick=self.link.callback(move |_| Msg::Toggle(idx)) />
+                        <input class="toggle" id=entry.id() type="checkbox" checked={entry.completed} onclick=self.link.callback(move |_| Msg::Toggle(Box::new(id.clone()))) />
                         <label for=entry.id()>{ format!("{} {}", entry.name, entry.icon) }</label>
                     </div>
                     <a class="wiki-link" href={ entry.url.clone() } rel="noopener noreferrer" target="_blank" title={format!("View {} on fextralife wiki", &entry.name)}>{ "wiki ↱" }</a>
@@ -219,14 +219,8 @@ impl State {
             .sum()
     }
 
-    fn toggle(&mut self, idx: usize) {
-        let filter = self.filter.clone();
-        let mut entries = self
-            .entries
-            .iter_mut()
-            .filter(|e| filter.fit(e))
-            .collect::<Vec<_>>();
-        let entry = entries.get_mut(idx).unwrap();
+    fn toggle(&mut self, id: Box<String>) {
+        let mut entry = self.entries.iter_mut().find(|x| x.id() == *id).unwrap();
         entry.completed = !entry.completed;
     }
 }
