@@ -170,7 +170,7 @@ impl App {
         html! {
             <li class=class key=entry.id()>
                 <div class="row view">
-                    <div>
+                    <div class="row-label">
                         <input class="toggle" id=entry.id() type="checkbox" checked={entry.completed} onclick=self.link.callback(move |_| Msg::Toggle(id.clone())) />
                         <label for=entry.id()>{ format!("{} {}", entry.name, entry.icon) }</label>
                     </div>

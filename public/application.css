@@ -78,12 +78,17 @@ body {
   justify-content: space-between;
 }
 
+.row-label {
+  width: 100%;
+}
+
 .wiki-link {
   border-left: 1px solid var(--color-faded);
   color: var(--color-light);
   font-size: 18px;
   padding: 10px 20px;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .wiki-link:hover {
