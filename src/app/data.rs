@@ -90,34 +90,12 @@ trait CsvDataSource<T> {
     fn items() -> Vec<T>;
 }
 
-pub trait DataDisplay {
-    fn icon(&self) -> char;
-}
-
 pub trait EntryCompatible {
     fn data_type() -> DataType;
-    fn id(&self) -> u32;
     fn icon() -> char;
+    fn id(&self) -> u32;
     fn name(&self) -> &str;
     fn url(&self) -> &str;
-}
-
-impl DataDisplay for DataType {
-    fn icon(&self) -> char {
-        match *self {
-            DataType::Amulet => '💎',
-            DataType::ArmorSet => '👘',
-            DataType::BodyArmor => '🧥',
-            DataType::Emote => '☺',
-            DataType::HandGun => '🔫',
-            DataType::HeadArmor => '💂',
-            DataType::LegArmor => '🧦',
-            DataType::LongGun => '⚒',
-            DataType::MeleeWeapon => '🔱',
-            DataType::Ring => '💫',
-            DataType::Trait => '☯',
-        }
-    }
 }
 
 #[derive(Debug, Deserialize)]
@@ -440,7 +418,7 @@ impl EntryCompatible for Amulet {
     }
 
     fn icon() -> char {
-        DataType::Amulet.icon()
+        '💎'
     }
 
     fn id(&self) -> u32 {
@@ -462,7 +440,7 @@ impl EntryCompatible for ArmorSet {
     }
 
     fn icon() -> char {
-        DataType::ArmorSet.icon()
+        '👘'
     }
 
     fn id(&self) -> u32 {
@@ -484,7 +462,7 @@ impl EntryCompatible for BodyArmor {
     }
 
     fn icon() -> char {
-        DataType::BodyArmor.icon()
+        '🧥'
     }
 
     fn id(&self) -> u32 {
@@ -506,7 +484,7 @@ impl EntryCompatible for Emote {
     }
 
     fn icon() -> char {
-        DataType::Emote.icon()
+        '☺'
     }
 
     fn id(&self) -> u32 {
@@ -528,7 +506,7 @@ impl EntryCompatible for HandGun {
     }
 
     fn icon() -> char {
-        DataType::HandGun.icon()
+        '🔫'
     }
 
     fn id(&self) -> u32 {
@@ -550,7 +528,7 @@ impl EntryCompatible for HeadArmor {
     }
 
     fn icon() -> char {
-        DataType::HeadArmor.icon()
+        '💂'
     }
 
     fn id(&self) -> u32 {
@@ -572,7 +550,7 @@ impl EntryCompatible for LegArmor {
     }
 
     fn icon() -> char {
-        DataType::LegArmor.icon()
+        '🧦'
     }
 
     fn id(&self) -> u32 {
@@ -594,7 +572,7 @@ impl EntryCompatible for LongGun {
     }
 
     fn icon() -> char {
-        DataType::LongGun.icon()
+        '⚒'
     }
 
     fn id(&self) -> u32 {
@@ -616,7 +594,7 @@ impl EntryCompatible for MeleeWeapon {
     }
 
     fn icon() -> char {
-        DataType::MeleeWeapon.icon()
+        '🔱'
     }
 
     fn id(&self) -> u32 {
@@ -638,7 +616,7 @@ impl EntryCompatible for Ring {
     }
 
     fn icon() -> char {
-        DataType::Ring.icon()
+        '💫'
     }
 
     fn id(&self) -> u32 {
@@ -660,7 +638,7 @@ impl EntryCompatible for Trait {
     }
 
     fn icon() -> char {
-        DataType::Trait.icon()
+        '☯'
     }
 
     fn id(&self) -> u32 {
