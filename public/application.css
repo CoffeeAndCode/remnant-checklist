@@ -137,6 +137,16 @@ body {
   overflow: hidden;
 }
 
+.loading {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+
 .todoapp {
   display: grid;
   grid-template-columns: 100%;
