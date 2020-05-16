@@ -92,7 +92,6 @@ trait CsvDataSource<T> {
 
 pub trait DataDisplay {
     fn icon(&self) -> char;
-    fn label(&self) -> &'static str;
 }
 
 pub trait EntryCompatible {
@@ -117,22 +116,6 @@ impl DataDisplay for DataType {
             DataType::MeleeWeapon => '🔱',
             DataType::Ring => '💫',
             DataType::Trait => '☯',
-        }
-    }
-
-    fn label(&self) -> &'static str {
-        match *self {
-            DataType::Amulet => "Amulets",
-            DataType::ArmorSet => "Armor Sets",
-            DataType::BodyArmor => "Body Armor",
-            DataType::Emote => "Emotes",
-            DataType::HandGun => "Hand Guns",
-            DataType::HeadArmor => "Head Armor",
-            DataType::LegArmor => "Leg Armor",
-            DataType::LongGun => "Long Guns",
-            DataType::MeleeWeapon => "Melee Weapons",
-            DataType::Ring => "Rings",
-            DataType::Trait => "Traits",
         }
     }
 }
