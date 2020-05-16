@@ -47,24 +47,6 @@ pub enum DataType {
     Trait,
 }
 
-impl DataType {
-    fn data(&self) -> &'static [u8] {
-        match *self {
-            DataType::Amulet => include_bytes!("../data/amulets.csv"),
-            DataType::ArmorSet => include_bytes!("../data/armor_sets.csv"),
-            DataType::BodyArmor => include_bytes!("../data/body_armor.csv"),
-            DataType::Emote => include_bytes!("../data/emotes.csv"),
-            DataType::HeadArmor => include_bytes!("../data/head_armor.csv"),
-            DataType::HandGun => include_bytes!("../data/hand_guns.csv"),
-            DataType::LegArmor => include_bytes!("../data/leg_armor.csv"),
-            DataType::LongGun => include_bytes!("../data/long_guns.csv"),
-            DataType::MeleeWeapon => include_bytes!("../data/melee_weapons.csv"),
-            DataType::Ring => include_bytes!("../data/rings.csv"),
-            DataType::Trait => include_bytes!("../data/traits.csv"),
-        }
-    }
-}
-
 impl Display for DataType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let str = match self {
@@ -85,12 +67,13 @@ impl Display for DataType {
 }
 
 trait CsvDataSource<T> {
-    fn data() -> &'static [u8];
+    fn csv_data() -> &'static [u8];
     fn entries() -> Vec<Entry>;
     fn items() -> Vec<T>;
 }
 
 pub trait EntryCompatible {
+    fn csv_data() -> &'static [u8];
     fn data_type() -> DataType;
     fn icon() -> char;
     fn id(&self) -> u32;
@@ -390,8 +373,8 @@ impl<'de, T> CsvDataSource<T> for T
 where
     T: EntryCompatible + serde::de::DeserializeOwned,
 {
-    fn data() -> &'static [u8] {
-        T::data_type().data()
+    fn csv_data() -> &'static [u8] {
+        T::csv_data()
     }
 
     fn entries() -> Vec<Entry> {
@@ -402,7 +385,7 @@ where
     }
 
     fn items() -> Vec<T> {
-        let mut rdr = csv::Reader::from_reader(<T as CsvDataSource<T>>::data());
+        let mut rdr = csv::Reader::from_reader(<T as CsvDataSource<T>>::csv_data());
         let mut items: Vec<T> = rdr
             .deserialize()
             .filter_map(|t: Result<T, _>| t.ok())
@@ -413,6 +396,10 @@ where
 }
 
 impl EntryCompatible for Amulet {
+    fn csv_data() -> &'static [u8] {
+        include_bytes!("../data/amulets.csv")
+    }
+
     fn data_type() -> DataType {
         DataType::Amulet
     }
@@ -435,6 +422,10 @@ impl EntryCompatible for Amulet {
 }
 
 impl EntryCompatible for ArmorSet {
+    fn csv_data() -> &'static [u8] {
+        include_bytes!("../data/armor_sets.csv")
+    }
+
     fn data_type() -> DataType {
         DataType::ArmorSet
     }
@@ -457,6 +448,10 @@ impl EntryCompatible for ArmorSet {
 }
 
 impl EntryCompatible for BodyArmor {
+    fn csv_data() -> &'static [u8] {
+        include_bytes!("../data/body_armor.csv")
+    }
+
     fn data_type() -> DataType {
         DataType::BodyArmor
     }
@@ -479,6 +474,10 @@ impl EntryCompatible for BodyArmor {
 }
 
 impl EntryCompatible for Emote {
+    fn csv_data() -> &'static [u8] {
+        include_bytes!("../data/emotes.csv")
+    }
+
     fn data_type() -> DataType {
         DataType::Emote
     }
@@ -501,6 +500,10 @@ impl EntryCompatible for Emote {
 }
 
 impl EntryCompatible for HandGun {
+    fn csv_data() -> &'static [u8] {
+        include_bytes!("../data/hand_guns.csv")
+    }
+
     fn data_type() -> DataType {
         DataType::HandGun
     }
@@ -523,6 +526,10 @@ impl EntryCompatible for HandGun {
 }
 
 impl EntryCompatible for HeadArmor {
+    fn csv_data() -> &'static [u8] {
+        include_bytes!("../data/head_armor.csv")
+    }
+
     fn data_type() -> DataType {
         DataType::HeadArmor
     }
@@ -545,6 +552,10 @@ impl EntryCompatible for HeadArmor {
 }
 
 impl EntryCompatible for LegArmor {
+    fn csv_data() -> &'static [u8] {
+        include_bytes!("../data/leg_armor.csv")
+    }
+
     fn data_type() -> DataType {
         DataType::LegArmor
     }
@@ -567,6 +578,10 @@ impl EntryCompatible for LegArmor {
 }
 
 impl EntryCompatible for LongGun {
+    fn csv_data() -> &'static [u8] {
+        include_bytes!("../data/long_guns.csv")
+    }
+
     fn data_type() -> DataType {
         DataType::LongGun
     }
@@ -589,6 +604,10 @@ impl EntryCompatible for LongGun {
 }
 
 impl EntryCompatible for MeleeWeapon {
+    fn csv_data() -> &'static [u8] {
+        include_bytes!("../data/melee_weapons.csv")
+    }
+
     fn data_type() -> DataType {
         DataType::MeleeWeapon
     }
@@ -611,6 +630,10 @@ impl EntryCompatible for MeleeWeapon {
 }
 
 impl EntryCompatible for Ring {
+    fn csv_data() -> &'static [u8] {
+        include_bytes!("../data/rings.csv")
+    }
+
     fn data_type() -> DataType {
         DataType::Ring
     }
@@ -633,6 +656,10 @@ impl EntryCompatible for Ring {
 }
 
 impl EntryCompatible for Trait {
+    fn csv_data() -> &'static [u8] {
+        include_bytes!("../data/traits.csv")
+    }
+
     fn data_type() -> DataType {
         DataType::Trait
     }
