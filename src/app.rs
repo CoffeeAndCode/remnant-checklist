@@ -99,9 +99,11 @@ impl Component for App {
         match msg {
             Msg::SetFilter(filter) => {
                 self.state.filter = filter;
+                true
             }
             Msg::ShareApp(url) => {
                 share(Some("Remnant Checklist".into()), None, url);
+                false
             }
             Msg::Toggle(id) => {
                 let goal = if self.state.toggle(id) {
@@ -110,19 +112,23 @@ impl Component for App {
                     Goal::MarkItemAsIncomplete
                 };
                 self.link.send_message(Msg::TrackGoal(goal));
+                self.storage.store(&self.state.entries);
+                true
             }
-            Msg::TrackGoal(goal) => match goal {
-                Goal::MarkItemAsComplete => track_mark_item_as_complete(),
-                Goal::MarkItemAsIncomplete => track_mark_item_as_incomplete(),
-                Goal::VisitGunfireGames => track_visit_gunfire_games_site(),
-                Goal::VisitPersonalSite => track_visit_personal_site(),
-            },
+            Msg::TrackGoal(goal) => {
+                match goal {
+                    Goal::MarkItemAsComplete => track_mark_item_as_complete(),
+                    Goal::MarkItemAsIncomplete => track_mark_item_as_incomplete(),
+                    Goal::VisitGunfireGames => track_visit_gunfire_games_site(),
+                    Goal::VisitPersonalSite => track_visit_personal_site(),
+                }
+                false
+            }
             Msg::UpdateSearch(value) => {
                 self.state.search = value;
+                true
             }
         }
-        self.storage.store(&self.state.entries);
-        true
     }
 
     fn view(&self) -> Html {
