@@ -3,7 +3,7 @@ use super::Entry;
 use yew::format::Json;
 use yew::services::storage::{Area, StorageService as YewStorageService};
 
-const KEY: &str = "yew.todomvc.self";
+const KEY: &str = "dev.coffee.remnant";
 
 pub struct StorageService {
     storage_service: YewStorageService,
