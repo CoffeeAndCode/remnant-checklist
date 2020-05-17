@@ -1,8 +1,6 @@
-mod data_format;
-
-use super::data;
-use super::Entry;
-use data_format::DataFormat;
+use super::data_format::DataFormat;
+use crate::app::data;
+use crate::app::Entry;
 use yew::format::Json;
 use yew::services::storage::{Area, StorageService as YewStorageService};
 

@@ -1,5 +1,5 @@
-use super::data::DataType;
-use super::Entry;
+use crate::app::data::DataType;
+use crate::app::Entry;
 use chrono::{DateTime, Utc};
 use serde_derive::{Deserialize, Serialize};
 
