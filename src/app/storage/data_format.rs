@@ -1,5 +1,6 @@
 use super::data::DataType;
 use super::Entry;
+use chrono::{DateTime, Utc};
 use serde_derive::{Deserialize, Serialize};
 
 const DATA_FORMAT_VERSION: usize = 1;
@@ -7,6 +8,7 @@ const DATA_FORMAT_VERSION: usize = 1;
 #[derive(Deserialize, Serialize)]
 pub struct DataFormat {
     completed_items: Vec<Item>,
+    last_saved_at: DateTime<Utc>,
     version: usize,
 }
 
@@ -41,6 +43,7 @@ impl Default for DataFormat {
     fn default() -> Self {
         DataFormat {
             completed_items: Default::default(),
+            last_saved_at: Utc::now(),
             version: DATA_FORMAT_VERSION,
         }
     }
@@ -55,13 +58,16 @@ struct Item {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use chrono::Duration;
 
     #[test]
     fn test_data_format_defaults() {
+        let now = Utc::now().checked_add_signed(Duration::seconds(1)).unwrap();
         let data: DataFormat = Default::default();
 
         assert!(data.completed_items.is_empty());
         assert_eq!(DATA_FORMAT_VERSION, data.version);
+        assert!(now > data.last_saved_at);
     }
 
     #[test]
