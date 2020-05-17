@@ -697,6 +697,8 @@ impl<T: EntryCompatible> From<T> for Entry {
 
 pub fn amulet_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     let mut entries = Amulet::entries();
+
+    #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults
             .iter()
@@ -710,6 +712,8 @@ pub fn amulet_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
 
 pub fn armor_set_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     let mut entries = ArmorSet::entries();
+
+    #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults.iter().any(|default| {
             default.id == entry.id && matches!(default.data_type, DataType::ArmorSet)
@@ -722,6 +726,8 @@ pub fn armor_set_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
 
 pub fn body_armor_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     let mut entries = BodyArmor::entries();
+
+    #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults.iter().any(|default| {
             default.id == entry.id && matches!(default.data_type, DataType::BodyArmor)
@@ -734,6 +740,8 @@ pub fn body_armor_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
 
 pub fn emote_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     let mut entries = Emote::entries();
+
+    #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults
             .iter()
@@ -747,6 +755,8 @@ pub fn emote_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
 
 pub fn hand_gun_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     let mut entries = HandGun::entries();
+
+    #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults
             .iter()
@@ -760,6 +770,8 @@ pub fn hand_gun_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
 
 pub fn head_armor_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     let mut entries = HeadArmor::entries();
+
+    #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults.iter().any(|default| {
             default.id == entry.id && matches!(default.data_type, DataType::HeadArmor)
@@ -772,6 +784,8 @@ pub fn head_armor_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
 
 pub fn leg_armor_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     let mut entries = LegArmor::entries();
+
+    #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults.iter().any(|default| {
             default.id == entry.id && matches!(default.data_type, DataType::LegArmor)
@@ -784,6 +798,8 @@ pub fn leg_armor_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
 
 pub fn long_gun_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     let mut entries = LongGun::entries();
+
+    #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults
             .iter()
@@ -797,6 +813,8 @@ pub fn long_gun_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
 
 pub fn melee_weapon_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     let mut entries = MeleeWeapon::entries();
+
+    #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults.iter().any(|default| {
             default.id == entry.id && matches!(default.data_type, DataType::MeleeWeapon)
@@ -809,6 +827,8 @@ pub fn melee_weapon_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
 
 pub fn remnant_trait_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     let mut entries = Trait::entries();
+
+    #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults
             .iter()
@@ -822,6 +842,8 @@ pub fn remnant_trait_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
 
 pub fn ring_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     let mut entries = Ring::entries();
+
+    #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults
             .iter()
