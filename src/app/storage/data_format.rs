@@ -7,7 +7,7 @@ const DATA_FORMAT_VERSION: usize = 1;
 
 #[derive(Deserialize, Serialize)]
 pub struct DataFormat {
-    completed_items: Vec<Item>,
+    pub completed_items: Vec<Item>,
     last_saved_at: DateTime<Utc>,
     version: usize,
 }
@@ -50,9 +50,9 @@ impl Default for DataFormat {
 }
 
 #[derive(Deserialize, Serialize)]
-struct Item {
-    data_type: DataType,
-    id: u32,
+pub struct Item {
+    pub data_type: DataType,
+    pub id: u32,
 }
 
 #[cfg(test)]

@@ -1,3 +1,4 @@
+use super::storage::CompletedItem;
 use super::Entry;
 use serde_derive::{Deserialize, Serialize};
 use std::fmt::Display;
@@ -694,48 +695,142 @@ impl<T: EntryCompatible> From<T> for Entry {
     }
 }
 
-pub fn amulet_entries() -> Vec<Entry> {
-    Amulet::entries()
+pub fn amulet_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
+    let mut entries = Amulet::entries();
+    for entry in &mut entries {
+        if defaults
+            .iter()
+            .any(|default| default.id == entry.id && matches!(default.data_type, DataType::Amulet))
+        {
+            entry.completed = true;
+        }
+    }
+    entries
 }
 
-pub fn armor_set_entries() -> Vec<Entry> {
-    ArmorSet::entries()
+pub fn armor_set_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
+    let mut entries = ArmorSet::entries();
+    for entry in &mut entries {
+        if defaults.iter().any(|default| {
+            default.id == entry.id && matches!(default.data_type, DataType::ArmorSet)
+        }) {
+            entry.completed = true;
+        }
+    }
+    entries
 }
 
-pub fn body_armor_entries() -> Vec<Entry> {
-    BodyArmor::entries()
+pub fn body_armor_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
+    let mut entries = BodyArmor::entries();
+    for entry in &mut entries {
+        if defaults.iter().any(|default| {
+            default.id == entry.id && matches!(default.data_type, DataType::BodyArmor)
+        }) {
+            entry.completed = true;
+        }
+    }
+    entries
 }
 
-pub fn emote_entries() -> Vec<Entry> {
-    Emote::entries()
+pub fn emote_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
+    let mut entries = Emote::entries();
+    for entry in &mut entries {
+        if defaults
+            .iter()
+            .any(|default| default.id == entry.id && matches!(default.data_type, DataType::Emote))
+        {
+            entry.completed = true;
+        }
+    }
+    entries
 }
 
-pub fn hand_gun_entries() -> Vec<Entry> {
-    HandGun::entries()
+pub fn hand_gun_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
+    let mut entries = HandGun::entries();
+    for entry in &mut entries {
+        if defaults
+            .iter()
+            .any(|default| default.id == entry.id && matches!(default.data_type, DataType::HandGun))
+        {
+            entry.completed = true;
+        }
+    }
+    entries
 }
 
-pub fn head_armor_entries() -> Vec<Entry> {
-    HeadArmor::entries()
+pub fn head_armor_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
+    let mut entries = HeadArmor::entries();
+    for entry in &mut entries {
+        if defaults.iter().any(|default| {
+            default.id == entry.id && matches!(default.data_type, DataType::HeadArmor)
+        }) {
+            entry.completed = true;
+        }
+    }
+    entries
 }
 
-pub fn leg_armor_entries() -> Vec<Entry> {
-    LegArmor::entries()
+pub fn leg_armor_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
+    let mut entries = LegArmor::entries();
+    for entry in &mut entries {
+        if defaults.iter().any(|default| {
+            default.id == entry.id && matches!(default.data_type, DataType::LegArmor)
+        }) {
+            entry.completed = true;
+        }
+    }
+    entries
 }
 
-pub fn long_gun_entries() -> Vec<Entry> {
-    LongGun::entries()
+pub fn long_gun_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
+    let mut entries = LongGun::entries();
+    for entry in &mut entries {
+        if defaults
+            .iter()
+            .any(|default| default.id == entry.id && matches!(default.data_type, DataType::LongGun))
+        {
+            entry.completed = true;
+        }
+    }
+    entries
 }
 
-pub fn melee_weapon_entries() -> Vec<Entry> {
-    MeleeWeapon::entries()
+pub fn melee_weapon_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
+    let mut entries = MeleeWeapon::entries();
+    for entry in &mut entries {
+        if defaults.iter().any(|default| {
+            default.id == entry.id && matches!(default.data_type, DataType::MeleeWeapon)
+        }) {
+            entry.completed = true;
+        }
+    }
+    entries
 }
 
-pub fn remnant_trait_entries() -> Vec<Entry> {
-    Trait::entries()
+pub fn remnant_trait_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
+    let mut entries = Trait::entries();
+    for entry in &mut entries {
+        if defaults
+            .iter()
+            .any(|default| default.id == entry.id && matches!(default.data_type, DataType::Trait))
+        {
+            entry.completed = true;
+        }
+    }
+    entries
 }
 
-pub fn ring_entries() -> Vec<Entry> {
-    Ring::entries()
+pub fn ring_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
+    let mut entries = Ring::entries();
+    for entry in &mut entries {
+        if defaults
+            .iter()
+            .any(|default| default.id == entry.id && matches!(default.data_type, DataType::Ring))
+        {
+            entry.completed = true;
+        }
+    }
+    entries
 }
 
 #[cfg(test)]
