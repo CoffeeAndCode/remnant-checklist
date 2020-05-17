@@ -1,9 +1,13 @@
+mod data_format;
+
 use super::data;
 use super::Entry;
+use data_format::DataFormat;
 use yew::format::Json;
 use yew::services::storage::{Area, StorageService as YewStorageService};
 
 const KEY: &str = "dev.coffee.remnant";
+const KEY_CONDENSED: &str = "dev.coffee.remnant.condensed";
 
 pub struct StorageService {
     storage_service: YewStorageService,
@@ -37,6 +41,8 @@ impl StorageService {
 
     #[allow(clippy::ptr_arg)]
     pub fn store(&mut self, value: &Vec<Entry>) {
-        self.storage_service.store(KEY, Json(value))
+        self.storage_service.store(KEY, Json(value));
+        self.storage_service
+            .store(KEY_CONDENSED, Json(&DataFormat::new(value)));
     }
 }
