@@ -209,7 +209,7 @@ impl App {
         let id = entry.id();
 
         html! {
-            <li class=class key=entry.id()>
+            <li class=class>
                 <div class="row view">
                     <div class="row-label">
                         <input class="toggle" id=entry.id() type="checkbox" checked={entry.completed} onclick=self.link.callback(move |_| Msg::Toggle(id.clone())) />
