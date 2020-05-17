@@ -81,7 +81,7 @@ impl Component for App {
 
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
         let storage = StorageService::new().unwrap();
-        let entries = storage.restore_or_default();
+        let entries = storage.restore();
 
         let state = State {
             entries,
