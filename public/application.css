@@ -78,6 +78,12 @@ body {
   opacity: 1;
 }
 
+.item-type {
+  display: block;
+  font-size: 14px;
+  color: #777;
+}
+
 .list-unstyled {
   list-style: none;
   padding-left: 0;

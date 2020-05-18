@@ -25,7 +25,6 @@ pub struct State {
 pub struct Entry {
     completed: bool,
     data_type: data::DataType,
-    icon: char,
     id: u32,
     name: String,
     url: String,
@@ -33,7 +32,7 @@ pub struct Entry {
 
 impl Entry {
     fn id(&self) -> String {
-        format!("{}-{}", self.data_type, self.id)
+        format!("{}-{}", self.data_type.url_slug(), self.id)
     }
 }
 
@@ -213,7 +212,10 @@ impl App {
                 <div class="row view">
                     <div class="row-label">
                         <input class="toggle" id=entry.id() type="checkbox" checked={entry.completed} onclick=self.link.callback(move |_| Msg::Toggle(id.clone())) />
-                        <label for=entry.id()>{ format!("{} {}", entry.name, entry.icon) }</label>
+                        <label class="item-label" for=entry.id()>
+                            { entry.name.to_string() }
+                            <span class="item-type">{ entry.data_type.to_string() }</span>
+                        </label>
                     </div>
                     <a class="wiki-link" href={ entry.url.clone() } rel="noopener noreferrer" target="_blank" title={format!("View {} on fextralife wiki", &entry.name)}>{ "wiki ↱" }</a>
                 </div>
