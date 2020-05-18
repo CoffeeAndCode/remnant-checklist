@@ -1,6 +1,7 @@
 mod data;
 mod storage;
 
+use data::{UrlParam, World};
 use serde_derive::{Deserialize, Serialize};
 use storage::StorageService;
 use strum::IntoEnumIterator;
@@ -19,6 +20,7 @@ pub struct State {
     entries: Vec<Entry>,
     filter: Filter,
     search: String,
+    world: World,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -28,6 +30,7 @@ pub struct Entry {
     id: u32,
     name: String,
     url: String,
+    worlds: Vec<World>,
 }
 
 impl Entry {
@@ -86,6 +89,7 @@ impl Component for App {
             entries,
             filter: Filter::Active,
             search: "".into(),
+            world: World::Any,
         };
         App {
             link,
@@ -146,7 +150,7 @@ impl Component for App {
                     </header>
                     <section class="main">
                         <ul class="todo-list">
-                            { for self.state.entries.iter().filter(|e| self.state.filter.fit(e) && e.name.to_lowercase().contains(&self.state.search.to_lowercase()))
+                            { for self.state.entries.iter().filter(|e| self.state.filter.fit(e) && e.worlds.iter().any(|world| world == &self.state.world) && e.name.to_lowercase().contains(&self.state.search.to_lowercase()))
                                 .map(|val| self.view_entry(val)) }
                         </ul>
                     </section>
@@ -229,7 +233,7 @@ pub enum Filter {
     All,
     Active,
     Completed,
-    // World(data::World),
+    World(data::World),
 }
 
 impl<'a> Into<Href> for &'a Filter {
@@ -238,7 +242,7 @@ impl<'a> Into<Href> for &'a Filter {
             Filter::All => "#/".into(),
             Filter::Active => "#/active".into(),
             Filter::Completed => "#/completed".into(),
-            // Filter::World(world) => format!("#/world/{}", world).into(),
+            Filter::World(world) => format!("#/world/{}", world.url_slug()).into(),
         }
     }
 }
@@ -249,7 +253,7 @@ impl Filter {
             Filter::All => true,
             Filter::Active => !entry.completed,
             Filter::Completed => entry.completed,
-            // Filter::World(_) => true,
+            Filter::World(_) => true,
         }
     }
 }

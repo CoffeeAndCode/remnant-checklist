@@ -1,26 +1,26 @@
-ID,Name,Description,Location & Crafting,Url
-1,Brutal Mark,Deals 20% bonus damage to enemies that has less than 50% Health.,Can be found at a random location at Rhom.,https://remnantfromtheashes.wiki.fextralife.com/Brutal+Mark
-2,Butcher's Fetish,Increases Crit Chance by 15% for 10 seconds after striking an enemy with a Charged Melee Attack.,Found at The Fetid Glade.,https://remnantfromtheashes.wiki.fextralife.com/Butcher's+Fetish
-3,Cleansing Jewel,Removes all negative status effects after expending a Dragon Heart and increases status buildup resistance by 50%.,Found at The Labyrinth - The Eastern Wind.,https://remnantfromtheashes.wiki.fextralife.com/Cleansing+Jewel
-4,Galenic Charm,Increases Weapon Mod damage by 30%,Can be found at a random location at Rhom.,https://remnantfromtheashes.wiki.fextralife.com/Galenic+Charm
-5,Gunslinger's Charm,Increases Fire Rate by 15% and Reload Speed by 20%,Can be found at a random location at Earth.,https://remnantfromtheashes.wiki.fextralife.com/Gunslinger's+Charm
-6,Leto's Amulet,Reduces Armor Encumbrance by 40% and Stamina cost by 10%.,Can be found at a random location at Earth.,https://remnantfromtheashes.wiki.fextralife.com/Leto's+Amulet
-7,Mender's Charm,50% ally heal on Dragon Hearts use,Can be purchased from Wud.,https://remnantfromtheashes.wiki.fextralife.com/Mender's+Charm
+ID,Name,Description,Location & Crafting,Url,Worlds
+1,Brutal Mark,Deals 20% bonus damage to enemies that has less than 50% Health.,Can be found at a random location at Rhom.,https://remnantfromtheashes.wiki.fextralife.com/Brutal+Mark,
+2,Butcher's Fetish,Increases Crit Chance by 15% for 10 seconds after striking an enemy with a Charged Melee Attack.,Found at The Fetid Glade.,https://remnantfromtheashes.wiki.fextralife.com/Butcher's+Fetish,
+3,Cleansing Jewel,Removes all negative status effects after expending a Dragon Heart and increases status buildup resistance by 50%.,Found at The Labyrinth - The Eastern Wind.,https://remnantfromtheashes.wiki.fextralife.com/Cleansing+Jewel,
+4,Galenic Charm,Increases Weapon Mod damage by 30%,Can be found at a random location at Rhom.,https://remnantfromtheashes.wiki.fextralife.com/Galenic+Charm,
+5,Gunslinger's Charm,Increases Fire Rate by 15% and Reload Speed by 20%,Can be found at a random location at Earth.,https://remnantfromtheashes.wiki.fextralife.com/Gunslinger's+Charm,
+6,Leto's Amulet,Reduces Armor Encumbrance by 40% and Stamina cost by 10%.,Can be found at a random location at Earth.,https://remnantfromtheashes.wiki.fextralife.com/Leto's+Amulet,
+7,Mender's Charm,50% ally heal on Dragon Hearts use,Can be purchased from Wud.,https://remnantfromtheashes.wiki.fextralife.com/Mender's+Charm,
 8,Pocket Watch,Increases Stamina Regeneration by 20 per second and reduces Stamina Cost by 20%.,"Given by Mudtooth in Helicopter on Earth after listening to all his stories
 
-Can be used as exchange for Bandit Set before fight with Brabus.",https://remnantfromtheashes.wiki.fextralife.com/Pocket+Watch
-9,Rock of Anguish,Increases movement speed by 15% and Reload Speed by 25% for 10 seconds after taking damage,Can be found at a random location at Corsus,https://remnantfromtheashes.wiki.fextralife.com/Rock+of+Anguish
-10,Storm Amulet,Increases SHOCK damage by 20%.,Can be found at a random location at Yaesha.,https://remnantfromtheashes.wiki.fextralife.com/Storm+Amulet
-11,Twisted Idol,Increases Armor Effectiveness by 30%.,Drop by Wailing Tree,https://remnantfromtheashes.wiki.fextralife.com/Twisted+Idol
-12,Soul Anchor,Increases duration of summoned creatures by 100% and increases hero damage by 5% per summoned minion.,Dropped by Reanimator boss.,https://remnantfromtheashes.wiki.fextralife.com/Soul+Anchor
-13,Scavenger's Bauble,Increases the amount of Scrap picked up in the world by 35%,Can be obtained by solving the Song of the Doe puzzle at Yaesha.,https://remnantfromtheashes.wiki.fextralife.com/Scavenger's+Bauble
-14,Vengeance Idol,All damage dealt is increased by 30% when the wearer's Health is below 50%. Includes Summons.,Can be found at Yaesha.,https://remnantfromtheashes.wiki.fextralife.com/Vengeance+Idol
-15,Nightmare Spiral,Ranged hits steal 2.0% of base damage dealt as health. Consumable health regen effectiveness reduced by 95%,Defeat Dreamer / Nightmare Hardcore Mode.,https://remnantfromtheashes.wiki.fextralife.com/Nightmare+Spiral
-16,Rusted Amulet,Reduces Stamina Cost by 80% but increases Armor Encumbrance by 25.,Can be found at Corsus.,https://remnantfromtheashes.wiki.fextralife.com/Rusted+Amulet
-17,Talisman of Animosity,Increase Weakspot damage by 30%,Can be found at a random location at Rhom.,https://remnantfromtheashes.wiki.fextralife.com/Talisman+of+Animosity
-18,Heart of Darkness,Increases Ranged and Melee damage dealt by 20%. Increases damage received by 50% for 60 seconds after using a Dragon Heart.,Can be found in the Fetid Pools on Corsus. Use the Acid Cleaned Key on the second door.,https://remnantfromtheashes.wiki.fextralife.com/Heart+of+Darkness
-19,Amulet of Epicaricacy,Increases Mod Power generation by 10%. When attacking an enemy with an active STATUS EFFECT. Mod power generation is increased by an additional 25%.,Dropped by Red Beetle in the Fetid Pools Dungeon on Corsus.,https://remnantfromtheashes.wiki.fextralife.com/Amulet+of+Epicaricacy
-20,Toxic Juju,,,https://remnantfromtheashes.wiki.fextralife.com/Toxic+Juju
-21,Daredevil's Charm,Increases Total damage dealt by 25% for each piece of unequipped armor. Damage received is increased by 1%.,75 Total Boss Kills in Survival Mode,https://remnantfromtheashes.wiki.fextralife.com/Daredevil's+Charm
-22,Black Rose,The wearer's chest armor set bonus is increased by 1 piece. It will not exceed the 3 piece armor set bonus.,100 Total Boss Kills in Survival Mode,https://remnantfromtheashes.wiki.fextralife.com/Black+Rose
-23,Amulet of Perseverance,"Increases earned experience by 1% when slaying an enemy and will last until the wearer dies, unequips the amulet, or rests at a checkpoint. stacking up to 50 times.",Survival Mode - 50 Boss Kills,https://remnantfromtheashes.wiki.fextralife.com/Amulet+of+Perseverance
+Can be used as exchange for Bandit Set before fight with Brabus.",https://remnantfromtheashes.wiki.fextralife.com/Pocket+Watch,
+9,Rock of Anguish,Increases movement speed by 15% and Reload Speed by 25% for 10 seconds after taking damage,Can be found at a random location at Corsus,https://remnantfromtheashes.wiki.fextralife.com/Rock+of+Anguish,
+10,Storm Amulet,Increases SHOCK damage by 20%.,Can be found at a random location at Yaesha.,https://remnantfromtheashes.wiki.fextralife.com/Storm+Amulet,
+11,Twisted Idol,Increases Armor Effectiveness by 30%.,Drop by Wailing Tree,https://remnantfromtheashes.wiki.fextralife.com/Twisted+Idol,
+12,Soul Anchor,Increases duration of summoned creatures by 100% and increases hero damage by 5% per summoned minion.,Dropped by Reanimator boss.,https://remnantfromtheashes.wiki.fextralife.com/Soul+Anchor,
+13,Scavenger's Bauble,Increases the amount of Scrap picked up in the world by 35%,Can be obtained by solving the Song of the Doe puzzle at Yaesha.,https://remnantfromtheashes.wiki.fextralife.com/Scavenger's+Bauble,
+14,Vengeance Idol,All damage dealt is increased by 30% when the wearer's Health is below 50%. Includes Summons.,Can be found at Yaesha.,https://remnantfromtheashes.wiki.fextralife.com/Vengeance+Idol,
+15,Nightmare Spiral,Ranged hits steal 2.0% of base damage dealt as health. Consumable health regen effectiveness reduced by 95%,Defeat Dreamer / Nightmare Hardcore Mode.,https://remnantfromtheashes.wiki.fextralife.com/Nightmare+Spiral,
+16,Rusted Amulet,Reduces Stamina Cost by 80% but increases Armor Encumbrance by 25.,Can be found at Corsus.,https://remnantfromtheashes.wiki.fextralife.com/Rusted+Amulet,
+17,Talisman of Animosity,Increase Weakspot damage by 30%,Can be found at a random location at Rhom.,https://remnantfromtheashes.wiki.fextralife.com/Talisman+of+Animosity,
+18,Heart of Darkness,Increases Ranged and Melee damage dealt by 20%. Increases damage received by 50% for 60 seconds after using a Dragon Heart.,Can be found in the Fetid Pools on Corsus. Use the Acid Cleaned Key on the second door.,https://remnantfromtheashes.wiki.fextralife.com/Heart+of+Darkness,
+19,Amulet of Epicaricacy,Increases Mod Power generation by 10%. When attacking an enemy with an active STATUS EFFECT. Mod power generation is increased by an additional 25%.,Dropped by Red Beetle in the Fetid Pools Dungeon on Corsus.,https://remnantfromtheashes.wiki.fextralife.com/Amulet+of+Epicaricacy,
+20,Toxic Juju,,,https://remnantfromtheashes.wiki.fextralife.com/Toxic+Juju,
+21,Daredevil's Charm,Increases Total damage dealt by 25% for each piece of unequipped armor. Damage received is increased by 1%.,75 Total Boss Kills in Survival Mode,https://remnantfromtheashes.wiki.fextralife.com/Daredevil's+Charm,
+22,Black Rose,The wearer's chest armor set bonus is increased by 1 piece. It will not exceed the 3 piece armor set bonus.,100 Total Boss Kills in Survival Mode,https://remnantfromtheashes.wiki.fextralife.com/Black+Rose,
+23,Amulet of Perseverance,"Increases earned experience by 1% when slaying an enemy and will last until the wearer dies, unequips the amulet, or rests at a checkpoint. stacking up to 50 times.",Survival Mode - 50 Boss Kills,https://remnantfromtheashes.wiki.fextralife.com/Amulet+of+Perseverance,

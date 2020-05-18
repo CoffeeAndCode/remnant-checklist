@@ -1,41 +1,41 @@
-ID,Name,Description,Url
-1,Vigor,Increases Max Health.,https://remnantfromtheashes.wiki.fextralife.com/Vigor
-2,Endurance,Increases Max Stamina.,https://remnantfromtheashes.wiki.fextralife.com/Endurance
-3,Exploiter,Increases Weak Spot Damage.,https://remnantfromtheashes.wiki.fextralife.com/Exploiter
-4,Spirit,Increases Mod Power Generation.,https://remnantfromtheashes.wiki.fextralife.com/Spirit
-5,Quick Hands,Increases Reload Speed.,https://remnantfromtheashes.wiki.fextralife.com/Quick+Hands
-6,World Walker,Reduces Stamina cost when sprinting and evading.,https://remnantfromtheashes.wiki.fextralife.com/World+Walker
-7,Keeper's Blessing,"Increases resistance to elemental damage, buildup, and STATUS effects.",https://remnantfromtheashes.wiki.fextralife.com/Keeper's+Blessing
-8,Mother's Blessing,Increases Ranged damage reduction.,https://remnantfromtheashes.wiki.fextralife.com/Mother's+Blessing
-9,Teamwork,"Increases Mod Power buildup rate, earned Experience when killing enemies, and reduces damage taken when standing near teammates.",https://remnantfromtheashes.wiki.fextralife.com/Teamwork
-10,Warrior,Increases Melee Damage.,https://remnantfromtheashes.wiki.fextralife.com/Warrior
-11,Shadow Walker,Reduces enemy Awareness.,https://remnantfromtheashes.wiki.fextralife.com/Shadow+Walker
-12,Elder Knowledge,Increases earned Experience when killing enemies.,https://remnantfromtheashes.wiki.fextralife.com/Elder+Knowledge
-13,Scavenger,Increases the amount of scrap picked up.,https://remnantfromtheashes.wiki.fextralife.com/Scavenger
-14,Recovery,Increases Stamina Regen rate and reduces Stamina Regen delay.,https://remnantfromtheashes.wiki.fextralife.com/Recovery
-15,Handling,Reduces Gun Spread and Recoil.,https://remnantfromtheashes.wiki.fextralife.com/Handling
-16,Glutton,Increases Consumable Use speed.,https://remnantfromtheashes.wiki.fextralife.com/Glutton
-17,Catalyst,Increases chance to proc STATUS effects on enemies.,https://remnantfromtheashes.wiki.fextralife.com/Catalyst
-18,Executioner,Increases Critical Hit Chance.,https://remnantfromtheashes.wiki.fextralife.com/Executioner
-19,Triage,Increases Healing Effectiveness.,https://remnantfromtheashes.wiki.fextralife.com/Triage
-20,Kingslayer,Increases Critical Hit Damage.,https://remnantfromtheashes.wiki.fextralife.com/Kingslayer
-21,Will to Live,Increases Health while wounded.,https://remnantfromtheashes.wiki.fextralife.com/Will+to+Live
-22,Arcane Strike,Increases Mod Power gained on Melee hits.,https://remnantfromtheashes.wiki.fextralife.com/Arcane+Strike
-23,Mind's Eye,Increases Ranged Damage.,https://remnantfromtheashes.wiki.fextralife.com/Mind's+Eye
-24,Bark Skin,Increases Armor Effectiveness.,https://remnantfromtheashes.wiki.fextralife.com/Bark+Skin
-25,Revivalist,Increases Revive Speed.,https://remnantfromtheashes.wiki.fextralife.com/Revivalist
-26,Guardian's Blessing,Melee Damage Reduction +1%,https://remnantfromtheashes.wiki.fextralife.com/Guardians+Blessing
-27,Cold as Ice,Increases damage dealt to enemies when attacking them from behind.,https://remnantfromtheashes.wiki.fextralife.com/Cold+as+Ice
-28,Trigger Happy,Increases Fire Rate.,https://remnantfromtheashes.wiki.fextralife.com/Trigger+Happy
-29,Rapid Strike,Increases Melee Attack Speed.,https://remnantfromtheashes.wiki.fextralife.com/Rapid+Strike
-30,Suspicion,Reduced Friendly Fire Damage Taken.,https://remnantfromtheashes.wiki.fextralife.com/Suspicion
-31,Swiftness,Increases Movement Speed.,https://remnantfromtheashes.wiki.fextralife.com/Swiftness
-32,Sleight of Hand,Increases Weapon Swap Speed.,https://remnantfromtheashes.wiki.fextralife.com/Sleight+of+Hand
-33,Concentration,Increases weapon mod duration.,https://remnantfromtheashes.wiki.fextralife.com/Concentration
-34,Blood Bond,Damage absorbtion.,https://remnantfromtheashes.wiki.fextralife.com/Blood+Bond
-35,Footwork,Aim movement speed.,https://remnantfromtheashes.wiki.fextralife.com/Footwork
-36,Potency,Increases consumable duration.,https://remnantfromtheashes.wiki.fextralife.com/Potency
-37,Fortification,Reduces damage taken while reviving teamates.,https://remnantfromtheashes.wiki.fextralife.com/Fortification
-38,Invoker,Increases summons damage.,https://remnantfromtheashes.wiki.fextralife.com/Invoker
-39,Luminescent,Extra lumenite chance.,https://remnantfromtheashes.wiki.fextralife.com/Luminescent
-40,Evocation,Mod damage bonus.,https://remnantfromtheashes.wiki.fextralife.com/Evocation
+ID,Name,Description,Url,Worlds
+1,Vigor,Increases Max Health.,https://remnantfromtheashes.wiki.fextralife.com/Vigor,Ward 13
+2,Endurance,Increases Max Stamina.,https://remnantfromtheashes.wiki.fextralife.com/Endurance,Ward 13
+3,Exploiter,Increases Weak Spot Damage.,https://remnantfromtheashes.wiki.fextralife.com/Exploiter,Any
+4,Spirit,Increases Mod Power Generation.,https://remnantfromtheashes.wiki.fextralife.com/Spirit,"Earth,Ward 13"
+5,Quick Hands,Increases Reload Speed.,https://remnantfromtheashes.wiki.fextralife.com/Quick+Hands,Earth
+6,World Walker,Reduces Stamina cost when sprinting and evading.,https://remnantfromtheashes.wiki.fextralife.com/World+Walker,Rhom
+7,Keeper's Blessing,"Increases resistance to elemental damage, buildup, and STATUS effects.",https://remnantfromtheashes.wiki.fextralife.com/Keeper's+Blessing,Labyrinth
+8,Mother's Blessing,Increases Ranged damage reduction.,https://remnantfromtheashes.wiki.fextralife.com/Mother's+Blessing,Earth
+9,Teamwork,"Increases Mod Power buildup rate, earned Experience when killing enemies, and reduces damage taken when standing near teammates.",https://remnantfromtheashes.wiki.fextralife.com/Teamwork,Any
+10,Warrior,Increases Melee Damage.,https://remnantfromtheashes.wiki.fextralife.com/Warrior,"Earth,Ward 13"
+11,Shadow Walker,Reduces enemy Awareness.,https://remnantfromtheashes.wiki.fextralife.com/Shadow+Walker,"Earth,Ward 13"
+12,Elder Knowledge,Increases earned Experience when killing enemies.,https://remnantfromtheashes.wiki.fextralife.com/Elder+Knowledge,Ward 13
+13,Scavenger,Increases the amount of scrap picked up.,https://remnantfromtheashes.wiki.fextralife.com/Scavenger,"Earth,Ward 13"
+14,Recovery,Increases Stamina Regen rate and reduces Stamina Regen delay.,https://remnantfromtheashes.wiki.fextralife.com/Recovery,Rhom
+15,Handling,Reduces Gun Spread and Recoil.,https://remnantfromtheashes.wiki.fextralife.com/Handling,Any
+16,Glutton,Increases Consumable Use speed.,https://remnantfromtheashes.wiki.fextralife.com/Glutton,Corsus
+17,Catalyst,Increases chance to proc STATUS effects on enemies.,https://remnantfromtheashes.wiki.fextralife.com/Catalyst,Corsus
+18,Executioner,Increases Critical Hit Chance.,https://remnantfromtheashes.wiki.fextralife.com/Executioner,Corsus
+19,Triage,Increases Healing Effectiveness.,https://remnantfromtheashes.wiki.fextralife.com/Triage,Yaesha
+20,Kingslayer,Increases Critical Hit Damage.,https://remnantfromtheashes.wiki.fextralife.com/Kingslayer,Rhom
+21,Will to Live,Increases Health while wounded.,https://remnantfromtheashes.wiki.fextralife.com/Will+to+Live,Any
+22,Arcane Strike,Increases Mod Power gained on Melee hits.,https://remnantfromtheashes.wiki.fextralife.com/Arcane+Strike,Yaesha
+23,Mind's Eye,Increases Ranged Damage.,https://remnantfromtheashes.wiki.fextralife.com/Mind's+Eye,Ward 17
+24,Bark Skin,Increases Armor Effectiveness.,https://remnantfromtheashes.wiki.fextralife.com/Bark+Skin,Earth
+25,Revivalist,Increases Revive Speed.,https://remnantfromtheashes.wiki.fextralife.com/Revivalist,Any
+26,Guardian's Blessing,Melee Damage Reduction +1%,https://remnantfromtheashes.wiki.fextralife.com/Guardians+Blessing,Yaesha
+27,Cold as Ice,Increases damage dealt to enemies when attacking them from behind.,https://remnantfromtheashes.wiki.fextralife.com/Cold+as+Ice,Earth
+28,Trigger Happy,Increases Fire Rate.,https://remnantfromtheashes.wiki.fextralife.com/Trigger+Happy,Ward 13
+29,Rapid Strike,Increases Melee Attack Speed.,https://remnantfromtheashes.wiki.fextralife.com/Rapid+Strike,Ward 13
+30,Suspicion,Reduced Friendly Fire Damage Taken.,https://remnantfromtheashes.wiki.fextralife.com/Suspicion,Any
+31,Swiftness,Increases Movement Speed.,https://remnantfromtheashes.wiki.fextralife.com/Swiftness,Yaesha
+32,Sleight of Hand,Increases Weapon Swap Speed.,https://remnantfromtheashes.wiki.fextralife.com/Sleight+of+Hand,Any
+33,Concentration,Increases weapon mod duration.,https://remnantfromtheashes.wiki.fextralife.com/Concentration,Corsus
+34,Blood Bond,Damage absorbtion.,https://remnantfromtheashes.wiki.fextralife.com/Blood+Bond,Corsus
+35,Footwork,Aim movement speed.,https://remnantfromtheashes.wiki.fextralife.com/Footwork,Corsus
+36,Potency,Increases consumable duration.,https://remnantfromtheashes.wiki.fextralife.com/Potency,Corsus
+37,Fortification,Reduces damage taken while reviving teamates.,https://remnantfromtheashes.wiki.fextralife.com/Fortification,Corsus
+38,Invoker,Increases summons damage.,https://remnantfromtheashes.wiki.fextralife.com/Invoker,Any
+39,Luminescent,Extra lumenite chance.,https://remnantfromtheashes.wiki.fextralife.com/Luminescent,Corsus
+40,Evocation,Mod damage bonus.,https://remnantfromtheashes.wiki.fextralife.com/Evocation,Corsus
