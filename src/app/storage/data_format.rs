@@ -87,7 +87,6 @@ mod tests {
             Entry {
                 completed,
                 data_type,
-                icon: 'x',
                 id,
                 name: "Necklace".into(),
                 url: "https://example.com".into(),
