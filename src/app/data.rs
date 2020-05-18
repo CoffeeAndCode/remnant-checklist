@@ -49,7 +49,7 @@ pub enum DataType {
 }
 
 impl DataType {
-    pub fn url_slug(&self) -> &'static str {
+    pub fn url_slug(self) -> &'static str {
         match self {
             DataType::Amulet => "amulet",
             DataType::ArmorSet => "armor-set",
