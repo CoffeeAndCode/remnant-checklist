@@ -90,6 +90,7 @@ mod tests {
                 id,
                 name: "Necklace".into(),
                 url: "https://example.com".into(),
+                worlds: vec![],
             }
         }
 

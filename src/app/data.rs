@@ -2,15 +2,35 @@ use super::storage::CompletedItem;
 use super::Entry;
 use serde_derive::{Deserialize, Serialize};
 use std::fmt::Display;
+use strum::IntoEnumIterator;
+use strum_macros::EnumIter;
 
-#[derive(Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, EnumIter, PartialEq, Serialize, Deserialize)]
 pub enum World {
+    Any,
     Corsus,
     Earth,
     Labyrinth,
     Rhom,
     Ward13,
+    Ward17,
     Yaesha,
+}
+
+impl World {
+    pub fn from_param(str: &str) -> Result<Self, String> {
+        match str {
+            "any" => Ok(World::Any),
+            "corsus" => Ok(World::Corsus),
+            "earth" => Ok(World::Earth),
+            "labyrinth" => Ok(World::Labyrinth),
+            "rhom" => Ok(World::Rhom),
+            "ward13" => Ok(World::Ward13),
+            "ward17" => Ok(World::Ward17),
+            "yaesha" => Ok(World::Yaesha),
+            _ => Err(format!("unknown world: {}", str)),
+        }
+    }
 }
 
 impl Default for World {
@@ -21,19 +41,21 @@ impl Default for World {
 
 impl Display for World {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let world_str = match self {
-            World::Corsus => "corsus",
-            World::Earth => "earth",
-            World::Labyrinth => "labyrinth",
-            World::Rhom => "rhom",
-            World::Ward13 => "ward13",
-            World::Yaesha => "yaesha",
+        let str = match self {
+            World::Any => "Any World",
+            World::Corsus => "Corsus",
+            World::Earth => "Earth",
+            World::Labyrinth => "Labyrinth",
+            World::Rhom => "Rhom",
+            World::Ward13 => "Ward 13",
+            World::Ward17 => "Ward 17",
+            World::Yaesha => "Yaesha",
         };
-        write!(f, "{}", world_str)
+        write!(f, "{}", str)
     }
 }
 
-#[derive(Copy, Clone, Serialize, Deserialize)]
+#[derive(Clone, Copy, Serialize, Deserialize)]
 pub enum DataType {
     Amulet,
     ArmorSet,
@@ -46,24 +68,6 @@ pub enum DataType {
     MeleeWeapon,
     Ring,
     Trait,
-}
-
-impl DataType {
-    pub fn url_slug(self) -> &'static str {
-        match self {
-            DataType::Amulet => "amulet",
-            DataType::ArmorSet => "armor-set",
-            DataType::BodyArmor => "body-armor",
-            DataType::Emote => "emote",
-            DataType::HandGun => "hand-gun",
-            DataType::HeadArmor => "head-armor",
-            DataType::LegArmor => "leg-armor",
-            DataType::LongGun => "long-gun",
-            DataType::MeleeWeapon => "melee-weapon",
-            DataType::Ring => "ring",
-            DataType::Trait => "trait",
-        }
-    }
 }
 
 impl Display for DataType {
@@ -85,10 +89,11 @@ impl Display for DataType {
     }
 }
 
-trait CsvDataSource<T> {
+pub trait CsvDataSource<T> {
     fn csv_data() -> &'static [u8];
     fn entries() -> Vec<Entry>;
     fn items() -> Vec<T>;
+    fn worlds(&self) -> Vec<World>;
 }
 
 pub trait EntryCompatible {
@@ -97,6 +102,44 @@ pub trait EntryCompatible {
     fn id(&self) -> u32;
     fn name(&self) -> &str;
     fn url(&self) -> &str;
+    fn worlds_str(&self) -> &str;
+}
+
+pub trait UrlParam {
+    fn url_slug(self) -> &'static str;
+}
+
+impl UrlParam for DataType {
+    fn url_slug(self) -> &'static str {
+        match self {
+            DataType::Amulet => "amulet",
+            DataType::ArmorSet => "armor-set",
+            DataType::BodyArmor => "body-armor",
+            DataType::Emote => "emote",
+            DataType::HandGun => "hand-gun",
+            DataType::HeadArmor => "head-armor",
+            DataType::LegArmor => "leg-armor",
+            DataType::LongGun => "long-gun",
+            DataType::MeleeWeapon => "melee-weapon",
+            DataType::Ring => "ring",
+            DataType::Trait => "trait",
+        }
+    }
+}
+
+impl UrlParam for World {
+    fn url_slug(self) -> &'static str {
+        match self {
+            World::Any => "any",
+            World::Corsus => "corsus",
+            World::Earth => "earth",
+            World::Labyrinth => "labyrinth",
+            World::Rhom => "rhom",
+            World::Ward13 => "ward13",
+            World::Ward17 => "ward17",
+            World::Yaesha => "yaesha",
+        }
+    }
 }
 
 #[derive(Debug, Deserialize)]
@@ -115,6 +158,9 @@ struct Amulet {
 
     #[serde(rename = "Url")]
     url: String,
+
+    #[serde(rename = "Worlds")]
+    worlds_str: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -130,6 +176,9 @@ struct ArmorSet {
 
     #[serde(rename = "Url")]
     url: String,
+
+    #[serde(rename = "Worlds")]
+    worlds_str: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -169,6 +218,9 @@ struct BodyArmor {
 
     #[serde(rename = "Url")]
     url: String,
+
+    #[serde(rename = "Worlds")]
+    worlds_str: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -187,6 +239,9 @@ struct Emote {
 
     #[serde(rename = "Url")]
     url: String,
+
+    #[serde(rename = "Worlds")]
+    worlds_str: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -220,6 +275,9 @@ struct HandGun {
 
     #[serde(rename = "Url")]
     url: String,
+
+    #[serde(rename = "Worlds")]
+    worlds_str: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -259,6 +317,9 @@ struct HeadArmor {
 
     #[serde(rename = "Url")]
     url: String,
+
+    #[serde(rename = "Worlds")]
+    worlds_str: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -298,6 +359,9 @@ struct LegArmor {
 
     #[serde(rename = "Url")]
     url: String,
+
+    #[serde(rename = "Worlds")]
+    worlds_str: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -331,6 +395,9 @@ struct LongGun {
 
     #[serde(rename = "Url")]
     url: String,
+
+    #[serde(rename = "Worlds")]
+    worlds_str: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -352,6 +419,9 @@ struct MeleeWeapon {
 
     #[serde(rename = "Url")]
     url: String,
+
+    #[serde(rename = "Worlds")]
+    worlds_str: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -370,6 +440,9 @@ struct Ring {
 
     #[serde(rename = "Url")]
     url: String,
+
+    #[serde(rename = "Worlds")]
+    worlds_str: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -385,6 +458,9 @@ struct Trait {
 
     #[serde(rename = "Url")]
     url: String,
+
+    #[serde(rename = "Worlds")]
+    worlds_str: String,
 }
 
 impl<'de, T> CsvDataSource<T> for T
@@ -411,6 +487,32 @@ where
         items.sort_unstable_by(|a, b| a.name().cmp(&b.name()));
         items
     }
+
+    fn worlds(&self) -> Vec<World> {
+        if self.worlds_str().trim().is_empty() {
+            return vec![World::Any];
+        }
+        if self.worlds_str().trim() == "Any" {
+            return World::iter().collect();
+        }
+
+        let mut worlds: Vec<World> = self
+            .worlds_str()
+            .split(',')
+            .flat_map(|world| match world.trim() {
+                "Corsus" => vec![World::Corsus],
+                "Earth" => vec![World::Earth],
+                "Labyrinth" => vec![World::Labyrinth],
+                "Rhom" => vec![World::Rhom],
+                "Ward 13" => vec![World::Ward13],
+                "Ward 17" => vec![World::Ward17],
+                "Yaesha" => vec![World::Yaesha],
+                _ => panic!("Invalid world found: {}", world),
+            })
+            .collect();
+        worlds.push(World::Any);
+        worlds
+    }
 }
 
 impl EntryCompatible for Amulet {
@@ -432,6 +534,10 @@ impl EntryCompatible for Amulet {
 
     fn url(&self) -> &str {
         &self.url
+    }
+
+    fn worlds_str(&self) -> &str {
+        &self.worlds_str
     }
 }
 
@@ -455,6 +561,10 @@ impl EntryCompatible for ArmorSet {
     fn url(&self) -> &str {
         &self.url
     }
+
+    fn worlds_str(&self) -> &str {
+        &self.worlds_str
+    }
 }
 
 impl EntryCompatible for BodyArmor {
@@ -476,6 +586,10 @@ impl EntryCompatible for BodyArmor {
 
     fn url(&self) -> &str {
         &self.url
+    }
+
+    fn worlds_str(&self) -> &str {
+        &self.worlds_str
     }
 }
 
@@ -499,6 +613,10 @@ impl EntryCompatible for Emote {
     fn url(&self) -> &str {
         &self.url
     }
+
+    fn worlds_str(&self) -> &str {
+        &self.worlds_str
+    }
 }
 
 impl EntryCompatible for HandGun {
@@ -520,6 +638,10 @@ impl EntryCompatible for HandGun {
 
     fn url(&self) -> &str {
         &self.url
+    }
+
+    fn worlds_str(&self) -> &str {
+        &self.worlds_str
     }
 }
 
@@ -543,6 +665,10 @@ impl EntryCompatible for HeadArmor {
     fn url(&self) -> &str {
         &self.url
     }
+
+    fn worlds_str(&self) -> &str {
+        &self.worlds_str
+    }
 }
 
 impl EntryCompatible for LegArmor {
@@ -564,6 +690,10 @@ impl EntryCompatible for LegArmor {
 
     fn url(&self) -> &str {
         &self.url
+    }
+
+    fn worlds_str(&self) -> &str {
+        &self.worlds_str
     }
 }
 
@@ -587,6 +717,10 @@ impl EntryCompatible for LongGun {
     fn url(&self) -> &str {
         &self.url
     }
+
+    fn worlds_str(&self) -> &str {
+        &self.worlds_str
+    }
 }
 
 impl EntryCompatible for MeleeWeapon {
@@ -608,6 +742,10 @@ impl EntryCompatible for MeleeWeapon {
 
     fn url(&self) -> &str {
         &self.url
+    }
+
+    fn worlds_str(&self) -> &str {
+        &self.worlds_str
     }
 }
 
@@ -631,6 +769,10 @@ impl EntryCompatible for Ring {
     fn url(&self) -> &str {
         &self.url
     }
+
+    fn worlds_str(&self) -> &str {
+        &self.worlds_str
+    }
 }
 
 impl EntryCompatible for Trait {
@@ -653,9 +795,13 @@ impl EntryCompatible for Trait {
     fn url(&self) -> &str {
         &self.url
     }
+
+    fn worlds_str(&self) -> &str {
+        &self.worlds_str
+    }
 }
 
-impl<T: EntryCompatible> From<T> for Entry {
+impl<T: CsvDataSource<T> + EntryCompatible> From<T> for Entry {
     fn from(item: T) -> Self {
         Entry {
             completed: false,
@@ -663,6 +809,7 @@ impl<T: EntryCompatible> From<T> for Entry {
             id: item.id(),
             name: String::from(item.name()),
             url: String::from(item.url()),
+            worlds: item.worlds(),
         }
     }
 }
@@ -1064,5 +1211,62 @@ mod tests {
         assert_eq!("Arcane Strike", traits[0].name);
         assert_eq!("Bark Skin", traits[1].name);
         assert_eq!("World Walker", traits[NUMBER_OF_TRAITS - 1].name);
+    }
+
+    #[test]
+    fn worlds_str_is_converted_to_a_vec_of_worlds() {
+        let amulet = Amulet {
+            description: None,
+            id: 1,
+            location: None,
+            name: String::from("example"),
+            url: String::from("www.example.com"),
+            worlds_str: String::from("Ward 17,Earth"),
+        };
+
+        assert_eq!(
+            vec![World::Ward17, World::Earth, World::Any],
+            amulet.worlds()
+        );
+    }
+
+    #[test]
+    #[should_panic(expected = "Invalid world found: Invalid")]
+    fn invalid_worlds_str_panics() {
+        let amulet = Amulet {
+            description: None,
+            id: 1,
+            location: None,
+            name: String::from("example"),
+            url: String::from("www.example.com"),
+            worlds_str: String::from("Earth,Invalid"),
+        };
+        amulet.worlds();
+    }
+
+    #[test]
+    fn any_worlds_str_is_converted_to_a_vec_of_all_worlds() {
+        let amulet = Amulet {
+            description: None,
+            id: 1,
+            location: None,
+            name: String::from("example"),
+            url: String::from("www.example.com"),
+            worlds_str: String::from("Any"),
+        };
+
+        assert_eq!(
+            vec![
+                World::Any,
+                World::Corsus,
+                World::Earth,
+                World::Labyrinth,
+                World::Rhom,
+                World::Ward13,
+                World::Ward17,
+                World::Yaesha,
+            ],
+            amulet.worlds()
+        );
     }
 }
