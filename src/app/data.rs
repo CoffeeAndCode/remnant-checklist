@@ -17,9 +17,41 @@ pub enum World {
     Yaesha,
 }
 
+impl World {
+    pub fn from_param(str: &str) -> Result<Self, String> {
+        match str {
+            "any" => Ok(World::Any),
+            "corsus" => Ok(World::Corsus),
+            "earth" => Ok(World::Earth),
+            "labyrinth" => Ok(World::Labyrinth),
+            "rhom" => Ok(World::Rhom),
+            "ward13" => Ok(World::Ward13),
+            "ward17" => Ok(World::Ward17),
+            "yaesha" => Ok(World::Yaesha),
+            _ => Err(format!("unknown world: {}", str)),
+        }
+    }
+}
+
 impl Default for World {
     fn default() -> World {
         World::Ward13
+    }
+}
+
+impl Display for World {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let str = match self {
+            World::Any => "Any World",
+            World::Corsus => "Corsus",
+            World::Earth => "Earth",
+            World::Labyrinth => "Labyrinth",
+            World::Rhom => "Rhom",
+            World::Ward13 => "Ward 13",
+            World::Ward17 => "Ward 17",
+            World::Yaesha => "Yaesha",
+        };
+        write!(f, "{}", str)
     }
 }
 

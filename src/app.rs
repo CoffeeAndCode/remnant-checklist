@@ -52,6 +52,7 @@ pub enum Msg {
     Toggle(String),
     TrackGoal(Goal),
     UpdateSearch(String),
+    UpdateWorld(World),
 }
 
 #[wasm_bindgen(module = "/src/js/share.js")]
@@ -131,6 +132,10 @@ impl Component for App {
                 self.state.search = value;
                 true
             }
+            Msg::UpdateWorld(world) => {
+                self.state.world = world;
+                true
+            }
         }
     }
 
@@ -140,13 +145,24 @@ impl Component for App {
                 <section class="todoapp">
                     <header class="header">
                         <h1 class="logo-container"><img alt="Remnant logo" class="img-fluid logo" src="/images/remnant-logo.png" /></h1>
-                        <input
-                            class="input-search"
-                            placeholder="Search..."
-                            oninput=self.link.callback(|e: InputData| Msg::UpdateSearch(e.value))
-                            type="text"
-                            value=""
-                        />
+                        <div class="filter-fields">
+                            <input
+                                class="input-search"
+                                placeholder="Search..."
+                                oninput=self.link.callback(|e: InputData| Msg::UpdateSearch(e.value))
+                                type="text"
+                                value=""
+                            />
+                            <select class="input-world-select" onchange=self.link.callback(move |e| {
+                                if let ChangeData::Select(element) = e {
+                                    Msg::UpdateWorld(World::from_param(&element.value()).unwrap())
+                                } else {
+                                    unreachable!()
+                                }
+                            })>
+                                { for World::iter().map(|world| self.view_world(world)) }
+                            </select>
+                        </div>
                     </header>
                     <section class="main">
                         <ul class="todo-list">
@@ -226,6 +242,12 @@ impl App {
             </li>
         }
     }
+
+    fn view_world(&self, world: World) -> Html {
+        html! {
+            <option selected={self.state.world == world} value=world.url_slug()>{ world }</option>
+        }
+    }
 }
 
 #[derive(EnumIter, ToString, Clone, PartialEq, Serialize, Deserialize)]
@@ -233,7 +255,6 @@ pub enum Filter {
     All,
     Active,
     Completed,
-    World(data::World),
 }
 
 impl<'a> Into<Href> for &'a Filter {
@@ -242,7 +263,6 @@ impl<'a> Into<Href> for &'a Filter {
             Filter::All => "#/".into(),
             Filter::Active => "#/active".into(),
             Filter::Completed => "#/completed".into(),
-            Filter::World(world) => format!("#/world/{}", world.url_slug()).into(),
         }
     }
 }
@@ -253,7 +273,6 @@ impl Filter {
             Filter::All => true,
             Filter::Active => !entry.completed,
             Filter::Completed => entry.completed,
-            Filter::World(_) => true,
         }
     }
 }
