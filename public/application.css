@@ -72,12 +72,12 @@ body {
 .input-world-select {
   border: 1px solid var(--color-faded);
   box-sizing: border-box;
-  font-size: 20px;
+  font-size: 14px;
   font-style: italic;
   font-weight: 300;
   line-height: 1;
   opacity: 0.4;
-  padding: 10px 15px;
+  padding: 8px 9px;
   transition: border-color 0.5s, opacity 0.5s;
   width: 100%;
 }
@@ -191,6 +191,12 @@ body {
 }
 
 @media (min-height: 800px) {
+  .input-search,
+  .input-world-select {
+    font-size: 20px;
+    padding: 10px 15px;
+  }
+
   .logo {
     max-height: 200px;
   }
