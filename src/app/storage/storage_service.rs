@@ -31,6 +31,7 @@ impl StorageService {
         entries.append(&mut data::hand_gun_entries(&data.completed_items));
         entries.append(&mut data::long_gun_entries(&data.completed_items));
         entries.append(&mut data::melee_weapon_entries(&data.completed_items));
+        entries.append(&mut data::mod_entries(&data.completed_items));
         entries
     }
 

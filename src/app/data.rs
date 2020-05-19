@@ -66,6 +66,7 @@ pub enum DataType {
     LegArmor,
     LongGun,
     MeleeWeapon,
+    Mod,
     Ring,
     Trait,
 }
@@ -82,6 +83,7 @@ impl Display for DataType {
             DataType::LegArmor => "Leg Armor",
             DataType::LongGun => "Long Gun",
             DataType::MeleeWeapon => "Melee Weapon",
+            DataType::Mod => "Mod",
             DataType::Ring => "Ring",
             DataType::Trait => "Trait",
         };
@@ -121,6 +123,7 @@ impl UrlParam for DataType {
             DataType::LegArmor => "leg-armor",
             DataType::LongGun => "long-gun",
             DataType::MeleeWeapon => "melee-weapon",
+            DataType::Mod => "mod",
             DataType::Ring => "ring",
             DataType::Trait => "trait",
         }
@@ -416,6 +419,21 @@ struct MeleeWeapon {
 
     #[serde(rename = "Weapon Mod")]
     weapon_mod: Option<String>,
+
+    #[serde(rename = "Url")]
+    url: String,
+
+    #[serde(rename = "Worlds")]
+    worlds_str: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct Mod {
+    #[serde(rename = "ID")]
+    id: u32,
+
+    #[serde(rename = "Name")]
+    name: String,
 
     #[serde(rename = "Url")]
     url: String,
@@ -749,6 +767,32 @@ impl EntryCompatible for MeleeWeapon {
     }
 }
 
+impl EntryCompatible for Mod {
+    fn csv_data() -> &'static [u8] {
+        include_bytes!("../data/mods.csv")
+    }
+
+    fn data_type() -> DataType {
+        DataType::Mod
+    }
+
+    fn id(&self) -> u32 {
+        self.id
+    }
+
+    fn name(&self) -> &str {
+        &self.name
+    }
+
+    fn url(&self) -> &str {
+        &self.url
+    }
+
+    fn worlds_str(&self) -> &str {
+        &self.worlds_str
+    }
+}
+
 impl EntryCompatible for Ring {
     fn csv_data() -> &'static [u8] {
         include_bytes!("../data/rings.csv")
@@ -944,6 +988,21 @@ pub fn melee_weapon_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     entries
 }
 
+pub fn mod_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
+    let mut entries = Mod::entries();
+
+    #[allow(clippy::block_in_if_condition_stmt)]
+    for entry in &mut entries {
+        if defaults
+            .iter()
+            .any(|default| default.id == entry.id && matches!(default.data_type, DataType::Mod))
+        {
+            entry.completed = true;
+        }
+    }
+    entries
+}
+
 pub fn remnant_trait_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     let mut entries = Trait::entries();
 
@@ -987,6 +1046,7 @@ mod tests {
     const NUMBER_OF_LEG_ARMOR: usize = 17;
     const NUMBER_OF_LONG_GUNS: usize = 15;
     const NUMBER_OF_MELEE_WEAPONS: usize = 17;
+    const NUMBER_OF_MODS: usize = 33;
     const NUMBER_OF_RINGS: usize = 47;
     const NUMBER_OF_TRAITS: usize = 40;
 
@@ -1171,6 +1231,26 @@ mod tests {
             "World Breaker",
             melee_weapons[NUMBER_OF_MELEE_WEAPONS - 1].name
         );
+    }
+
+    #[test]
+    fn all_mods_found() {
+        assert_eq!(NUMBER_OF_MODS, Mod::items().len());
+    }
+
+    #[test]
+    fn all_mod_ids_unique() {
+        let mut mods = Mod::items();
+        mods.dedup_by_key(|x| x.id);
+        assert_eq!(NUMBER_OF_MODS, mods.len());
+    }
+
+    #[test]
+    fn mods_are_sorted_alphabetically() {
+        let mods = Mod::items();
+        assert_eq!("Banish", mods[0].name);
+        assert_eq!("Beckon", mods[1].name);
+        assert_eq!("Wildfire Shot", mods[NUMBER_OF_MODS - 1].name);
     }
 
     #[test]
