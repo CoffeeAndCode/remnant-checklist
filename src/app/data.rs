@@ -2,6 +2,7 @@ use super::storage::CompletedItem;
 use super::Entry;
 use serde_derive::{Deserialize, Serialize};
 use std::fmt::Display;
+use std::str::FromStr;
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
 
@@ -517,19 +518,29 @@ where
         let mut worlds: Vec<World> = self
             .worlds_str()
             .split(',')
-            .flat_map(|world| match world.trim() {
-                "Corsus" => vec![World::Corsus],
-                "Earth" => vec![World::Earth],
-                "Labyrinth" => vec![World::Labyrinth],
-                "Rhom" => vec![World::Rhom],
-                "Ward 13" => vec![World::Ward13],
-                "Ward 17" => vec![World::Ward17],
-                "Yaesha" => vec![World::Yaesha],
-                _ => panic!("Invalid world found: {}", world),
-            })
+            .map(|world| world.trim())
+            .map(World::from_str)
+            .filter_map(|world| world.ok())
             .collect();
         worlds.push(World::Any);
         worlds
+    }
+}
+
+impl FromStr for World {
+    type Err = String;
+
+    fn from_str(value: &str) -> Result<Self, Self::Err> {
+        match value {
+            "Corsus" => Ok(World::Corsus),
+            "Earth" => Ok(World::Earth),
+            "Labyrinth" => Ok(World::Labyrinth),
+            "Rhom" => Ok(World::Rhom),
+            "Ward 13" => Ok(World::Ward13),
+            "Ward 17" => Ok(World::Ward17),
+            "Yaesha" => Ok(World::Yaesha),
+            _ => Err(format!("Invalid world found: {}", value)),
+        }
     }
 }
 
@@ -1311,17 +1322,17 @@ mod tests {
     }
 
     #[test]
-    #[should_panic(expected = "Invalid world found: Invalid")]
-    fn invalid_worlds_str_panics() {
+    fn worlds_str_ignores_invalid_input() {
         let amulet = Amulet {
             description: None,
             id: 1,
             location: None,
             name: String::from("example"),
             url: String::from("www.example.com"),
-            worlds_str: String::from("Earth,Invalid"),
+            worlds_str: String::from("Nope,Earth,Invalid"),
         };
-        amulet.worlds();
+
+        assert_eq!(vec![World::Earth, World::Any], amulet.worlds());
     }
 
     #[test]
