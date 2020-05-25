@@ -6,7 +6,7 @@ use std::str::FromStr;
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
 
-#[derive(Clone, Copy, Debug, EnumIter, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Deserialize, EnumIter, PartialEq, Serialize)]
 pub enum World {
     Any,
     Corsus,
@@ -56,7 +56,7 @@ impl Display for World {
     }
 }
 
-#[derive(Clone, Copy, Serialize, Deserialize)]
+#[derive(Clone, Copy, Deserialize, Serialize)]
 pub enum ItemType {
     Amulet,
     ArmorSet,

@@ -15,7 +15,7 @@ pub struct App {
     state: State,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Deserialize, Serialize)]
 pub struct State {
     entries: Vec<Entry>,
     filter: Filter,
@@ -23,7 +23,7 @@ pub struct State {
     world: World,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Deserialize, Serialize)]
 pub struct Entry {
     completed: bool,
     data_type: data::ItemType,
@@ -250,7 +250,7 @@ impl App {
     }
 }
 
-#[derive(EnumIter, ToString, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Deserialize, EnumIter, ToString, Clone, PartialEq, Serialize)]
 pub enum Filter {
     All,
     Active,
