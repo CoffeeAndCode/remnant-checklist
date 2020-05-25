@@ -26,7 +26,7 @@ pub struct State {
 #[derive(Serialize, Deserialize)]
 pub struct Entry {
     completed: bool,
-    data_type: data::DataType,
+    data_type: data::ItemType,
     id: u32,
     name: String,
     url: String,
@@ -92,7 +92,7 @@ impl Component for App {
             search: "".into(),
             world: World::Any,
         };
-        App {
+        Self {
             link,
             storage,
             state,
@@ -110,7 +110,7 @@ impl Component for App {
                 false
             }
             Msg::Toggle(id) => {
-                let goal = if self.state.toggle(id) {
+                let goal = if self.state.toggle(&id) {
                     Goal::MarkItemAsComplete
                 } else {
                     Goal::MarkItemAsIncomplete
@@ -270,9 +270,9 @@ impl<'a> Into<Href> for &'a Filter {
 impl Filter {
     fn fit(&self, entry: &Entry) -> bool {
         match *self {
-            Filter::All => true,
-            Filter::Active => !entry.completed,
-            Filter::Completed => entry.completed,
+            Self::All => true,
+            Self::Active => !entry.completed,
+            Self::Completed => entry.completed,
         }
     }
 }
@@ -285,7 +285,7 @@ impl State {
             .sum()
     }
 
-    fn toggle(&mut self, id: String) -> bool {
+    fn toggle(&mut self, id: &str) -> bool {
         let mut entry = self.entries.iter_mut().find(|x| x.id() == id).unwrap();
         entry.completed = !entry.completed;
         entry.completed

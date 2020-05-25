@@ -1,4 +1,5 @@
-#![deny(clippy::all)]
+#![deny(clippy::all, clippy::cargo, clippy::nursery, clippy::pedantic)]
+#![allow(clippy::non_ascii_literal)]
 #![recursion_limit = "512"]
 
 mod app;
@@ -11,6 +12,9 @@ use wasm_bindgen::prelude::*;
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
+/// # Errors
+///
+/// Will return `JsValue` if dom selector is unavailable.
 #[wasm_bindgen]
 pub fn start() -> Result<(), JsValue> {
     yew::initialize();

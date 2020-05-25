@@ -6,6 +6,7 @@ authors = ["Jonathan Knapp <jon@coffeeandcode.com>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
 readme = "README.md"
+categories = ['wasm', 'webapp']
 repository = "https://github.com/CoffeeAndCode/remnant-checklist"
 documentation = "https://github.com/CoffeeAndCode/remnant-checklist"
 homepage = "https://github.com/CoffeeAndCode/remnant-checklist"

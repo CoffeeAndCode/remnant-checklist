@@ -13,7 +13,7 @@ pub struct StorageService {
 impl StorageService {
     pub fn new() -> Result<Self, &'static str> {
         YewStorageService::new(Area::Local)
-            .map(|storage_service| StorageService { storage_service })
+            .map(|storage_service| Self { storage_service })
             .map_err(|error| error)
     }
 

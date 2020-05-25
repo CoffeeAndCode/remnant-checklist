@@ -21,43 +21,43 @@ pub enum World {
 impl World {
     pub fn from_param(str: &str) -> Result<Self, String> {
         match str {
-            "any" => Ok(World::Any),
-            "corsus" => Ok(World::Corsus),
-            "earth" => Ok(World::Earth),
-            "labyrinth" => Ok(World::Labyrinth),
-            "rhom" => Ok(World::Rhom),
-            "ward13" => Ok(World::Ward13),
-            "ward17" => Ok(World::Ward17),
-            "yaesha" => Ok(World::Yaesha),
+            "any" => Ok(Self::Any),
+            "corsus" => Ok(Self::Corsus),
+            "earth" => Ok(Self::Earth),
+            "labyrinth" => Ok(Self::Labyrinth),
+            "rhom" => Ok(Self::Rhom),
+            "ward13" => Ok(Self::Ward13),
+            "ward17" => Ok(Self::Ward17),
+            "yaesha" => Ok(Self::Yaesha),
             _ => Err(format!("unknown world: {}", str)),
         }
     }
 }
 
 impl Default for World {
-    fn default() -> World {
-        World::Ward13
+    fn default() -> Self {
+        Self::Ward13
     }
 }
 
 impl Display for World {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let str = match self {
-            World::Any => "Any World",
-            World::Corsus => "Corsus",
-            World::Earth => "Earth",
-            World::Labyrinth => "Labyrinth",
-            World::Rhom => "Rhom",
-            World::Ward13 => "Ward 13",
-            World::Ward17 => "Ward 17",
-            World::Yaesha => "Yaesha",
+            Self::Any => "Any World",
+            Self::Corsus => "Corsus",
+            Self::Earth => "Earth",
+            Self::Labyrinth => "Labyrinth",
+            Self::Rhom => "Rhom",
+            Self::Ward13 => "Ward 13",
+            Self::Ward17 => "Ward 17",
+            Self::Yaesha => "Yaesha",
         };
         write!(f, "{}", str)
     }
 }
 
 #[derive(Clone, Copy, Serialize, Deserialize)]
-pub enum DataType {
+pub enum ItemType {
     Amulet,
     ArmorSet,
     BodyArmor,
@@ -72,21 +72,21 @@ pub enum DataType {
     Trait,
 }
 
-impl Display for DataType {
+impl Display for ItemType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let str = match self {
-            DataType::Amulet => "Amulet",
-            DataType::ArmorSet => "Armor Set",
-            DataType::BodyArmor => "Body Armor",
-            DataType::Emote => "Emote",
-            DataType::HandGun => "Hand Gun",
-            DataType::HeadArmor => "Head Armor",
-            DataType::LegArmor => "Leg Armor",
-            DataType::LongGun => "Long Gun",
-            DataType::MeleeWeapon => "Melee Weapon",
-            DataType::Mod => "Mod",
-            DataType::Ring => "Ring",
-            DataType::Trait => "Trait",
+            Self::Amulet => "Amulet",
+            Self::ArmorSet => "Armor Set",
+            Self::BodyArmor => "Body Armor",
+            Self::Emote => "Emote",
+            Self::HandGun => "Hand Gun",
+            Self::HeadArmor => "Head Armor",
+            Self::LegArmor => "Leg Armor",
+            Self::LongGun => "Long Gun",
+            Self::MeleeWeapon => "Melee Weapon",
+            Self::Mod => "Mod",
+            Self::Ring => "Ring",
+            Self::Trait => "Trait",
         };
         write!(f, "{}", str)
     }
@@ -101,7 +101,7 @@ pub trait CsvDataSource<T> {
 
 pub trait EntryCompatible {
     fn csv_data() -> &'static [u8];
-    fn data_type() -> DataType;
+    fn data_type() -> ItemType;
     fn id(&self) -> u32;
     fn name(&self) -> &str;
     fn url(&self) -> &str;
@@ -112,21 +112,21 @@ pub trait UrlParam {
     fn url_slug(self) -> &'static str;
 }
 
-impl UrlParam for DataType {
+impl UrlParam for ItemType {
     fn url_slug(self) -> &'static str {
         match self {
-            DataType::Amulet => "amulet",
-            DataType::ArmorSet => "armor-set",
-            DataType::BodyArmor => "body-armor",
-            DataType::Emote => "emote",
-            DataType::HandGun => "hand-gun",
-            DataType::HeadArmor => "head-armor",
-            DataType::LegArmor => "leg-armor",
-            DataType::LongGun => "long-gun",
-            DataType::MeleeWeapon => "melee-weapon",
-            DataType::Mod => "mod",
-            DataType::Ring => "ring",
-            DataType::Trait => "trait",
+            Self::Amulet => "amulet",
+            Self::ArmorSet => "armor-set",
+            Self::BodyArmor => "body-armor",
+            Self::Emote => "emote",
+            Self::HandGun => "hand-gun",
+            Self::HeadArmor => "head-armor",
+            Self::LegArmor => "leg-armor",
+            Self::LongGun => "long-gun",
+            Self::MeleeWeapon => "melee-weapon",
+            Self::Mod => "mod",
+            Self::Ring => "ring",
+            Self::Trait => "trait",
         }
     }
 }
@@ -134,14 +134,14 @@ impl UrlParam for DataType {
 impl UrlParam for World {
     fn url_slug(self) -> &'static str {
         match self {
-            World::Any => "any",
-            World::Corsus => "corsus",
-            World::Earth => "earth",
-            World::Labyrinth => "labyrinth",
-            World::Rhom => "rhom",
-            World::Ward13 => "ward13",
-            World::Ward17 => "ward17",
-            World::Yaesha => "yaesha",
+            Self::Any => "any",
+            Self::Corsus => "corsus",
+            Self::Earth => "earth",
+            Self::Labyrinth => "labyrinth",
+            Self::Rhom => "rhom",
+            Self::Ward13 => "ward13",
+            Self::Ward17 => "ward17",
+            Self::Yaesha => "yaesha",
         }
     }
 }
@@ -487,23 +487,20 @@ where
     T: EntryCompatible + serde::de::DeserializeOwned,
 {
     fn csv_data() -> &'static [u8] {
-        T::csv_data()
+        Self::csv_data()
     }
 
     fn entries() -> Vec<Entry> {
-        <T as CsvDataSource<T>>::items()
+        <Self as CsvDataSource<Self>>::items()
             .into_iter()
             .map(Entry::from)
             .collect()
     }
 
     fn items() -> Vec<T> {
-        let mut rdr = csv::Reader::from_reader(<T as CsvDataSource<T>>::csv_data());
-        let mut items: Vec<T> = rdr
-            .deserialize()
-            .filter_map(|t: Result<T, _>| t.ok())
-            .collect();
-        items.sort_unstable_by(|a, b| a.name().cmp(&b.name()));
+        let mut rdr = csv::Reader::from_reader(<Self as CsvDataSource<Self>>::csv_data());
+        let mut items: Vec<Self> = rdr.deserialize().filter_map(Result::ok).collect();
+        items.sort_unstable_by(|a, b| a.name().cmp(b.name()));
         items
     }
 
@@ -518,9 +515,9 @@ where
         let mut worlds: Vec<World> = self
             .worlds_str()
             .split(',')
-            .map(|world| world.trim())
+            .map(str::trim)
             .map(World::from_str)
-            .filter_map(|world| world.ok())
+            .filter_map(Result::ok)
             .collect();
         worlds.push(World::Any);
         worlds
@@ -532,13 +529,13 @@ impl FromStr for World {
 
     fn from_str(value: &str) -> Result<Self, Self::Err> {
         match value {
-            "Corsus" => Ok(World::Corsus),
-            "Earth" => Ok(World::Earth),
-            "Labyrinth" => Ok(World::Labyrinth),
-            "Rhom" => Ok(World::Rhom),
-            "Ward 13" => Ok(World::Ward13),
-            "Ward 17" => Ok(World::Ward17),
-            "Yaesha" => Ok(World::Yaesha),
+            "Corsus" => Ok(Self::Corsus),
+            "Earth" => Ok(Self::Earth),
+            "Labyrinth" => Ok(Self::Labyrinth),
+            "Rhom" => Ok(Self::Rhom),
+            "Ward 13" => Ok(Self::Ward13),
+            "Ward 17" => Ok(Self::Ward17),
+            "Yaesha" => Ok(Self::Yaesha),
             _ => Err(format!("Invalid world found: {}", value)),
         }
     }
@@ -549,8 +546,8 @@ impl EntryCompatible for Amulet {
         include_bytes!("../data/amulets.csv")
     }
 
-    fn data_type() -> DataType {
-        DataType::Amulet
+    fn data_type() -> ItemType {
+        ItemType::Amulet
     }
 
     fn id(&self) -> u32 {
@@ -575,8 +572,8 @@ impl EntryCompatible for ArmorSet {
         include_bytes!("../data/armor_sets.csv")
     }
 
-    fn data_type() -> DataType {
-        DataType::ArmorSet
+    fn data_type() -> ItemType {
+        ItemType::ArmorSet
     }
 
     fn id(&self) -> u32 {
@@ -601,8 +598,8 @@ impl EntryCompatible for BodyArmor {
         include_bytes!("../data/body_armor.csv")
     }
 
-    fn data_type() -> DataType {
-        DataType::BodyArmor
+    fn data_type() -> ItemType {
+        ItemType::BodyArmor
     }
 
     fn id(&self) -> u32 {
@@ -627,8 +624,8 @@ impl EntryCompatible for Emote {
         include_bytes!("../data/emotes.csv")
     }
 
-    fn data_type() -> DataType {
-        DataType::Emote
+    fn data_type() -> ItemType {
+        ItemType::Emote
     }
 
     fn id(&self) -> u32 {
@@ -653,8 +650,8 @@ impl EntryCompatible for HandGun {
         include_bytes!("../data/hand_guns.csv")
     }
 
-    fn data_type() -> DataType {
-        DataType::HandGun
+    fn data_type() -> ItemType {
+        ItemType::HandGun
     }
 
     fn id(&self) -> u32 {
@@ -679,8 +676,8 @@ impl EntryCompatible for HeadArmor {
         include_bytes!("../data/head_armor.csv")
     }
 
-    fn data_type() -> DataType {
-        DataType::HeadArmor
+    fn data_type() -> ItemType {
+        ItemType::HeadArmor
     }
 
     fn id(&self) -> u32 {
@@ -705,8 +702,8 @@ impl EntryCompatible for LegArmor {
         include_bytes!("../data/leg_armor.csv")
     }
 
-    fn data_type() -> DataType {
-        DataType::LegArmor
+    fn data_type() -> ItemType {
+        ItemType::LegArmor
     }
 
     fn id(&self) -> u32 {
@@ -731,8 +728,8 @@ impl EntryCompatible for LongGun {
         include_bytes!("../data/long_guns.csv")
     }
 
-    fn data_type() -> DataType {
-        DataType::LongGun
+    fn data_type() -> ItemType {
+        ItemType::LongGun
     }
 
     fn id(&self) -> u32 {
@@ -757,8 +754,8 @@ impl EntryCompatible for MeleeWeapon {
         include_bytes!("../data/melee_weapons.csv")
     }
 
-    fn data_type() -> DataType {
-        DataType::MeleeWeapon
+    fn data_type() -> ItemType {
+        ItemType::MeleeWeapon
     }
 
     fn id(&self) -> u32 {
@@ -783,8 +780,8 @@ impl EntryCompatible for Mod {
         include_bytes!("../data/mods.csv")
     }
 
-    fn data_type() -> DataType {
-        DataType::Mod
+    fn data_type() -> ItemType {
+        ItemType::Mod
     }
 
     fn id(&self) -> u32 {
@@ -809,8 +806,8 @@ impl EntryCompatible for Ring {
         include_bytes!("../data/rings.csv")
     }
 
-    fn data_type() -> DataType {
-        DataType::Ring
+    fn data_type() -> ItemType {
+        ItemType::Ring
     }
 
     fn id(&self) -> u32 {
@@ -835,8 +832,8 @@ impl EntryCompatible for Trait {
         include_bytes!("../data/traits.csv")
     }
 
-    fn data_type() -> DataType {
-        DataType::Trait
+    fn data_type() -> ItemType {
+        ItemType::Trait
     }
 
     fn id(&self) -> u32 {
@@ -858,7 +855,7 @@ impl EntryCompatible for Trait {
 
 impl<T: CsvDataSource<T> + EntryCompatible> From<T> for Entry {
     fn from(item: T) -> Self {
-        Entry {
+        Self {
             completed: false,
             data_type: T::data_type(),
             id: item.id(),
@@ -876,7 +873,7 @@ pub fn amulet_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     for entry in &mut entries {
         if defaults
             .iter()
-            .any(|default| default.id == entry.id && matches!(default.data_type, DataType::Amulet))
+            .any(|default| default.id == entry.id && matches!(default.data_type, ItemType::Amulet))
         {
             entry.completed = true;
         }
@@ -890,7 +887,7 @@ pub fn armor_set_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults.iter().any(|default| {
-            default.id == entry.id && matches!(default.data_type, DataType::ArmorSet)
+            default.id == entry.id && matches!(default.data_type, ItemType::ArmorSet)
         }) {
             entry.completed = true;
         }
@@ -904,7 +901,7 @@ pub fn body_armor_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults.iter().any(|default| {
-            default.id == entry.id && matches!(default.data_type, DataType::BodyArmor)
+            default.id == entry.id && matches!(default.data_type, ItemType::BodyArmor)
         }) {
             entry.completed = true;
         }
@@ -919,7 +916,7 @@ pub fn emote_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     for entry in &mut entries {
         if defaults
             .iter()
-            .any(|default| default.id == entry.id && matches!(default.data_type, DataType::Emote))
+            .any(|default| default.id == entry.id && matches!(default.data_type, ItemType::Emote))
         {
             entry.completed = true;
         }
@@ -934,7 +931,7 @@ pub fn hand_gun_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     for entry in &mut entries {
         if defaults
             .iter()
-            .any(|default| default.id == entry.id && matches!(default.data_type, DataType::HandGun))
+            .any(|default| default.id == entry.id && matches!(default.data_type, ItemType::HandGun))
         {
             entry.completed = true;
         }
@@ -948,7 +945,7 @@ pub fn head_armor_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults.iter().any(|default| {
-            default.id == entry.id && matches!(default.data_type, DataType::HeadArmor)
+            default.id == entry.id && matches!(default.data_type, ItemType::HeadArmor)
         }) {
             entry.completed = true;
         }
@@ -962,7 +959,7 @@ pub fn leg_armor_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults.iter().any(|default| {
-            default.id == entry.id && matches!(default.data_type, DataType::LegArmor)
+            default.id == entry.id && matches!(default.data_type, ItemType::LegArmor)
         }) {
             entry.completed = true;
         }
@@ -977,7 +974,7 @@ pub fn long_gun_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     for entry in &mut entries {
         if defaults
             .iter()
-            .any(|default| default.id == entry.id && matches!(default.data_type, DataType::LongGun))
+            .any(|default| default.id == entry.id && matches!(default.data_type, ItemType::LongGun))
         {
             entry.completed = true;
         }
@@ -991,7 +988,7 @@ pub fn melee_weapon_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     #[allow(clippy::block_in_if_condition_stmt)]
     for entry in &mut entries {
         if defaults.iter().any(|default| {
-            default.id == entry.id && matches!(default.data_type, DataType::MeleeWeapon)
+            default.id == entry.id && matches!(default.data_type, ItemType::MeleeWeapon)
         }) {
             entry.completed = true;
         }
@@ -1006,7 +1003,7 @@ pub fn mod_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     for entry in &mut entries {
         if defaults
             .iter()
-            .any(|default| default.id == entry.id && matches!(default.data_type, DataType::Mod))
+            .any(|default| default.id == entry.id && matches!(default.data_type, ItemType::Mod))
         {
             entry.completed = true;
         }
@@ -1021,7 +1018,7 @@ pub fn remnant_trait_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     for entry in &mut entries {
         if defaults
             .iter()
-            .any(|default| default.id == entry.id && matches!(default.data_type, DataType::Trait))
+            .any(|default| default.id == entry.id && matches!(default.data_type, ItemType::Trait))
         {
             entry.completed = true;
         }
@@ -1036,7 +1033,7 @@ pub fn ring_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
     for entry in &mut entries {
         if defaults
             .iter()
-            .any(|default| default.id == entry.id && matches!(default.data_type, DataType::Ring))
+            .any(|default| default.id == entry.id && matches!(default.data_type, ItemType::Ring))
         {
             entry.completed = true;
         }
@@ -1045,6 +1042,7 @@ pub fn ring_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
 }
 
 #[cfg(test)]
+#[allow(clippy::wildcard_imports)]
 mod tests {
     use super::*;
 
