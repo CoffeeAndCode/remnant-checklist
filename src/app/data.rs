@@ -6,7 +6,7 @@ use std::str::FromStr;
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
 
-#[derive(Clone, Copy, Debug, Deserialize, EnumIter, PartialEq, Serialize)]
+#[derive(Clone, Debug, EnumIter, PartialEq)]
 pub enum World {
     Any,
     Corsus,
@@ -56,7 +56,7 @@ impl Display for World {
     }
 }
 
-#[derive(Clone, Copy, Deserialize, Serialize)]
+#[derive(Clone, Deserialize, Serialize)]
 pub enum ItemType {
     Amulet,
     ArmorSet,
@@ -146,16 +146,16 @@ impl UrlParam for World {
     }
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 struct Amulet {
     #[serde(rename = "Description")]
-    description: Option<String>,
+    _description: Option<String>,
 
     #[serde(rename = "ID")]
     id: u32,
 
     #[serde(rename = "Location & Crafting")]
-    location: Option<String>,
+    _location: Option<String>,
 
     #[serde(rename = "Name")]
     name: String,
@@ -167,7 +167,7 @@ struct Amulet {
     worlds_str: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 struct ArmorSet {
     #[serde(rename = "ID")]
     id: u32,
@@ -176,7 +176,7 @@ struct ArmorSet {
     name: String,
 
     #[serde(rename = "Set Bonus")]
-    set_bonus: String,
+    _set_bonus: String,
 
     #[serde(rename = "Url")]
     url: String,
@@ -185,34 +185,34 @@ struct ArmorSet {
     worlds_str: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 struct BodyArmor {
     #[serde(rename = "Armor")]
-    armor: f32,
+    _armor: f32,
 
     #[serde(rename = "Armor Skill")]
-    armor_skill: String,
+    _armor_skill: String,
 
     #[serde(rename = "Bleed")]
-    bleed: f32,
+    _bleed: f32,
 
     #[serde(rename = "Corrosive")]
-    corrosive: f32,
+    _corrosive: f32,
 
     #[serde(rename = "Fire")]
-    fire: f32,
+    _fire: f32,
 
     #[serde(rename = "Radiation")]
-    radiation: f32,
+    _radiation: f32,
 
     #[serde(rename = "Rot")]
-    rot: f32,
+    _rot: f32,
 
     #[serde(rename = "Shock")]
-    shock: f32,
+    _shock: f32,
 
     #[serde(rename = "Weight")]
-    weight: f32,
+    _weight: f32,
 
     #[serde(rename = "ID")]
     id: u32,
@@ -227,16 +227,16 @@ struct BodyArmor {
     worlds_str: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 struct Emote {
     #[serde(rename = "Description")]
-    description: String,
+    _description: String,
 
     #[serde(rename = "ID")]
     id: u32,
 
     #[serde(rename = "Location")]
-    location: String,
+    _location: String,
 
     #[serde(rename = "Name")]
     name: String,
@@ -248,34 +248,34 @@ struct Emote {
     worlds_str: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 struct HandGun {
     #[serde(rename = "Base Damage")]
-    base_damage: u32,
+    _base_damage: u32,
 
     #[serde(rename = "Crit Chance")]
-    crit_chance: u32,
+    _crit_chance: u32,
 
     #[serde(rename = "ID")]
     id: u32,
 
     #[serde(rename = "Ideal Range")]
-    ideal_range: u32,
+    _ideal_range: u32,
 
     #[serde(rename = "Magazine")]
-    magazine: u32,
+    _magazine: u32,
 
     #[serde(rename = "Max Ammo")]
-    max_ammo: u32,
+    _max_ammo: u32,
 
     #[serde(rename = "Max Damage")]
-    max_damage: Option<u32>,
+    _max_damage: Option<u32>,
 
     #[serde(rename = "Name")]
     name: String,
 
     #[serde(rename = "RPS")]
-    rps: f32,
+    _rps: f32,
 
     #[serde(rename = "Url")]
     url: String,
@@ -284,34 +284,34 @@ struct HandGun {
     worlds_str: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 struct HeadArmor {
     #[serde(rename = "Armor")]
-    armor: f32,
+    _armor: f32,
 
     #[serde(rename = "Armor Skill")]
-    armor_skill: String,
+    _armor_skill: String,
 
     #[serde(rename = "Bleed")]
-    bleed: f32,
+    _bleed: f32,
 
     #[serde(rename = "Corrosive")]
-    corrosive: f32,
+    _corrosive: f32,
 
     #[serde(rename = "Fire")]
-    fire: f32,
+    _fire: f32,
 
     #[serde(rename = "Radiation")]
-    radiation: f32,
+    _radiation: f32,
 
     #[serde(rename = "Rot")]
-    rot: f32,
+    _rot: f32,
 
     #[serde(rename = "Shock")]
-    shock: f32,
+    _shock: f32,
 
     #[serde(rename = "Weight")]
-    weight: f32,
+    _weight: f32,
 
     #[serde(rename = "ID")]
     id: u32,
@@ -326,34 +326,34 @@ struct HeadArmor {
     worlds_str: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 struct LegArmor {
     #[serde(rename = "Armor")]
-    armor: f32,
+    _armor: f32,
 
     #[serde(rename = "Armor Skill")]
-    armor_skill: String,
+    _armor_skill: String,
 
     #[serde(rename = "Bleed")]
-    bleed: f32,
+    _bleed: f32,
 
     #[serde(rename = "Corrosive")]
-    corrosive: f32,
+    _corrosive: f32,
 
     #[serde(rename = "Fire")]
-    fire: f32,
+    _fire: f32,
 
     #[serde(rename = "Radiation")]
-    radiation: f32,
+    _radiation: f32,
 
     #[serde(rename = "Rot")]
-    rot: f32,
+    _rot: f32,
 
     #[serde(rename = "Shock")]
-    shock: f32,
+    _shock: f32,
 
     #[serde(rename = "Weight")]
-    weight: f32,
+    _weight: f32,
 
     #[serde(rename = "ID")]
     id: u32,
@@ -368,34 +368,34 @@ struct LegArmor {
     worlds_str: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 struct LongGun {
     #[serde(rename = "Base Damage")]
-    base_damage: u32,
+    _base_damage: u32,
 
     #[serde(rename = "Crit Chance")]
-    crit_chance: u32,
+    _crit_chance: u32,
 
     #[serde(rename = "ID")]
     id: u32,
 
     #[serde(rename = "Ideal Range")]
-    ideal_range: u32,
+    _ideal_range: u32,
 
     #[serde(rename = "Magazine")]
-    magazine: u32,
+    _magazine: u32,
 
     #[serde(rename = "Max Ammo")]
-    max_ammo: u32,
+    _max_ammo: u32,
 
     #[serde(rename = "Max Damage")]
-    max_damage: Option<u32>,
+    _max_damage: Option<u32>,
 
     #[serde(rename = "Name")]
     name: String,
 
     #[serde(rename = "RPS")]
-    rps: f32,
+    _rps: f32,
 
     #[serde(rename = "Url")]
     url: String,
@@ -404,22 +404,22 @@ struct LongGun {
     worlds_str: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 struct MeleeWeapon {
     #[serde(rename = "Base Damage")]
-    base_damage: u32,
+    _base_damage: u32,
 
     #[serde(rename = "ID")]
     id: u32,
 
     #[serde(rename = "Max Damage")]
-    max_damage: Option<u32>,
+    _max_damage: Option<u32>,
 
     #[serde(rename = "Name")]
     name: String,
 
     #[serde(rename = "Weapon Mod")]
-    weapon_mod: Option<String>,
+    _weapon_mod: Option<String>,
 
     #[serde(rename = "Url")]
     url: String,
@@ -428,7 +428,7 @@ struct MeleeWeapon {
     worlds_str: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 struct Mod {
     #[serde(rename = "ID")]
     id: u32,
@@ -443,10 +443,10 @@ struct Mod {
     worlds_str: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 struct Ring {
     #[serde(rename = "Description")]
-    description: String,
+    _description: String,
 
     #[serde(rename = "ID")]
     id: u32,
@@ -455,7 +455,7 @@ struct Ring {
     name: String,
 
     #[serde(rename = "Location")]
-    location: String,
+    _location: String,
 
     #[serde(rename = "Url")]
     url: String,
@@ -464,10 +464,10 @@ struct Ring {
     worlds_str: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize)]
 struct Trait {
     #[serde(rename = "Description")]
-    description: String,
+    _description: String,
 
     #[serde(rename = "ID")]
     id: u32,
@@ -1305,9 +1305,9 @@ mod tests {
     #[test]
     fn worlds_str_is_converted_to_a_vec_of_worlds() {
         let amulet = Amulet {
-            description: None,
+            _description: None,
             id: 1,
-            location: None,
+            _location: None,
             name: String::from("example"),
             url: String::from("www.example.com"),
             worlds_str: String::from("Ward 17,Earth"),
@@ -1322,9 +1322,9 @@ mod tests {
     #[test]
     fn worlds_str_ignores_invalid_input() {
         let amulet = Amulet {
-            description: None,
+            _description: None,
             id: 1,
-            location: None,
+            _location: None,
             name: String::from("example"),
             url: String::from("www.example.com"),
             worlds_str: String::from("Nope,Earth,Invalid"),
@@ -1336,9 +1336,9 @@ mod tests {
     #[test]
     fn any_worlds_str_is_converted_to_a_vec_of_all_worlds() {
         let amulet = Amulet {
-            description: None,
+            _description: None,
             id: 1,
-            location: None,
+            _location: None,
             name: String::from("example"),
             url: String::from("www.example.com"),
             worlds_str: String::from("Any"),

@@ -2,10 +2,9 @@ mod data;
 mod storage;
 
 use data::{UrlParam, World};
-use serde_derive::{Deserialize, Serialize};
 use storage::StorageService;
 use strum::IntoEnumIterator;
-use strum_macros::{EnumIter, ToString};
+use strum_macros::{AsRefStr, EnumIter};
 use wasm_bindgen::prelude::*;
 use yew::prelude::*;
 
@@ -15,7 +14,6 @@ pub struct App {
     state: State,
 }
 
-#[derive(Deserialize, Serialize)]
 pub struct State {
     entries: Vec<Entry>,
     filter: Filter,
@@ -23,7 +21,6 @@ pub struct State {
     world: World,
 }
 
-#[derive(Deserialize, Serialize)]
 pub struct Entry {
     completed: bool,
     data_type: data::ItemType,
@@ -35,7 +32,7 @@ pub struct Entry {
 
 impl Entry {
     fn id(&self) -> String {
-        format!("{}-{}", self.data_type.url_slug(), self.id)
+        format!("{}-{}", self.data_type.clone().url_slug(), self.id)
     }
 }
 
@@ -176,7 +173,7 @@ impl Component for App {
                             { " item(s) left" }
                         </span>
                         <ul class="filters">
-                            { for Filter::iter().map(|flt| self.view_filter(flt)) }
+                            { for Filter::iter().map(|flt| self.view_filter(&flt)) }
                         </ul>
                     </footer>
                 </section>
@@ -206,7 +203,7 @@ impl App {
         }
     }
 
-    fn view_filter(&self, filter: Filter) -> Html {
+    fn view_filter(&self, filter: &Filter) -> Html {
         let flt = filter.clone();
 
         html! {
@@ -214,7 +211,7 @@ impl App {
                 <a class=if self.state.filter == flt { "selected" } else { "not-selected" }
                    href=&flt
                    onclick=self.link.callback(move |_| Msg::SetFilter(flt.clone()))>
-                    { filter }
+                    { filter.as_ref() }
                 </a>
             </li>
         }
@@ -245,12 +242,12 @@ impl App {
 
     fn view_world(&self, world: World) -> Html {
         html! {
-            <option selected={self.state.world == world} value=world.url_slug()>{ world }</option>
+            <option selected={self.state.world == world} value=world.clone().url_slug()>{ world }</option>
         }
     }
 }
 
-#[derive(Deserialize, EnumIter, ToString, Clone, PartialEq, Serialize)]
+#[derive(AsRefStr, Clone, EnumIter, PartialEq)]
 pub enum Filter {
     All,
     Active,

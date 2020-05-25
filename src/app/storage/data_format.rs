@@ -33,7 +33,7 @@ impl DataFormat {
 impl From<&Entry> for Item {
     fn from(entry: &Entry) -> Self {
         Self {
-            data_type: entry.data_type,
+            data_type: entry.data_type.clone(),
             id: entry.id,
         }
     }
