@@ -1052,7 +1052,7 @@ mod tests {
     const NUMBER_OF_HAND_GUNS: usize = 9;
     const NUMBER_OF_HEAD_ARMOR: usize = 18;
     const NUMBER_OF_EMOTES: usize = 15;
-    const NUMBER_OF_LEG_ARMOR: usize = 17;
+    const NUMBER_OF_LEG_ARMOR: usize = 16;
     const NUMBER_OF_LONG_GUNS: usize = 15;
     const NUMBER_OF_MELEE_WEAPONS: usize = 17;
     const NUMBER_OF_MODS: usize = 33;
