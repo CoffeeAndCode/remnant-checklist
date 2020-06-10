@@ -1,4 +1,4 @@
-on: [push, pull_request]
+on: [push]
 
 jobs:
   test:
@@ -9,7 +9,12 @@ jobs:
       - name: Install
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
-      - run: cargo clippy --all-targets --all-features -- -D warnings
+      - run: rustup component add clippy
+      - uses: actions-rs/clippy-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --all-features --all-targets -- -D warnings
+
       - run: cargo test --locked
       - run: wasm-pack test --headless --chrome -- --locked
       - run: wasm-pack test --headless --firefox -- --locked
