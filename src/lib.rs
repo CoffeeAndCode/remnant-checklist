@@ -1,4 +1,5 @@
 #![deny(clippy::all, clippy::cargo, clippy::nursery, clippy::pedantic)]
+#![allow(clippy::multiple_crate_versions)]
 #![allow(clippy::non_ascii_literal)]
 #![recursion_limit = "512"]
 
