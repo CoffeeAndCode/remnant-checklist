@@ -92,16 +92,19 @@ impl Display for ItemType {
     }
 }
 
-pub trait CsvDataSource<T> {
-    fn csv_data() -> &'static [u8];
+pub trait CsvDataSource<T>
+where
+    T: EntryCompatible,
+{
     fn entries() -> Vec<Entry>;
     fn items() -> Vec<T>;
     fn worlds(&self) -> Vec<World>;
 }
 
 pub trait EntryCompatible {
-    fn csv_data() -> &'static [u8];
-    fn data_type() -> ItemType;
+    const DATA_TYPE: ItemType;
+    const RAW_DATA: &'static [u8];
+
     fn id(&self) -> u32;
     fn name(&self) -> &str;
     fn url(&self) -> &str;
@@ -486,10 +489,6 @@ impl<'de, T> CsvDataSource<T> for T
 where
     T: EntryCompatible + serde::de::DeserializeOwned,
 {
-    fn csv_data() -> &'static [u8] {
-        Self::csv_data()
-    }
-
     fn entries() -> Vec<Entry> {
         <Self as CsvDataSource<Self>>::items()
             .into_iter()
@@ -498,7 +497,7 @@ where
     }
 
     fn items() -> Vec<T> {
-        let mut rdr = csv::Reader::from_reader(<Self as CsvDataSource<Self>>::csv_data());
+        let mut rdr = csv::Reader::from_reader(Self::RAW_DATA);
         let mut items: Vec<Self> = rdr.deserialize().filter_map(Result::ok).collect();
         items.sort_unstable_by(|a, b| a.name().cmp(b.name()));
         items
@@ -542,13 +541,8 @@ impl FromStr for World {
 }
 
 impl EntryCompatible for Amulet {
-    fn csv_data() -> &'static [u8] {
-        include_bytes!("../data/amulets.csv")
-    }
-
-    fn data_type() -> ItemType {
-        ItemType::Amulet
-    }
+    const DATA_TYPE: ItemType = ItemType::Amulet;
+    const RAW_DATA: &'static [u8] = include_bytes!("../data/amulets.csv");
 
     fn id(&self) -> u32 {
         self.id
@@ -568,13 +562,8 @@ impl EntryCompatible for Amulet {
 }
 
 impl EntryCompatible for ArmorSet {
-    fn csv_data() -> &'static [u8] {
-        include_bytes!("../data/armor_sets.csv")
-    }
-
-    fn data_type() -> ItemType {
-        ItemType::ArmorSet
-    }
+    const DATA_TYPE: ItemType = ItemType::ArmorSet;
+    const RAW_DATA: &'static [u8] = include_bytes!("../data/armor_sets.csv");
 
     fn id(&self) -> u32 {
         self.id
@@ -594,13 +583,8 @@ impl EntryCompatible for ArmorSet {
 }
 
 impl EntryCompatible for BodyArmor {
-    fn csv_data() -> &'static [u8] {
-        include_bytes!("../data/body_armor.csv")
-    }
-
-    fn data_type() -> ItemType {
-        ItemType::BodyArmor
-    }
+    const DATA_TYPE: ItemType = ItemType::BodyArmor;
+    const RAW_DATA: &'static [u8] = include_bytes!("../data/body_armor.csv");
 
     fn id(&self) -> u32 {
         self.id
@@ -620,13 +604,8 @@ impl EntryCompatible for BodyArmor {
 }
 
 impl EntryCompatible for Emote {
-    fn csv_data() -> &'static [u8] {
-        include_bytes!("../data/emotes.csv")
-    }
-
-    fn data_type() -> ItemType {
-        ItemType::Emote
-    }
+    const DATA_TYPE: ItemType = ItemType::Emote;
+    const RAW_DATA: &'static [u8] = include_bytes!("../data/emotes.csv");
 
     fn id(&self) -> u32 {
         self.id
@@ -646,13 +625,8 @@ impl EntryCompatible for Emote {
 }
 
 impl EntryCompatible for HandGun {
-    fn csv_data() -> &'static [u8] {
-        include_bytes!("../data/hand_guns.csv")
-    }
-
-    fn data_type() -> ItemType {
-        ItemType::HandGun
-    }
+    const DATA_TYPE: ItemType = ItemType::HandGun;
+    const RAW_DATA: &'static [u8] = include_bytes!("../data/hand_guns.csv");
 
     fn id(&self) -> u32 {
         self.id
@@ -672,13 +646,8 @@ impl EntryCompatible for HandGun {
 }
 
 impl EntryCompatible for HeadArmor {
-    fn csv_data() -> &'static [u8] {
-        include_bytes!("../data/head_armor.csv")
-    }
-
-    fn data_type() -> ItemType {
-        ItemType::HeadArmor
-    }
+    const DATA_TYPE: ItemType = ItemType::HeadArmor;
+    const RAW_DATA: &'static [u8] = include_bytes!("../data/head_armor.csv");
 
     fn id(&self) -> u32 {
         self.id
@@ -698,13 +667,8 @@ impl EntryCompatible for HeadArmor {
 }
 
 impl EntryCompatible for LegArmor {
-    fn csv_data() -> &'static [u8] {
-        include_bytes!("../data/leg_armor.csv")
-    }
-
-    fn data_type() -> ItemType {
-        ItemType::LegArmor
-    }
+    const DATA_TYPE: ItemType = ItemType::LegArmor;
+    const RAW_DATA: &'static [u8] = include_bytes!("../data/leg_armor.csv");
 
     fn id(&self) -> u32 {
         self.id
@@ -724,13 +688,8 @@ impl EntryCompatible for LegArmor {
 }
 
 impl EntryCompatible for LongGun {
-    fn csv_data() -> &'static [u8] {
-        include_bytes!("../data/long_guns.csv")
-    }
-
-    fn data_type() -> ItemType {
-        ItemType::LongGun
-    }
+    const DATA_TYPE: ItemType = ItemType::LongGun;
+    const RAW_DATA: &'static [u8] = include_bytes!("../data/long_guns.csv");
 
     fn id(&self) -> u32 {
         self.id
@@ -750,13 +709,8 @@ impl EntryCompatible for LongGun {
 }
 
 impl EntryCompatible for MeleeWeapon {
-    fn csv_data() -> &'static [u8] {
-        include_bytes!("../data/melee_weapons.csv")
-    }
-
-    fn data_type() -> ItemType {
-        ItemType::MeleeWeapon
-    }
+    const DATA_TYPE: ItemType = ItemType::MeleeWeapon;
+    const RAW_DATA: &'static [u8] = include_bytes!("../data/melee_weapons.csv");
 
     fn id(&self) -> u32 {
         self.id
@@ -776,13 +730,8 @@ impl EntryCompatible for MeleeWeapon {
 }
 
 impl EntryCompatible for Mod {
-    fn csv_data() -> &'static [u8] {
-        include_bytes!("../data/mods.csv")
-    }
-
-    fn data_type() -> ItemType {
-        ItemType::Mod
-    }
+    const DATA_TYPE: ItemType = ItemType::Mod;
+    const RAW_DATA: &'static [u8] = include_bytes!("../data/mods.csv");
 
     fn id(&self) -> u32 {
         self.id
@@ -802,13 +751,8 @@ impl EntryCompatible for Mod {
 }
 
 impl EntryCompatible for Ring {
-    fn csv_data() -> &'static [u8] {
-        include_bytes!("../data/rings.csv")
-    }
-
-    fn data_type() -> ItemType {
-        ItemType::Ring
-    }
+    const DATA_TYPE: ItemType = ItemType::Ring;
+    const RAW_DATA: &'static [u8] = include_bytes!("../data/rings.csv");
 
     fn id(&self) -> u32 {
         self.id
@@ -828,13 +772,8 @@ impl EntryCompatible for Ring {
 }
 
 impl EntryCompatible for Trait {
-    fn csv_data() -> &'static [u8] {
-        include_bytes!("../data/traits.csv")
-    }
-
-    fn data_type() -> ItemType {
-        ItemType::Trait
-    }
+    const DATA_TYPE: ItemType = ItemType::Trait;
+    const RAW_DATA: &'static [u8] = include_bytes!("../data/traits.csv");
 
     fn id(&self) -> u32 {
         self.id
@@ -857,7 +796,7 @@ impl<T: CsvDataSource<T> + EntryCompatible> From<T> for Entry {
     fn from(item: T) -> Self {
         Self {
             completed: false,
-            data_type: T::data_type(),
+            data_type: T::DATA_TYPE,
             id: item.id(),
             name: String::from(item.name()),
             url: String::from(item.url()),
