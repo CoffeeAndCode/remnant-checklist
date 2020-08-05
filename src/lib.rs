@@ -1,6 +1,7 @@
 #![deny(clippy::all, clippy::cargo, clippy::nursery, clippy::pedantic)]
 #![allow(clippy::multiple_crate_versions)]
 #![allow(clippy::non_ascii_literal)]
+#![deny(unsafe_code)]
 #![recursion_limit = "512"]
 
 mod app;

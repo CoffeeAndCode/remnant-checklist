@@ -54,19 +54,29 @@ pub enum Msg {
 
 #[wasm_bindgen(module = "/src/js/share.js")]
 extern "C" {
+    #[allow(unsafe_code)]
     #[wasm_bindgen(js_name = canShare)]
     fn can_share() -> bool;
+
+    #[allow(unsafe_code)]
     fn share(title: Option<String>, text: Option<String>, url: String) -> bool;
 }
 
 #[wasm_bindgen(module = "/src/js/stats.js")]
 extern "C" {
+    #[allow(unsafe_code)]
     #[wasm_bindgen(js_name = markItemAsComplete)]
     fn track_mark_item_as_complete();
+
+    #[allow(unsafe_code)]
     #[wasm_bindgen(js_name = markItemAsIncomplete)]
     fn track_mark_item_as_incomplete();
+
+    #[allow(unsafe_code)]
     #[wasm_bindgen(js_name = visitPersonalSite)]
     fn track_visit_personal_site();
+
+    #[allow(unsafe_code)]
     #[wasm_bindgen(js_name = visitGunfireGamesSite)]
     fn track_visit_gunfire_games_site();
 }
