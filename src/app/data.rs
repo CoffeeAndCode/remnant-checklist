@@ -994,7 +994,7 @@ mod tests {
     const NUMBER_OF_LEG_ARMOR: usize = 16;
     const NUMBER_OF_LONG_GUNS: usize = 15;
     const NUMBER_OF_MELEE_WEAPONS: usize = 17;
-    const NUMBER_OF_MODS: usize = 33;
+    const NUMBER_OF_MODS: usize = 34;
     const NUMBER_OF_RINGS: usize = 47;
     const NUMBER_OF_TRAITS: usize = 40;
 
