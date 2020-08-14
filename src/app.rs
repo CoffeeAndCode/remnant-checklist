@@ -158,7 +158,7 @@ impl Component for App {
                                 placeholder="Search..."
                                 oninput=self.link.callback(|e: InputData| Msg::UpdateSearch(e.value))
                                 type="text"
-                                value=""
+                                value={self.state.search.clone()}
                             />
                             <select class="input-world-select" onchange=self.link.callback(move |e| {
                                 if let ChangeData::Select(element) = e {
