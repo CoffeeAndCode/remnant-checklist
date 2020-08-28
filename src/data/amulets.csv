@@ -10,11 +10,11 @@ ID,Name,Description,Location & Crafting,Url,Worlds
 
 Can be used as exchange for Bandit Set before fight with Brabus.",https://remnantfromtheashes.wiki.fextralife.com/Pocket+Watch,Earth
 9,Rock of Anguish,Increases movement speed by 15% and Reload Speed by 25% for 10 seconds after taking damage,Can be found at a random location at Corsus,https://remnantfromtheashes.wiki.fextralife.com/Rock+of+Anguish,Corsus
-10,Storm Amulet,Increases SHOCK damage by 20%.,Can be found at a random location at Yaesha.,https://remnantfromtheashes.wiki.fextralife.com/Storm+Amulet,Yaesha 
+10,Storm Amulet,Increases SHOCK damage by 20%.,Can be found at a random location at Yaesha.,https://remnantfromtheashes.wiki.fextralife.com/Storm+Amulet,Yaesha
 11,Twisted Idol,Increases Armor Effectiveness by 30%.,Drop by Wailing Tree,https://remnantfromtheashes.wiki.fextralife.com/Twisted+Idol,Earth
-12,Soul Anchor,Increases duration of summoned creatures by 100% and increases hero damage by 5% per summoned minion.,Dropped by Reanimator boss.,https://remnantfromtheashes.wiki.fextralife.com/Soul+Anchor,Yaesha 
-13,Scavenger's Bauble,Increases the amount of Scrap picked up in the world by 35%,Can be obtained by solving the Song of the Doe puzzle at Yaesha.,https://remnantfromtheashes.wiki.fextralife.com/Scavenger's+Bauble,Yaesha 
-14,Vengeance Idol,All damage dealt is increased by 30% when the wearer's Health is below 50%. Includes Summons.,Can be found at Yaesha.,https://remnantfromtheashes.wiki.fextralife.com/Vengeance+Idol,Yaesha 
+12,Soul Anchor,Increases duration of summoned creatures by 100% and increases hero damage by 5% per summoned minion.,Dropped by Reanimator boss.,https://remnantfromtheashes.wiki.fextralife.com/Soul+Anchor,Yaesha
+13,Scavenger's Bauble,Increases the amount of Scrap picked up in the world by 35%,Can be obtained by solving the Song of the Doe puzzle at Yaesha.,https://remnantfromtheashes.wiki.fextralife.com/Scavenger's+Bauble,Yaesha
+14,Vengeance Idol,All damage dealt is increased by 30% when the wearer's Health is below 50%. Includes Summons.,Can be found at Yaesha.,https://remnantfromtheashes.wiki.fextralife.com/Vengeance+Idol,Yaesha
 15,Nightmare Spiral,Ranged hits steal 2.0% of base damage dealt as health. Consumable health regen effectiveness reduced by 95%,Defeat Dreamer / Nightmare Hardcore Mode.,https://remnantfromtheashes.wiki.fextralife.com/Nightmare+Spiral,Earth
 16,Rusted Amulet,Reduces Stamina Cost by 80% but increases Armor Encumbrance by 25.,Can be found at Corsus.,https://remnantfromtheashes.wiki.fextralife.com/Rusted+Amulet,Corsus
 17,Talisman of Animosity,Increase Weakspot damage by 30%,Can be found at a random location at Rhom.,https://remnantfromtheashes.wiki.fextralife.com/Talisman+of+Animosity,Rhom
@@ -23,4 +23,18 @@ Can be used as exchange for Bandit Set before fight with Brabus.",https://remnan
 20,Toxic Juju,,,https://remnantfromtheashes.wiki.fextralife.com/Toxic+Juju,
 21,Daredevil's Charm,Increases Total damage dealt by 25% for each piece of unequipped armor. Damage received is increased by 1%.,75 Total Boss Kills in Survival Mode,https://remnantfromtheashes.wiki.fextralife.com/Daredevil's+Charm,Any
 22,Black Rose,The wearer's chest armor set bonus is increased by 1 piece. It will not exceed the 3 piece armor set bonus.,100 Total Boss Kills in Survival Mode,https://remnantfromtheashes.wiki.fextralife.com/Black+Rose,Any
-23,Amulet of Perseverance,"Increases earned experience by 1% when slaying an enemy and will last until the wearer dies, unequips the amulet, or rests at a checkpoint. stacking up to 50 times.",Survival Mode - 50 Boss Kills,https://remnantfromtheashes.wiki.fextralife.com/Amulet+of+Perseverance,Any
+23,Talisman of Perseverance,"Increases earned experience by 1% when slaying an enemy and will last until the wearer dies, unequips the amulet, or rests at a checkpoint. stacking up to 50 times.",Survival Mode - 50 Boss Kills,https://remnantfromtheashes.wiki.fextralife.com/Talisman+of+Perseverance,Any
+24,Radioactive Ember,Increases RADIATION damage by 15% and converts basic melee weapons from physical to elemental dealing RADIATION damage.,Random drop on Rhom.,https://remnantfromtheashes.wiki.fextralife.com/Radioactive+Ember,Rhom
+25,Stalker's Brand,"Firearm sound is reduced by 25%. When crouched, increases Movement Speed by 20% and reduces enemy Awareness Range by 15%.",Random drop on Yaesha,https://remnantfromtheashes.wiki.fextralife.com/Stalkers+Brand,Yaesha
+26,Abrasive Amulet,Doubles application of the CORRODED effect. Melee Charge Attacks apply the CORRODED effect.,Found at a random location on Corsus.,https://remnantfromtheashes.wiki.fextralife.com/Abrasive+Amulet,Corsus
+27,Shattered Vertebrae,"Increase Ranged dmg by 10%. When dealing non-Critical dmg with a firearm, Crit Chance increased by 2%. When a Critical hit occurs, Crit Chance buff is removed",Complete the Reisum campaign.,https://remnantfromtheashes.wiki.fextralife.com/Shattered+Vertebrae,Reisum
+28,Onyx Pendulum,Dealing dmg with a firearm increases dmg dealt by stowed firearm by 2.5% for 15s. Stacks 10 times.,Complete both campaigns.,https://remnantfromtheashes.wiki.fextralife.com/Onyx+Pendulum,Any
+29,Blessed Necklace,Complete the Rescue the Krall Baby event.,Reward for saving the Krall Mother's baby,https://remnantfromtheashes.wiki.fextralife.com/Blessed+Necklace,Resium
+30,Hangman's Memento,Survive the Barn Siege.,Survive the Barn Siege during the Subject 2923 campaign,https://remnantfromtheashes.wiki.fextralife.com/Hangman's+Memento,Resium
+31,Vulcan's Detonator,"Destroy all Warning Totems, alerting all of them.",Warning Totems event: destroy all totems while alerting all of them,https://remnantfromtheashes.wiki.fextralife.com/Vulcan's+Detonator,Resium
+32,Charcoal Necklace,Found randomly in Reisum.,Reisum random drop,https://remnantfromtheashes.wiki.fextralife.com/Charcoal+Necklace,Resium
+33,Driftstone,Found randomly in Reisum.,Reisum random drop,https://remnantfromtheashes.wiki.fextralife.com/Driftstone,Resium
+34,Razorwire Necklace,Found randomly in Reisum.,Random drop Reisum,https://remnantfromtheashes.wiki.fextralife.com/Razorwire+Necklace,Resium
+35,Polished Whetstone,Found randomly in Reisum.,Random drop Reisum,https://remnantfromtheashes.wiki.fextralife.com/Polished+Whetstone,Resium
+36,Terror Margin,"Melee hits steal 1.5% base dmg dealt as health. For every 25% missing Health, gain an additional 1.5% lifesteal. When full health, gain 20% melee dmg.",Found at a random location on Rural Earth.,https://remnantfromtheashes.wiki.fextralife.com/Terror+Margin,RuralEarth
+37,White Rose,Increases all dmg dealt by 25% for each unequipped firearm,Survival: Defeat all Bosses ??? times,https://remnantfromtheashes.wiki.fextralife.com/White+Rose,Any

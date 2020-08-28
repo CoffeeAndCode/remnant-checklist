@@ -275,7 +275,7 @@ impl<'a> Into<Href> for &'a Filter {
 }
 
 impl Filter {
-    fn fit(&self, entry: &Entry) -> bool {
+    const fn fit(&self, entry: &Entry) -> bool {
         match *self {
             Self::All => true,
             Self::Active => !entry.completed,

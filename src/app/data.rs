@@ -12,9 +12,12 @@ pub enum World {
     Corsus,
     Earth,
     Labyrinth,
+    Reisum,
     Rhom,
+    RuralEarth,
     Ward13,
     Ward17,
+    WardPrime,
     Yaesha,
 }
 
@@ -25,9 +28,12 @@ impl World {
             "corsus" => Ok(Self::Corsus),
             "earth" => Ok(Self::Earth),
             "labyrinth" => Ok(Self::Labyrinth),
+            "reisum" => Ok(Self::Reisum),
             "rhom" => Ok(Self::Rhom),
+            "ruralearth" => Ok(Self::RuralEarth),
             "ward13" => Ok(Self::Ward13),
             "ward17" => Ok(Self::Ward17),
+            "wardprime" => Ok(Self::WardPrime),
             "yaesha" => Ok(Self::Yaesha),
             _ => Err(format!("unknown world: {}", str)),
         }
@@ -47,9 +53,12 @@ impl Display for World {
             Self::Corsus => "Corsus",
             Self::Earth => "Earth",
             Self::Labyrinth => "Labyrinth",
+            Self::Reisum => "Reisum",
             Self::Rhom => "Rhom",
+            Self::RuralEarth => "Rural Earth",
             Self::Ward13 => "Ward 13",
             Self::Ward17 => "Ward 17",
+            Self::WardPrime => "Ward Prime",
             Self::Yaesha => "Yaesha",
         };
         write!(f, "{}", str)
@@ -141,9 +150,12 @@ impl UrlParam for World {
             Self::Corsus => "corsus",
             Self::Earth => "earth",
             Self::Labyrinth => "labyrinth",
+            Self::Reisum => "reisum",
             Self::Rhom => "rhom",
+            Self::RuralEarth => "ruralearth",
             Self::Ward13 => "ward13",
             Self::Ward17 => "ward17",
+            Self::WardPrime => "wardprime",
             Self::Yaesha => "yaesha",
         }
     }
@@ -191,31 +203,31 @@ struct ArmorSet {
 #[derive(Deserialize)]
 struct BodyArmor {
     #[serde(rename = "Armor")]
-    _armor: f32,
+    _armor: Option<f32>,
 
     #[serde(rename = "Armor Skill")]
     _armor_skill: String,
 
     #[serde(rename = "Bleed")]
-    _bleed: f32,
+    _bleed: Option<f32>,
 
     #[serde(rename = "Corrosive")]
-    _corrosive: f32,
+    _corrosive: Option<f32>,
 
     #[serde(rename = "Fire")]
-    _fire: f32,
+    _fire: Option<f32>,
 
     #[serde(rename = "Radiation")]
-    _radiation: f32,
+    _radiation: Option<f32>,
 
     #[serde(rename = "Rot")]
-    _rot: f32,
+    _rot: Option<f32>,
 
     #[serde(rename = "Shock")]
-    _shock: f32,
+    _shock: Option<f32>,
 
     #[serde(rename = "Weight")]
-    _weight: f32,
+    _weight: Option<f32>,
 
     #[serde(rename = "ID")]
     id: u32,
@@ -290,31 +302,31 @@ struct HandGun {
 #[derive(Deserialize)]
 struct HeadArmor {
     #[serde(rename = "Armor")]
-    _armor: f32,
+    _armor: Option<f32>,
 
     #[serde(rename = "Armor Skill")]
     _armor_skill: String,
 
     #[serde(rename = "Bleed")]
-    _bleed: f32,
+    _bleed: Option<f32>,
 
     #[serde(rename = "Corrosive")]
-    _corrosive: f32,
+    _corrosive: Option<f32>,
 
     #[serde(rename = "Fire")]
-    _fire: f32,
+    _fire: Option<f32>,
 
     #[serde(rename = "Radiation")]
-    _radiation: f32,
+    _radiation: Option<f32>,
 
     #[serde(rename = "Rot")]
-    _rot: f32,
+    _rot: Option<f32>,
 
     #[serde(rename = "Shock")]
-    _shock: f32,
+    _shock: Option<f32>,
 
     #[serde(rename = "Weight")]
-    _weight: f32,
+    _weight: Option<f32>,
 
     #[serde(rename = "ID")]
     id: u32,
@@ -332,31 +344,31 @@ struct HeadArmor {
 #[derive(Deserialize)]
 struct LegArmor {
     #[serde(rename = "Armor")]
-    _armor: f32,
+    _armor: Option<f32>,
 
     #[serde(rename = "Armor Skill")]
     _armor_skill: String,
 
     #[serde(rename = "Bleed")]
-    _bleed: f32,
+    _bleed: Option<f32>,
 
     #[serde(rename = "Corrosive")]
-    _corrosive: f32,
+    _corrosive: Option<f32>,
 
     #[serde(rename = "Fire")]
-    _fire: f32,
+    _fire: Option<f32>,
 
     #[serde(rename = "Radiation")]
-    _radiation: f32,
+    _radiation: Option<f32>,
 
     #[serde(rename = "Rot")]
-    _rot: f32,
+    _rot: Option<f32>,
 
     #[serde(rename = "Shock")]
-    _shock: f32,
+    _shock: Option<f32>,
 
     #[serde(rename = "Weight")]
-    _weight: f32,
+    _weight: Option<f32>,
 
     #[serde(rename = "ID")]
     id: u32,
@@ -499,7 +511,7 @@ where
     fn items() -> Vec<T> {
         let mut rdr = csv::Reader::from_reader(Self::RAW_DATA);
         let mut items: Vec<Self> = rdr.deserialize().filter_map(Result::ok).collect();
-        items.sort_unstable_by(|a, b| a.name().cmp(b.name()));
+        items.sort_by_key(|a| a.name().to_string());
         items
     }
 
@@ -531,9 +543,12 @@ impl FromStr for World {
             "Corsus" => Ok(Self::Corsus),
             "Earth" => Ok(Self::Earth),
             "Labyrinth" => Ok(Self::Labyrinth),
+            "Reisum" => Ok(Self::Reisum),
             "Rhom" => Ok(Self::Rhom),
+            "Rural Earth" => Ok(Self::RuralEarth),
             "Ward 13" => Ok(Self::Ward13),
             "Ward 17" => Ok(Self::Ward17),
+            "Ward Prime" => Ok(Self::WardPrime),
             "Yaesha" => Ok(Self::Yaesha),
             _ => Err(format!("Invalid world found: {}", value)),
         }
@@ -985,18 +1000,18 @@ pub fn ring_entries(defaults: &[CompletedItem]) -> Vec<Entry> {
 mod tests {
     use super::*;
 
-    const NUMBER_OF_AMULETS: usize = 23;
-    const NUMBER_OF_ARMOR_SETS: usize = 17;
-    const NUMBER_OF_BODY_ARMOR: usize = 16;
-    const NUMBER_OF_HAND_GUNS: usize = 9;
-    const NUMBER_OF_HEAD_ARMOR: usize = 18;
+    const NUMBER_OF_AMULETS: usize = 37;
+    const NUMBER_OF_ARMOR_SETS: usize = 19;
+    const NUMBER_OF_BODY_ARMOR: usize = 18;
+    const NUMBER_OF_HAND_GUNS: usize = 12;
+    const NUMBER_OF_HEAD_ARMOR: usize = 20;
     const NUMBER_OF_EMOTES: usize = 15;
-    const NUMBER_OF_LEG_ARMOR: usize = 16;
-    const NUMBER_OF_LONG_GUNS: usize = 15;
-    const NUMBER_OF_MELEE_WEAPONS: usize = 17;
-    const NUMBER_OF_MODS: usize = 34;
-    const NUMBER_OF_RINGS: usize = 47;
-    const NUMBER_OF_TRAITS: usize = 40;
+    const NUMBER_OF_LEG_ARMOR: usize = 18;
+    const NUMBER_OF_LONG_GUNS: usize = 17;
+    const NUMBER_OF_MELEE_WEAPONS: usize = 20;
+    const NUMBER_OF_MODS: usize = 40;
+    const NUMBER_OF_RINGS: usize = 74;
+    const NUMBER_OF_TRAITS: usize = 50;
 
     #[test]
     fn all_amulets_found() {
@@ -1013,9 +1028,9 @@ mod tests {
     #[test]
     fn amulets_are_sorted_alphabetically() {
         let amulets = Amulet::items();
-        assert_eq!("Amulet of Epicaricacy", amulets[0].name);
-        assert_eq!("Amulet of Perseverance", amulets[1].name);
-        assert_eq!("Vengeance Idol", amulets[NUMBER_OF_AMULETS - 1].name);
+        assert_eq!("Abrasive Amulet", amulets[0].name);
+        assert_eq!("Amulet of Epicaricacy", amulets[1].name);
+        assert_eq!("White Rose", amulets[NUMBER_OF_AMULETS - 1].name);
     }
 
     #[test]
@@ -1035,7 +1050,7 @@ mod tests {
         let armor_sets = ArmorSet::items();
         assert_eq!("Adventurer Set", armor_sets[0].name);
         assert_eq!("Akari Set", armor_sets[1].name);
-        assert_eq!("Void Set", armor_sets[NUMBER_OF_ARMOR_SETS - 1].name);
+        assert_eq!("Warlord's Set", armor_sets[NUMBER_OF_ARMOR_SETS - 1].name);
     }
 
     #[test]
@@ -1055,7 +1070,7 @@ mod tests {
         let body_armor = BodyArmor::items();
         assert_eq!("Adventurer Tunic", body_armor[0].name);
         assert_eq!("Akari Garb", body_armor[1].name);
-        assert_eq!("Void Carapace", body_armor[NUMBER_OF_BODY_ARMOR - 1].name);
+        assert_eq!("Warlord Armor", body_armor[NUMBER_OF_BODY_ARMOR - 1].name);
     }
 
     #[test]
@@ -1075,7 +1090,7 @@ mod tests {
         let hand_guns = HandGun::items();
         assert_eq!("Curse of the Jungle God", hand_guns[0].name);
         assert_eq!("Defiler", hand_guns[1].name);
-        assert_eq!("Submachine Gun", hand_guns[NUMBER_OF_HAND_GUNS - 1].name);
+        assert_eq!("Twin Shot", hand_guns[NUMBER_OF_HAND_GUNS - 1].name);
     }
 
     #[test]
@@ -1095,7 +1110,7 @@ mod tests {
         let head_armor = HeadArmor::items();
         assert_eq!("Adventurer Goggles", head_armor[0].name);
         assert_eq!("Akari Mask", head_armor[1].name);
-        assert_eq!("Void Skull", head_armor[NUMBER_OF_HEAD_ARMOR - 1].name);
+        assert_eq!("Warlord Skull", head_armor[NUMBER_OF_HEAD_ARMOR - 1].name);
     }
 
     #[test]
@@ -1135,7 +1150,7 @@ mod tests {
         let leg_armor = LegArmor::items();
         assert_eq!("Adventurer Leggings", leg_armor[0].name);
         assert_eq!("Akari Leggings", leg_armor[1].name);
-        assert_eq!("Void Greaves", leg_armor[NUMBER_OF_LEG_ARMOR - 1].name);
+        assert_eq!("Warlord Boots", leg_armor[NUMBER_OF_LEG_ARMOR - 1].name);
     }
 
     #[test]
@@ -1153,8 +1168,8 @@ mod tests {
     #[test]
     fn long_guns_are_sorted_alphabetically() {
         let long_guns = LongGun::items();
-        assert_eq!("Assault Rifle", long_guns[0].name);
-        assert_eq!("Beam Rifle", long_guns[1].name);
+        assert_eq!("Alternator", long_guns[0].name);
+        assert_eq!("Assault Rifle", long_guns[1].name);
         assert_eq!("Sporebloom", long_guns[NUMBER_OF_LONG_GUNS - 1].name);
     }
 
@@ -1176,7 +1191,7 @@ mod tests {
         assert_eq!("Blade of Adventure", melee_weapons[0].name);
         assert_eq!("Butchers Flail", melee_weapons[1].name);
         assert_eq!(
-            "World Breaker",
+            "World's Edge",
             melee_weapons[NUMBER_OF_MELEE_WEAPONS - 1].name
         );
     }
@@ -1218,7 +1233,7 @@ mod tests {
         let rings = Ring::items();
         assert_eq!("Aggressor's Bane", rings[0].name);
         assert_eq!("Akari War Band", rings[1].name);
-        assert_eq!("Stone Of Balance", rings[NUMBER_OF_RINGS - 1].name);
+        assert_eq!("Volatile Gem", rings[NUMBER_OF_RINGS - 1].name);
     }
 
     #[test]
@@ -1237,7 +1252,7 @@ mod tests {
     fn traits_are_sorted_alphabetically() {
         let traits = Trait::items();
         assert_eq!("Arcane Strike", traits[0].name);
-        assert_eq!("Bark Skin", traits[1].name);
+        assert_eq!("Armor Piercer", traits[1].name);
         assert_eq!("World Walker", traits[NUMBER_OF_TRAITS - 1].name);
     }
 
@@ -1289,9 +1304,12 @@ mod tests {
                 World::Corsus,
                 World::Earth,
                 World::Labyrinth,
+                World::Reisum,
                 World::Rhom,
+                World::RuralEarth,
                 World::Ward13,
                 World::Ward17,
+                World::WardPrime,
                 World::Yaesha,
             ],
             amulet.worlds()
